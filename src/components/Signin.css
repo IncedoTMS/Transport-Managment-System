@@ -1,0 +1,24 @@
+.content{
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    height: 100%;
+
+  }
+  
+  .column {
+    flex: 50%;
+    height: 100%;
+    background-color: #2a2a72 !important;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  }
+
+ .one{
+    background-color: #2a2a72 !important;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    height: 100%;
+  }
