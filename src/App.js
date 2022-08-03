@@ -3,11 +3,14 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
   return (
     <>
+    <Header></Header>
       <Router>
 
         { /* These Buttons below are routing links to components */}
@@ -34,7 +37,7 @@ function App() {
     </Switch>
 
 
-
+      <Footer></Footer>
     </>
   );
 }
