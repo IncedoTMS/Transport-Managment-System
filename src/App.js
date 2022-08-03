@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+
+        { /* These Buttons below are routing links to components */}
+        {/* <Link to="/">{<button type="button" class="btn btn-outline-primary">Dashboard</button>}</Link>
+        <Link to="/signin">{<button type="button" class="btn btn-outline-primary">Signin</button>}</Link>
+        <Link to="/signup">{<button type="button" class="btn btn-outline-primary">Signup</button>}</Link> */}
+
+        {/* <Route exact path="/" component={Signin} /> */}
+        {/* <Route path="/signin" component={Dashboard} /> */}
+        {/* <Route path="/signup" component={Signup} /> */}
+
+      </Router>
+
+      <Switch>
+      <Route exact path='/' component={Signin}>
+        <Signin/>
+      </Route>
+      <Route path='/signup'>
+        <Signup/>                     
+      </Route>
+      <Route path='/dashboard' component={Dashboard}>
+
+      </Route>
+    </Switch>
+
+
+
+    </>
   );
 }
 
