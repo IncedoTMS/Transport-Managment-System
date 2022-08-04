@@ -5,10 +5,10 @@ export default function Signin() {
   return (
     <>
       <div class="row">
-        <div class="column one">
+        <div class="column one col-sm">
           <h2>Image Here</h2>
         </div>
-        <div class="column two">
+        <div class="column two col-sm">
           <div class="formbox">
             
             <div class="welcome d-flex justify-content-around">

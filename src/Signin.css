@@ -5,21 +5,31 @@ a{
 
 .row {
   display: flex;
-  max-height: 99%;
+  height: inherit;
+  /* max-height: 99%; */
 }
 
 .one{
   padding-left: 50px !important;
+  display: none;
 }
+
+@media all and (min-width: 600px) {
+  .one {
+    display: block;
+  }
+}
+
+
 
 /* Create two equal columns that sits next to each other */
 .column {
   flex: 50%;
   width: 50%;
   padding: 50px;
-  height: 700px;
+  /* height: 700px; */
   /* Should be removed. Only for demonstration */
-  display: flex;
+  /* display: flex; */
   align-content: center;
   float: left;
 }
@@ -30,7 +40,12 @@ a{
   /* background-image: linear-gradient(315deg, #1CA7EC 0%, #3242ae 50%); */
   padding-left: 20px;
   flex: 50%;
+}
 
+@media all and (max-width: 600px){
+  .two{
+    padding: 50px;
+  }
 }
 
 .formbox {
@@ -46,7 +61,7 @@ a{
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   position: relative;
-  top: 100px;
+  /* top: 100px; */
   /* background-color: #1CA7EC;  */
   background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
   border-radius: 1.5%;
@@ -55,6 +70,14 @@ a{
   margin-top: 50px;
   margin-left: 100px;
 }
+
+@media all and (max-width:600px){
+  .formbox{
+    /* border: 2px solid green; */
+    margin: auto;
+  }
+}
+
 
 .welcome {
   color: white;
@@ -96,7 +119,7 @@ a{
 
 .signin-button{
   margin-top: 10%;
-  width: 30%;
+  /* width: 30%; */
   padding-bottom: 3%;
   background-color: #2d8ef6;
   border-color: #2d8ef6;
