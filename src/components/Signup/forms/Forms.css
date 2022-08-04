@@ -5,6 +5,8 @@
 .form-control{
     background-color: rgb(255,69,0);
     color: aliceblue;
+    width: 90%;
+    margin-left: 5%;
 }
 
 ::placeholder{
@@ -21,8 +23,7 @@ input:focus::placeholder {
   button{
     margin-top: 60px;
     position: relative;
-    left: 300px;
-
+    left: 40%;
   }
 
   @media screen {
@@ -31,4 +32,14 @@ input:focus::placeholder {
 
   .btn{
     border-radius: 0 0 0 0;
+  }
+
+
+  form{
+    margin-top: 10%;
+  }
+
+  .add1{
+    margin-left: 2.5%;
+    width: 95%;
   }

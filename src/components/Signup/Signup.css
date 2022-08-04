@@ -16,72 +16,93 @@
     display: table;
     clear: both;
   }  */
-  
-    .rows{
-    display:flex;
+
+.rows {
+  display: flex;
+
+}
+
+.column {
+  width: 50%;
+  height: 300px;
+  margin: auto;
+
+}
+
+.two {
+  display: flex;
+  justify-content: center;
+  height: 700px;
+  background-color: rgb(255, 69, 0);
+
+}
+
+.formbox {
+  border-style: solid;
+  border-color: orange;
+  border-width: 3px;
+
+  height: 80%;
+  width: 90%;
+  margin-top: 50px;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+}
+
+.myForm {
+
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.headings {
+  display: flex;
+  gap: 180px;
+  color: white;
+
+}
+
+.left {
+  position: relative;
+  left: 10px;
+  bottom: 10px;
+  top: 10px;
+}
+
+.para {
+
+  display: flex;
+  word-wrap: break-word;
+  top: 15px;
+  font-weight: bolder;
+  margin-top: 6.8%;
+  margin-left: 8%;
+  font-size: smaller;
+  gap: 5px;
+}
+
+
+img {
+  max-width: 80%;
+  height: auto;
+  opacity: 80%;
+  margin-left: 10%;
+}
+
+@media screen and (max-width: 600px) {
+
+  .headings {
+
+    display: block;
 
   }
 
-  .column{
-    width:50%;
-    height: 300px;
-    margin:auto;
+}
 
-  }  
-
-  .two {
-    display: flex;
-    justify-content: center;
-    background-color: aquamarine;
-    height:700px;
-    background-color: rgb(255,69,0);
-    
-  }
-
-  .formbox{
-    border-style: solid;
-    border-color: orange;
-    border-width: 3px;
-
-    height: 80%;
-    width: 90%;
-    margin-top: 50px;
-
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-   
-  }
-
-  .myForm {
-
-    margin-top: 40px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-
-  .headings{
-    display: flex;
-    gap: 180px;
-    color:white;
-
-  }
-
-  .left{
-    position: relative;
-    left: 10px;
-    bottom: 10px;
-    top:10px;
-  }
-
-  .para{
-    display: flex;
-    position: relative;
-    top:15px;
-    font-weight: bolder;
-    margin-right:10px;
-    font-size: smaller;
-    gap:5px;
-    
-  }
-
-  
+.left{
+  margin-left: 2.5%;
+  margin-top: 5%;
+}

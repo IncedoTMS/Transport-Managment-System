@@ -8,7 +8,7 @@ export default function Signup() {
     
     <div className="row">
       <div className="column one">
-       
+       <img src='./img.jpg'/>
       </div>
       <div className="column two">
         <div className='formbox'>

@@ -4,6 +4,7 @@ import './Forms.css'
 export default function Forms() {
   return (
 <div>
+
 <form action='./' method='get'>
   <div class="row">
     <div class="col">
@@ -35,7 +36,7 @@ export default function Forms() {
 
 <div class="row">
     <div class="col">
-      <input type="text" class="form-control" placeholder="Address Line 1" name="address" required/>
+      <input type="text" class="form-control add1" placeholder="Address Line 1" name="address" required/>
     </div>
 </div>
 <div class="row">
