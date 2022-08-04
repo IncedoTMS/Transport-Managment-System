@@ -1,38 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
-import Dashboard from './Dashboard';
+import React from "react";
+import { Helmet } from "react-helmet";
 
-import Signup from './Signup';
-
-
+import { useHistory } from "react-router-dom";
 
 export default function Signin() {
+  const History = useHistory();
+  const routeToSignup = () => {
+    History.push("/signup");
+  };
 
-    const History = useHistory();
-    const routeToSignup = () => {
+  const toDashBoard = () => {
+    History.push("/dashboard");
+  };
 
+  return (
+    <>
+      <Helmet>
+        <title>Incedo-TMS-Sign-in</title>
+      </Helmet>
 
-        History.push('/signup');
-    };
-
-    const toDashBoard = () => {
-        History.push('/dashboard');
-    }
-
-
-    return (
-        <div>Signin
-
-
-            <button onClick={routeToSignup}>
-                Signup
-            </button>
-
-            <button onClick={toDashBoard}>
-                Signin
-            </button>
-
-        </div>
-    )
+      <div>
+        Signin
+        <button onClick={routeToSignup}>Signup</button>
+        <button onClick={toDashBoard}>Signin</button>
+      </div>
+    </>
+  );
 }
-
