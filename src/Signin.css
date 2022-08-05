@@ -6,7 +6,6 @@ a{
 .row {
   display: flex;
   height: inherit;
-  /* max-height: 99%; */
 }
 
 .one{
@@ -14,7 +13,7 @@ a{
   display: none;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 768px) {
   .one {
     display: block;
   }
@@ -37,12 +36,11 @@ a{
 
 .two {
   background-color: #ff6620;
-  /* background-image: linear-gradient(315deg, #1CA7EC 0%, #3242ae 50%); */
   padding-left: 20px;
   flex: 50%;
 }
 
-@media all and (max-width: 600px){
+@media all and (max-width: 768px){
   .two{
     padding: 50px;
   }
@@ -51,7 +49,6 @@ a{
 .formbox {
   border: 3px solid #fca424;
   padding: 50px 50px 0 50px;
-  /* padding-bottom: 0; */
   box-shadow:
     0 2.8px 2.2px rgba(244, 241, 241, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -61,19 +58,33 @@ a{
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   position: relative;
-  /* top: 100px; */
-  /* background-color: #1CA7EC;  */
   background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
   border-radius: 1.5%;
   height: 30em;
   width: 75%;
   margin-top: 50px;
-  margin-left: 100px;
+  margin-left: 20%;
 }
 
-@media all and (max-width:600px){
+@media all and (max-width: 500px){
+  .welcome{
+    flex: none !important;
+  }
+
+  .sign-in-h3{
+    margin-top: 50px;
+    display: block;
+  }
+
+  .register-link{
+    position: absolute;
+    display: inline-block;
+  }
+  
+}
+
+@media all and (max-width: 768px){
   .formbox{
-    /* border: 2px solid green; */
     margin: auto;
   }
 }
@@ -110,20 +121,12 @@ a{
   color: aliceblue
 }
 
-/* .btn-primary {
-  color: #fff;
-  background-color: #16b56b;
-  border-color: #1dae6b;
-  margin-top: 2.5%;
-} */
 
 .signin-button{
   margin-top: 10%;
-  /* width: 30%; */
   padding-bottom: 3%;
   background-color: #2d8ef6;
   border-color: #2d8ef6;
-  /* border-radius: 5% !important; */
 }
 
 .signin-button:hover{

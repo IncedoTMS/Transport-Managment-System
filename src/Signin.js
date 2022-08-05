@@ -12,7 +12,7 @@ export default function Signin() {
           <div class="formbox">
             
             <div class="welcome d-flex justify-content-around">
-              <h3>Sign In</h3>
+              <h3 class='sign-in-h3'>Sign In</h3>
               <p class='register-link'>New to Transportation Hub? <a href="#">Register</a></p>
             </div>
             
