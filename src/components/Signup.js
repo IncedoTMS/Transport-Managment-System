@@ -1,22 +1,23 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
 export default function Signup() {
+
   const History = useHistory();
   const routeToSignin = () => {
-    History.push("/");
+
+
+    History.push('/');
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Incedo-TMS-Sign-Up</title>
-      </Helmet>
-      <div>
-        Signup
-        <button onClick={routeToSignin}>Signin</button>
-      </div>
-    </>
-  );
+    <div>Signup
+
+
+      <button onClick={routeToSignin}>
+        Signin
+      </button>
+
+    </div>
+  )
 }
