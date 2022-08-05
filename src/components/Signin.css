@@ -1,0 +1,90 @@
+.row {
+  display: flex;
+  max-height: 99%;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  width: 50%;
+  padding: 10px;
+  height: 700px;
+  /* Should be removed. Only for demonstration */
+  display: flex;
+  align-content: center;
+  float: left;
+}
+
+.two {
+  background-color: #ff6620;
+  /* background-image: linear-gradient(315deg, #1CA7EC 0%, #3242ae 50%); */
+  padding-left: 20px;
+  flex: 50%;
+  align-content: center;
+  align-self: center;
+}
+
+.formbox {
+  border: 3px solid #fca424;
+  padding: 50px 50px 0 50px;
+  /* padding-bottom: 0; */
+  box-shadow: 0 2.8px 2.2px rgba(244, 241, 241, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+  position: relative;
+  /* top: 100px; */
+  /* background-color: #1CA7EC;  */
+  background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
+  border-radius: 1.5%;
+  height: 30em;
+  width: 100%;
+  margin-top: 50px;
+  /* margin-left: 100px; */
+}
+
+.welcome {
+  color: white;
+  width: 55%;
+  margin-bottom: 20px;
+}
+
+.reg {
+  color: white;
+  font-size: 0.8em;
+  font-style: italic;
+  display: inline;
+  float: right;
+  width: fit-content;
+}
+
+.form-content {
+  display: block;
+}
+
+.form-control {
+  background-color: #1ca7ec00;
+  /* background-image: linear-gradient(315deg, #1CA7EC 0%, #5163d4 60%); */
+  color: aliceblue;
+  width: 100%;
+}
+
+.form-label {
+  color: aliceblue;
+}
+
+.form-check-label {
+  color: aliceblue;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #16b56b;
+  border-color: #1dae6b;
+  margin-top: 2.5%;
+}
+
+.signin-button {
+  margin-top: 10%;
+}
