@@ -3,14 +3,14 @@
 }
 
 .form-control{
-    background-color: rgb(255,69,0);
-    color: aliceblue;
+    background-color: white;
+    color: black;
     width: 90%;
     margin-left: 5%;
 }
 
 ::placeholder{
-    color: white !important;
+    color: black !important;
 
 }
 
@@ -21,9 +21,9 @@ input:focus::placeholder {
   
 
   button{
-    margin-top: 60px;
+    margin-top: 4%;
     position: relative;
-    left: 40%;
+    left: 30%;
   }
 
   @media screen {
@@ -42,4 +42,15 @@ input:focus::placeholder {
   .add1{
     margin-left: 2.5%;
     width: 95%;
+  }
+
+  .para{
+    display: inline;
+    position: relative;
+    margin-left: 35%;
+    color: white;
+  }
+
+  a:hover{
+    cursor:pointer;
   }
