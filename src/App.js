@@ -7,8 +7,7 @@ import Signup from "./components/Signup";
 function App() {
   return (
     <>
-      <Router>
-        {/* These Buttons below are routing links to components */}
+      {/* <Router>
         <Link to="/">
           {
             <button type="button" class="btn btn-outline-primary">
@@ -34,7 +33,7 @@ function App() {
         <Route exact path="/" component={Dashboard} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
-      </Router>
+      </Router> */}
 
       <Switch>
         <Route exact path="/" component={Signin}>
