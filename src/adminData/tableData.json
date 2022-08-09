@@ -1,0 +1,84 @@
+{
+    "tableData": [
+
+    {
+        "id":1,
+        "empid": 1,
+        "name":"Akshit",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Requested"
+    },
+    
+    {
+        "id":2,
+        "empid": 2,
+        "name":"Nikita",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Active"
+    },
+    
+    {
+        "id":3,
+        "empid": 3,
+        "name":"Deeksha",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Inactive"
+    },
+    
+    {
+        "id":4,
+        "empid": 4,
+        "name":"Ritesh",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Active"
+    },
+    
+    {
+        "id":5,
+        "empid": 5,
+        "name":"Somya",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Active"
+    },
+    
+    {
+        "id":6,
+        "empid": 6,
+        "name":"Eshika",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Requested"
+    },
+    {
+        "id":7,
+        "empid": 7,
+        "name":"Kalpana",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Active"
+    },
+    
+    {
+        "id":8,
+        "empid": 8,
+        "name":"Parul",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Inactive"
+    },
+    
+    {
+        "id":9,
+        "empid": 9,
+        "name":"Himani",
+        "role": "User",
+        "reqdate": "08-08-2022",
+        "status": "Active"
+    }
+    ]
+}
