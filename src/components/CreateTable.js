@@ -1,20 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import './Admin.css';
 
 export default function Table ({ tableData }) {
+    function handleEdit(rowID){
+        alert(`id clicked: ${rowID}`);
+        setIsDisabled(!isDisabled)
+    }
+    const [isDisabled, setIsDisabled] = useState(true)
 
 	const Row = ({ tableData }) => {
 		return (
 			<tr>  
 				<td class='user-id'>{tableData.id}</td>
                 <td class='emp-id'>{tableData.empid}</td>
-                <td class='emp-name'>{tableData.name}</td>
+                <td class='emp-name'><input type='text' placeholder={tableData.name} disabled={isDisabled}></input></td>
                 <td class='role'>{tableData.role}</td>
                 <td class='req-date'>{tableData.reqdate}</td>
                 <td class='status'>{tableData.status}</td>
 				<td class='confirm-button'><button disabled={tableData.status == "Active" ? true : tableData.status == "Inactive" ? true : false} class='btn btn-success'>Confirm</button></td>
-                <td class='edit'><button class='btn btn-info'>Edit</button></td>
-		
+                <td class='edit'><button onClick={() => handleEdit(tableData.id)} class='btn btn-info'>Edit</button></td>
 			</tr>
 		)
 	}
