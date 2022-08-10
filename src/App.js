@@ -11,31 +11,6 @@ function App() {
     <>
       <Header />
       <Footer />
-      {/* <Router> */}
-
-      {/* These Buttons below are routing links to components */}
-      {/* <Link to="/">{<button type="button" class="btn btn-outline-primary">Dashboard</button>}</Link>
-        <Link to="/signin">{<button type="button" class="btn btn-outline-primary">Signin</button>}</Link>
-        <Link to="/signup">{<button type="button" class="btn btn-outline-primary">Signup</button>}</Link> */}
-
-      {/* <Route exact path="/" component={Signin} /> */}
-      {/* <Route path="/signin" component={Dashboard} /> */}
-      {/* <Route path="/signup" component={Signup} /> */}
-
-      {/* </Router> */}
-      
-      {/* <Switch>
-      
-      <Route exact path='/' component={Signin}>
-        <Signin/>
-      </Route>
-      <Route path='/signup'>
-        <Signup/>                     
-      </Route>
-      <Route path='/dashboard' component={Dashboard}>
-
-      </Route>
-    </Switch> */}
     </>
   );
 }
