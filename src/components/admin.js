@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import tableDataMethod  from './get_tableData';
 import Table from './CreateTable';
 import Post from './Post';
+import "./Admin.css";
 // import Data from './data';
 
 export default function Admin() {
@@ -13,7 +14,8 @@ export default function Admin() {
     return (
         <>
             <div class='container'>
-                <h4>Admin Page</h4>
+                <h4>User Dashboard Page</h4>
+                <h4 className='emp-details'>Employee Details</h4>
                 {console.log(tableDataMethod, "tester")}
                 {/* Checks if the length of the JSON array is not 0. 
                 If 0 Display nothing, else display table */}
