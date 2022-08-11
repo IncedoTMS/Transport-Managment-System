@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import tableDataMethod  from './get_tableData';
 import Table from './CreateTable';
 import Post from './Post';
-
+// import Data from './data';
 
 export default function Admin() {
     // Added State to wait for JSON API
