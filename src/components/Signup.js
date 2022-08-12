@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import './Signup.css';
 
@@ -53,18 +52,11 @@ export default function Signup() {
     const PHONE_REGEX = /^(\+\d{1,3}[- ]?)?\d{10}$/; //for phone no
     const pin_regex = /^[1-9]{1}[0-9]{5}/;
 
-    // if (!regex1.test(values.firstname)) {
-    //   errors.firstname = "Name must contain alphabets only";
-    // }
-    // else 
+
     if (!regex2.test(values.firstname)) {
       errors.firstname = "First letter must be capital";
     }
 
-    // if (!regex1.test(values.lastname)) {
-    //   errors.lastname = "Name must contain alphabets only";
-    // }
-    // else 
     if (!regex2.test(values.lastname)) {
       errors.lastname = "First letter must be capital";
     }
