@@ -1,7 +1,7 @@
-.emp-details{
-    border: solid black 2px;
-    text-align: center;
-    width:fit-content;
-    padding: 10px;
-    margin-left: 40%;
+.emp-details {
+  border: solid black 2px;
+  text-align: center;
+  width: fit-content;
+  padding: 10px;
+  margin: auto;
 }
