@@ -1,19 +1,7 @@
 {
   "users": [
     {
-      "empId": "9239",
-      "empName": "name_1",
-      "mobileNo": "9493939393",
-      "department": "dept_1",
-      "projectId": "pid_1",
-      "projectName": "pname_1",
-      "manager": "man_1",
-      "resAddress": "add_1",
-      "office": "off_1",
-      "id": 1
-    },
-    {
-      "empId": "",
+      "empId": "109",
       "empName": "",
       "mobileNo": "",
       "department": "",
@@ -22,7 +10,7 @@
       "manager": "",
       "resAddress": "",
       "office": "",
-      "id": 2
+      "id": 1
     }
   ]
 }

@@ -1,53 +1,92 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 // import './Admin.css';
 
-export default function Table ({ tableData }) {
-    
+export default function Table({ tableData }) {
+  const Row = ({ tableData }) => {
+    function handleEdit(rowID) {
+      // alert(`id clicked: ${rowID}`);
 
-	const Row = ({ tableData }) => {
+      setIsDisabled(!isDisabled);
+    }
+    const [isDisabled, setIsDisabled] = useState(true);
+    return (
+      <tr>
+        <td class="user-id">{tableData.id}</td>
+        <td class="emp-id">
+          {" "}
+          <input
+            type="text"
+            placeholder={tableData.Sno}
+            disabled={isDisabled}
+          ></input>{" "}
+        </td>
+        <td class="emp-name">
+          <input
+            type="text"
+            placeholder={tableData.month}
+            disabled={isDisabled}
+          ></input>
+        </td>
+        <td class="role">
+          <input
+            type="text"
+            placeholder={tableData.empid}
+            disabled={isDisabled}
+          ></input>
+        </td>
+        <td class="req-date">
+          <input
+            type="text"
+            placeholder={tableData.empName}
+            disabled={isDisabled}
+          ></input>
+        </td>
+        {/* <td class='status'><input type='text' placeholder={tableData.status} disabled={isDisabled}></input></td> */}
+        <td class="confirm-button">
+          <button
+            disabled={
+              tableData.status == "Active"
+                ? true
+                : tableData.status == "Inactive"
+                ? true
+                : false
+            }
+            class="btn btn-success"
+          >
+            Confirm
+          </button>
+        </td>
+        <td class="edit">
+          <button onClick={() => handleEdit(tableData.id)} class="btn btn-info">
+            Edit
+          </button>
+        </td>
+      </tr>
+    );
+  };
 
-        function handleEdit(rowID){
-            // alert(`id clicked: ${rowID}`);
-            
-            setIsDisabled(!isDisabled)
-        }
-        const [isDisabled, setIsDisabled] = useState(true)
-		return (
-			<tr>  
-				<td class='user-id'>{tableData.id}</td>
-                <td class='emp-id'> <input type='text' placeholder={tableData.Sno} disabled={isDisabled}></input> </td>
-                <td class='emp-name'><input type='text' placeholder={tableData.month} disabled={isDisabled}></input></td>
-                <td class='role'><input type='text' placeholder={tableData.empid} disabled={isDisabled}></input></td>
-                <td class='req-date'><input type='text' placeholder={tableData.empName} disabled={isDisabled}></input></td>
-                {/* <td class='status'><input type='text' placeholder={tableData.status} disabled={isDisabled}></input></td> */}
-				<td class='confirm-button'><button disabled={tableData.status == "Active" ? true : tableData.status == "Inactive" ? true : false} class='btn btn-success'>Confirm</button></td>
-                <td class='edit'><button onClick={() => handleEdit(tableData.id)} class='btn btn-info'>Edit</button></td>
-			</tr>
-		)
-	}
-
-	return (
-		// <div className='table'>
-			<table class="table table-striped table-bordered">
-                <thead class="custom-header">
-                    <tr>
-                        <th scope="col">User ID</th>
-                        <th scope="col">Sno</th>
-                        <th scope="col">Month</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">EmpId</th>
-                        <th scope="col">Empname</th>
-                        <th scope="col">Confirm</th>
-                        <th scope="col">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableData && tableData.map(t => <Row tableData={t} key={t.id} />)}
-                </tbody>
-            </table>
-			// { <div className='rows'>
-			// 	{users && users.map(u => <Row user={u} key={u.id} />)}
-			// </div> }
-		// </div>
-	)
+  return (
+    // <div className='table'>
+    <table class="table table-striped table-bordered">
+      <thead class="custom-header">
+        <tr>
+          <th scope="col">User ID</th>
+          <th scope="col">Sno</th>
+          <th scope="col">Month</th>
+          <th scope="col">Role</th>
+          <th scope="col">EmpId</th>
+          <th scope="col">Empname</th>
+          <th scope="col">Confirm</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableData && tableData.map((t) => <Row tableData={t} key={t.id} />)}
+      </tbody>
+    </table>
+    // { <div className='rows'>
+    // 	{users && users.map(u => <Row user={u} key={u.id} />)}
+    // </div> }
+    // </div>
+  );
 }
