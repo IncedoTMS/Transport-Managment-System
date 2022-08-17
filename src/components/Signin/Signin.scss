@@ -1,8 +1,20 @@
+.pageTwo{
+
+img {
+    max-width: 50%;
+    height: auto;
+    opacity: 80%;
+    margin: 30%;
+}
+
 a {
   text-decoration: none !important;
   color: #0037ff !important;
 }
 
+a:hover {
+  cursor: pointer;
+}
 .row {
   display: flex;
   height: inherit;
@@ -31,6 +43,7 @@ a {
   background-color: #ff6620;
   padding-left: 20px;
   flex: 50%;
+  height: 100vh;
 }
 
 @media all and (max-width: 768px) {
@@ -39,21 +52,18 @@ a {
   }
 }
 
-.formbox {
-  border: 3px solid #fca424;
-  padding: 50px; /*Padding is done 50 px to maintain the contents inside the formbox in center*/
-  box-shadow: 0 2.8px 2.2px rgba(244, 241, 241, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-
-  position: relative;
-  background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
-  border-radius: 1.5%;
-  /* height: 30em; width: 75%; */
-  /* Height and width are commented to solve the zoom in and zoom out problem. */
-  margin-top: 50px;
-  margin-left: 20%;
+.formbox{
+border: 3px solid #fca424;
+padding: 50px;
+box-shadow: 0 2.8px 2.2px rgba(244, 241, 241, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+position: relative;
+background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
+border-radius: 1.5%;
+// width: 80%;
+// height: 70%;
+top: 18%;
+left: 12%;
+margin-right: 15%;
 }
 
 @media all and (max-width: 500px) {
@@ -123,4 +133,5 @@ a {
 
 .forget-password {
   font-size: 0.8em;
+}
 }
