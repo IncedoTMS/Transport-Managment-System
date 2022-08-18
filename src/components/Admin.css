@@ -8,6 +8,7 @@
 .title-bar{
   border: solid black 2px;
   text-align: center;
+  border-radius: 15px;
   width: fit-content;
   padding: 10px;
   margin: auto;

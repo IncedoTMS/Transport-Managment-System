@@ -10,7 +10,7 @@ const Monthly = () => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:4000/monthly");
+    const result = await axios.get("http://localhost:3000/monthly");
     setUser(result.data);
   };
 
@@ -23,18 +23,19 @@ const Monthly = () => {
     <div className="container">
       <div className="py-4">
         <h3 className="title-bar">Monthly Drop Requests</h3>
-        <table class="table border shadow">
-          <thead class="thead-dark">
-            <tr>
+        <div class="table-responsive">
+        <table class="table table-striped">
+          <thead className="thead-dark">
+            <tr className="heading-text">
               <th scope="col">#</th>
               <th scope="col">Month</th>
-              <th scope="col">Employee Id</th>
+              {/* <th scope="col">Employee Id</th>
               <th scope="col">Employee Name</th>
               <th scope="col">Mobile No.</th>
               <th scope="col">Department</th>
               <th scope="col">Project Id</th>
               <th scope="col">Project Name</th>
-              <th scope="col">Manager</th>
+              <th scope="col">Manager</th> */}
               <th scope="col">Pickup Location</th>
               <th scope="col">Pickup Time</th>
               <th scope="col">Drop Location</th>
@@ -48,13 +49,13 @@ const Monthly = () => {
               <tr>
                 <th scope="row">{index + 1}</th>
                 <td>{user.month}</td>
-                <td>{user.empId}</td>
+                {/* <td>{user.empId}</td>
                 <td>{user.empName}</td>
                 <td>{user.mobNo}</td>
                 <td>{user.department}</td>
                 <td>{user.projectId}</td>
                 <td>{user.projectName}</td>
-                <td>{user.manager}</td>
+                <td>{user.manager}</td> */}
                 <td>{user.pickupLocation}</td>
                 <td>{user.pickupTime}</td>
                 <td>{user.dropLocation}</td>
@@ -83,6 +84,7 @@ const Monthly = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

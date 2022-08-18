@@ -24,7 +24,7 @@ export default function Post() {
       <div className="container">
         <div className="py-4">
           <h3 className="title-bar">User Master</h3>
-          <table className="table border shadow">
+          <table class="table table-striped">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">Emp ID</th>
