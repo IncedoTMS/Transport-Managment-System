@@ -1,11 +1,11 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import Signup from './components/Signup/Signup';
+import Signin from "./components/Signin/Signin";
 import Dashboard from "./components/Dashboard";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
+
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
 
 function App() {
   return (
@@ -13,31 +13,22 @@ function App() {
     <Header></Header>
       <Router>
 
-        { /* These Buttons below are routing links to components */}
-        {/* <Link to="/">{<button type="button" class="btn btn-outline-primary">Dashboard</button>}</Link>
-        <Link to="/signin">{<button type="button" class="btn btn-outline-primary">Signin</button>}</Link>
-        <Link to="/signup">{<button type="button" class="btn btn-outline-primary">Signup</button>}</Link> */}
+        <Switch>
+          <Route exact path='/' component={Signin}>
+            <Signin />
+          </Route>
+          <Route path='/signup' component={Signup}>
+            <Signup />
+          </Route>
+          <Route path='/dashboard' component={Dashboard}>
 
-        {/* <Route exact path="/" component={Signin} /> */}
-        {/* <Route path="/signin" component={Dashboard} /> */}
-        {/* <Route path="/signup" component={Signup} /> */}
+          </Route>
+        </Switch>
 
       </Router>
 
-      <Switch>
-      <Route exact path='/' component={Signin}>
-        <Signin/>
-      </Route>
-      <Route path='/signup'>
-        <Signup/>                     
-      </Route>
-      <Route path='/dashboard' component={Dashboard}>
-
-      </Route>
-    </Switch>
-
-
       <Footer></Footer>
+
     </>
   );
 }
