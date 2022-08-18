@@ -49,9 +49,7 @@ export default function Admin() {
         
         <Switch>
         <Route exact path="/" component={Monthly}><Monthly /></Route>
-       
-          <Route exact path="/monthly/edit/:id" component={Edit}></Route>
-          
+        <Route exact path="/monthly/edit/:id" component={Edit}></Route>
         </Switch>
         
       </div>
