@@ -1,169 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
-const axios = require("axios");
+import axios from "axios";
+// const axios = require("axios");
 
 export default function Post() {
-  const [user, setUser] = useState({
-    empId: "",
-    empName: "",
-    mobileNo: "",
-    department: "",
-    projectId: "",
-    projectName: "",
-    manager: "",
-    resAddress: "",
-    office: "",
-  });
+  
 
-  function submitHandler(e) {
-    e.preventDefault();
-    if (isDisabled) {
-      axios.put(" http://localhost:3000/users/1", user).then(
-        (resp) => {
-          console.log(resp);
-        },
-        (e) => {
-          console.log(e);
-        }
-      );
-    }
-  }
-  function handleEdit() {
-    setIsEditing(!isEditing);
-    setIsDisabled(!isDisabled);
-  }
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
+  
+  const [users, setUser] = useState([]);
+  useEffect(() => {
+    loadUsers();
+  }, []);
+  const loadUsers = async () => {
+    const res = await axios.get("http://localhost:4000/users");
+    setUser(res.data);
+  };
+
+  
+  
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="form-inline">
-        <div class="form-cell">
-          <label>Employee ID</label>
-          <input
-            required
-            type="number"
-            name="empId"
-            value={user.empId}
-            placeholder="Employee Id"
-            disabled={isDisabled}
-            onChange={(e) => {
-              // console.log(e.target.value);
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
+    <form >
+      <div className="container">
+        <div className="py-4">
+          <h3 className="title-bar">User Master</h3>
+          <table className="table border shadow">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Emp ID</th>
+                <th scope="col">Emp Name</th>
+                <th scope="col">Mobile No.</th>
+                <th scope="col">Department</th>
+                <th scope="col">Project ID</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Manager</th>
+                <th scope="col">Residence Address</th>
+                <th scope="col">Office</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr>
+                  <td>{user.empId}</td>
+                  <td>{user.empName}</td>
+                  <td>{user.mobileNo}</td>
+                  <td>{user.department}</td>
+                  <td>{user.projectId}</td>
+                  <td>{user.projectName}</td>
+                  <td>{user.manager}</td>
+                  <td>{user.resAddress}</td>
+                  <td>{user.office}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div class="form-cell">
-          <label>Employee Name</label>
-          <input
-            type="text"
-            name="empName"
-            value={user.empName}
-            placeholder="Employee Name"
-            disabled={isDisabled}
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Mobile No.</label>
-          <input
-            type="number"
-            name="mobileNo"
-            value={user.mobileNo}
-            disabled={isDisabled}
-            placeholder="Phone (10)"
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Department</label>
-          <input
-            type="text"
-            name="department"
-            value={user.department}
-            placeholder="Department"
-            disabled={isDisabled}
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Project ID</label>
-          <input
-            type="text"
-            name="projectId"
-            value={user.projectId}
-            disabled={isDisabled}
-            placeholder="Project ID"
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Project Name</label>
-          <input
-            type="text"
-            name="projectName"
-            value={user.projectName}
-            disabled={isDisabled}
-            placeholder="Project Name"
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Manager</label>
-          <input
-            type="text"
-            name="manager"
-            value={user.manager}
-            placeholder="Manager"
-            disabled={isDisabled}
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Residence Address</label>
-          <input
-            type="text"
-            name="resAddress"
-            value={user.resAddress}
-            disabled={isDisabled}
-            placeholder="Residence Address"
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
-        <div class="form-cell">
-          <label>Office</label>
-          <input
-            type="text"
-            name="office"
-            value={user.office}
-            disabled={isDisabled}
-            placeholder="Office"
-            onChange={(e) => {
-              setUser({ ...user, [e.target.name]: e.target.value });
-            }}
-          />
-        </div>
+
+        
       </div>
-      {/* <button className="form-btn" style={{ align: "center" }}>
-        Save
-      </button> */}
-      <button onClick={() => handleEdit()} className="form-btn">
+     
+      {/* <button onClick={() => handleEdit()} className="form-btn">
         {isEditing ? "Save" : "Edit"}
-      </button>
+      </button> */}
     </form>
   );
 }

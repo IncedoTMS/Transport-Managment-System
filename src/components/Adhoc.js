@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Monthly = () => {
+const Adhoc = () => {
   const [users, setUser] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const Monthly = () => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3000/monthly");
+    const result = await axios.get("http://localhost:5000/adhoc");
     setUser(result.data);
   };
 
@@ -22,12 +22,12 @@ const Monthly = () => {
   return (
     <div className="container">
       <div className="py-4">
-        <h3 className="title-bar">Monthly Drop Requests</h3>
+        <h1>Adhoc Requests</h1>
         <table class="table border shadow">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Month</th>
+              <th scope="col">Date</th>
               <th scope="col">Employee Id</th>
               <th scope="col">Employee Name</th>
               <th scope="col">Mobile No.</th>
@@ -47,7 +47,7 @@ const Monthly = () => {
             {users.map((user, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{user.month}</td>
+                <td>{user.date}</td>
                 <td>{user.empId}</td>
                 <td>{user.empName}</td>
                 <td>{user.mobNo}</td>
@@ -66,7 +66,7 @@ const Monthly = () => {
                   </Link> */}
                   <Link
                     class="btn btn-primary mr-2"
-                    to={`/monthly/edit/${user.id}`}
+                    to={`/adhoc/edit/${user.id}`}
                     // to="/monthly/edit"
                     
                   >
@@ -88,4 +88,4 @@ const Monthly = () => {
   );
 };
 
-export default Monthly;
+export default Adhoc;
