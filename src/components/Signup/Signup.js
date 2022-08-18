@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-//import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
-import './Signup.css';
+import { Helmet } from "react-helmet"; //React Helmet use to Dynamically set what's in the document's head section.
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  useHistory,
+} from "react-router-dom";
+import './Signup.css' ;
 
 export default function Signup() {
   const History = useHistory();
@@ -76,6 +82,9 @@ export default function Signup() {
     return errors;
   };
   return (
+  <>
+    <div className="pageOne">
+      </div>
     <div>
       <div className="row">
         <div className="column one">
@@ -176,5 +185,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
+    </>
   )
 }
