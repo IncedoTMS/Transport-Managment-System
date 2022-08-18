@@ -48,12 +48,12 @@ const Edit = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3000/monthly/${id}`, user);
+    await axios.put(`http://localhost:4000/monthly/${id}`, user);
     history.push("/");
   };
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/monthly/${id}`);
+    const result = await axios.get(`http://localhost:4000/monthly/${id}`);
     setUser(result.data);
   };
   return (

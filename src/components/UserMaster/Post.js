@@ -12,7 +12,7 @@ export default function Post() {
     loadUsers();
   }, []);
   const loadUsers = async () => {
-    const res = await axios.get("http://localhost:4000/users");
+    const res = await axios.get("http://localhost:3000/users");
     setUser(res.data);
   };
 

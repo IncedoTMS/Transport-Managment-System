@@ -5,7 +5,6 @@ import App from './App';
 import Signin from './Signin'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import Post from './components/Post';
 import Admin from './components/admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

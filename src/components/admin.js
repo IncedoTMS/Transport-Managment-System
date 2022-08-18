@@ -3,11 +3,11 @@ import {BrowserRouter , Routes ,Route, Switch} from 'react-router-dom'
 // import './Admin.css';
 import tableDataMethod from "./get_tableData";
 import Table from "./CreateTable";
-import Post from "./Post";
+import Post from "./UserMaster/Post.js";
 import "./Admin.css";
-import Monthly from "./Monthly.js";
-import Edit from "./Edit";
-import Adhoc from "./Adhoc";
+import Monthly from "./Monthly/Monthly.js";
+import Edit from "./Edit/Edit";
+import Adhoc from "./Adhoc/Adhoc";
 // import Data from './data';
 
 export default function Admin() {
