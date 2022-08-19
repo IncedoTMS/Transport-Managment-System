@@ -2,3 +2,8 @@
     background-color: #ff6620 !important;
     color: white;
 }
+
+
+td, th{
+    text-align: center
+}

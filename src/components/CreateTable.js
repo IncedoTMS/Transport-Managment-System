@@ -11,35 +11,10 @@ export default function Table({ tableData }) {
     const [isDisabled, setIsDisabled] = useState(true);
     return (
       <tr>
-        <td class="user-id">{tableData.id}</td>
-        <td class="emp-id">
-          {" "}
-          <input
-            type="text"
-            placeholder={tableData.empid}
-            disabled={isDisabled}
-          ></input>{" "}
-        </td>
-        <td class="emp-name">
-          <input
-            type="text"
-            placeholder={tableData.name}
-            disabled={isDisabled}
-          ></input>
-        </td>
-        <td class="role">
-          <input
-            type="text"
-            placeholder={tableData.role}
-            disabled={isDisabled}
-          ></input>
-        </td>
-        <td class="req-date">
-          <input
-            type="text"
-            placeholder={tableData.reqdate}
-            disabled={isDisabled}
-          ></input>
+        <td class="emp-id">{tableData.empid}</td>
+        <td class="emp-name">{tableData.name}</td>
+        <td class="role">{tableData.role}</td>
+        <td class="req-date">{tableData.reqdate}
         </td>
         <td class="status">
           <input
@@ -73,11 +48,9 @@ export default function Table({ tableData }) {
   };
 
   return (
-    // <div className='table'>
-    <table class="table table-striped table-bordered">
+    <table className="table table-striped table-bordered">
       <thead class="custom-header">
         <tr>
-          <th scope="col">User ID</th>
           <th scope="col">Emp ID</th>
           <th scope="col">Name</th>
           <th scope="col">Role</th>
@@ -91,9 +64,5 @@ export default function Table({ tableData }) {
         {tableData && tableData.map((t) => <Row tableData={t} key={t.id} />)}
       </tbody>
     </table>
-    // { <div className='rows'>
-    // 	{users && users.map(u => <Row user={u} key={u.id} />)}
-    // </div> }
-    // </div>
   );
 }

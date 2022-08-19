@@ -12,7 +12,7 @@ export default function Admin() {
     return (
         <>
             <div class='container'>
-                <h4>Admin Page</h4>
+                <h2>Admin Dashboard</h2>
                 {console.log(tableDataMethod, "tester")}
                 {/* Checks if the length of the JSON array is not 0. 
                 If 0 Display nothing, else display table */}
