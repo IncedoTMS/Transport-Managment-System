@@ -7,7 +7,9 @@ import Post from "./UserMaster/Post.js";
 import "./Admin.css";
 import Monthly from "./Monthly/Monthly.js";
 import Edit from "./Edit/Edit";
-import Adhoc from "./Adhoc/Adhoc";
+import Edit2 from "./Edit/Edit2";
+
+import Adhoc from "./Adhoc/Adhoc.js";
 // import Data from './data';
 
 export default function Admin() {
@@ -48,11 +50,15 @@ export default function Admin() {
         <Post />
         
         <Switch>
-        <Route exact path="/" component={Monthly}><Monthly /></Route>
+        <Route exact path="/" component={Monthly}><Monthly /><Adhoc/></Route>
         <Route exact path="/monthly/edit/:id" component={Edit}></Route>
+        {/* <Route exact path="/" component={Adhoc}><Adhoc /></Route> */}
+        <Route exact path="/adhoc/edit/:id" component={Edit2}></Route>
+        
         
 
         </Switch>
+        {/* <Adhoc/> */}
         
       </div>
     </BrowserRouter>

@@ -24,6 +24,7 @@ export default function Post() {
       <div className="container">
         <div className="py-4">
           <h3 className="title-bar">User Master</h3>
+          <div class="table-responsive">
           <table class="table table-striped">
             <thead className="thead-dark">
               <tr>
@@ -54,6 +55,7 @@ export default function Post() {
               ))}
             </tbody>
           </table>
+         </div>
         </div>
 
         

@@ -22,8 +22,9 @@ const Adhoc = () => {
   return (
     <div className="container">
       <div className="py-4">
-        <h3>Adhoc Requests</h3>
-        <table class="table border shadow">
+      <h3 className="title-bar">Adhoc Requests</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
@@ -83,6 +84,7 @@ const Adhoc = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
