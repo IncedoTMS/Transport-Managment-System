@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Admin.css";
 
-export default function Table({ tableData }) {
+export default function Table({ tableData , searchData}) {
+
+
   const Row = ({ tableData }) => {
     function handleEdit(rowID) {
       setIsEditing(!isEditing);
@@ -61,7 +63,9 @@ export default function Table({ tableData }) {
         </tr>
       </thead>
       <tbody>
-        {tableData && tableData.map((t) => <Row tableData={t} key={t.id} />)}
+    
+        {searchData.length>0?searchData.map((t) => <Row tableData={t} key={t.id} />) : 
+        tableData.map((t) => <Row tableData={t} key={t.id}/>)}
       </tbody>
     </table>
   );

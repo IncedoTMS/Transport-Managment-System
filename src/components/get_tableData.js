@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState ,useEffect} from 'react';
 
 const axios = require('axios');
 var oneTime = true
@@ -16,12 +16,12 @@ const tableDataMethod = (setter) => {
             data.forEach(e => {
                 tableData.push(e);
 
-                console.log(`${e.id}, ${e.name}, ${e.status}`);
+                // console.log(`${e.id}, ${e.name}, ${e.status}`);
             });
             // Once API call is complete and array is not empty,
             // setter sets the state and sends tableData to Admin.js
             setter(tableData)
-            oneTime = !oneTime
+            // oneTime = !oneTime
         })
         .catch(error => {
             console.log(error);

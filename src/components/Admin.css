@@ -3,6 +3,24 @@
     color: white;
 }
 
+.admin-header{
+    display: inline;
+    width: max-content;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight:900;
+    color: #1b15b7;
+}
+
+.fontAwesome {
+    font-family: 'Helvetica', FontAwesome, sans-serif;
+  }
+
+.searchBar{
+    height: fit-content;
+    margin-top: 2%;
+    width: 17%;
+}
+
 
 td, th{
     text-align: center
