@@ -33,14 +33,11 @@ export default function Signup() {
       .post("https://localhost:44371/api/v1/user", formData)
       .then((response) => console.log(response));
   }
-  function clicker(e) {
-    console.log("e=", e);
+  function changeHandler(e) {
+
     const name = e.target.name;
     const value = e.target.value;
-    console.log("name=", name);
-    console.log("value=", value);
     setformdata({ ...formData, [name]: value });
-    console.log("formdata", formData);
   }
 
   return (
@@ -69,7 +66,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="First Name"
                           name="firstName"
-                          onChange={clicker}
+                          onChange={changeHandler}
                           required
                         />
                       </div>
@@ -79,7 +76,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="Last Name"
                           name="lastName"
-                          onChange={clicker}
+                          onChange={changeHandler}
                         />
                       </div>
                     </div>
@@ -91,7 +88,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="Email Address"
                           name="email"
-                          onChange={clicker}
+                          onChange={changeHandler}
                           required
                         />
                       </div>
@@ -101,7 +98,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="Phone number"
                           name="phone"
-                          onChange={clicker}
+                          onChange={changeHandler}
                         />
                       </div>
                     </div>
@@ -113,7 +110,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="Password"
                           name="password"
-                          onChange={clicker}
+                          onChange={changeHandler}
                           required
                         />
                       </div>
@@ -123,7 +120,7 @@ export default function Signup() {
                           class="form-control"
                           placeholder="confirm password"
                           name="password"
-                          onChange={clicker}
+                          onChange={changeHandler}
                           required
                         />
                       </div>
