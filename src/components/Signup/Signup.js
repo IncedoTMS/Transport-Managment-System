@@ -27,7 +27,8 @@ export default function Signup() {
     addressId: null,
   });
 
-  function submitHandler() {
+  function submitHandler(e) {
+    e.preventDefault();
     console.log("axios", formData);
     axios
       .post("https://localhost:44371/api/v1/user", formData)
@@ -35,6 +36,7 @@ export default function Signup() {
   }
   function changeHandler(e) {
 
+    e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
     setformdata({ ...formData, [name]: value });
@@ -58,7 +60,7 @@ export default function Signup() {
               </div>
               <div className="myForm">
                 <div>
-                  <form action="./" method="get">
+                  <form action="./" method="post">
                     <div class="row">
                       <div class="col">
                         <input
