@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
 import Post from "./UserMaster/Post.js";
-import "./Admin.css";
+import "./UserDB.css";
 import Monthly from "./Monthly/Monthly.js";
 import Edit from "./Edit/Edit";
 import Edit2 from "./Edit/Edit2";

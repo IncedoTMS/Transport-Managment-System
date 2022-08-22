@@ -5,14 +5,14 @@ import App from "./App";
 import Signin from "./Signin";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import Admin from "./components/admin";
+import UserDB from "./components/UserDB/UserDB";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     {/* <App /> */}
     {/* <Signin /> */}
-    <Admin />
+    <UserDB />
   </BrowserRouter>
 );
 
