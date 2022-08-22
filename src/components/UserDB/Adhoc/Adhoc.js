@@ -78,7 +78,7 @@ const Adhoc = () => {
                   </Link> */}
                             <Link
                               class="btn btn-primary mr-2"
-                              to={`/adhoc/edit/${user.id}`}
+                              to={`/dashboard/adhoc/edit/${user.id}`}
                               // to="/monthly/edit"
                             >
                               <div style={{ color: "white" }}>Edit</div>

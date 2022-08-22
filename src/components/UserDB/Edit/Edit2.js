@@ -49,7 +49,7 @@ const Edit2 = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:3000/adhoc/${id}`, user);
-    history.push("/");
+    history.push("/dashboard");
   };
 
   const loadUser = async () => {

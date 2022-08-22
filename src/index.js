@@ -10,9 +10,9 @@ import UserDB from "./components/UserDB/UserDB";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    {/* <App /> */}
+    <App />
     {/* <Signin /> */}
-    <UserDB />
+    {/* <UserDB /> */}
   </BrowserRouter>
 );
 

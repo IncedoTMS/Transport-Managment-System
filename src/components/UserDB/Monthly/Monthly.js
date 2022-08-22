@@ -77,7 +77,7 @@ const Monthly = () => {
                         </Link> */}
                             <Link
                               class="btn btn-primary mr-2"
-                              to={`/monthly/edit/${user.id}`}
+                              to={`/dashboard/monthly/edit/${user.id}`}
                               // to="/monthly/edit"
                             >
                               <div style={{ color: "white" }}>Edit</div>

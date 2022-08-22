@@ -15,13 +15,21 @@ export default function Admin() {
         <Post />
 
         <Switch>
-          <Route exact path="/" component={Monthly}>
+          <Route exact path="/dashboard" component={Monthly}>
             <Monthly />
             <Adhoc />
           </Route>
-          <Route exact path="/monthly/edit/:id" component={Edit}></Route>
+          <Route
+            exact
+            path="/dashboard/monthly/edit/:id"
+            component={Edit}
+          ></Route>
           {/* <Route exact path="/" component={Adhoc}><Adhoc /></Route> */}
-          <Route exact path="/adhoc/edit/:id" component={Edit2}></Route>
+          <Route
+            exact
+            path="/dashboard/adhoc/edit/:id"
+            component={Edit2}
+          ></Route>
         </Switch>
         {/* <Adhoc/> */}
       </div>
