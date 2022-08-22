@@ -9,6 +9,7 @@ export default function Post() {
     loadUsers();
   }, []);
   const loadUsers = async () => {
+    // const res = await axios.get("http://localhost:3000/users");
     const res = await axios.get("http://localhost:3000/users");
     setUser(res.data);
   };
@@ -22,11 +23,11 @@ export default function Post() {
           <div>
             <h3 className="title-bar">User Master</h3>
           </div>
-          <div className="expand-sym">{isActive ? "-" : "+"}</div>
+          {/* <div className="expand-sym">{isActive ? "-" : "+"}</div> */}
         </div>
         <div>
           {" "}
-          {isActive && (
+          {true && (
             <div className="accordion-content">
               <div className="container">
                 <div className="py-4">
