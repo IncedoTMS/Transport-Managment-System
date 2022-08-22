@@ -8,11 +8,14 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
+
 import './Signup.css' ;
+
 
 export default function Signup() {
   const History = useHistory();
   const routeToSignin = () => {
+
     History.push('/');
   };
   const initialValues = {
@@ -184,6 +187,7 @@ export default function Signup() {
                   <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   <p className='para'>Have an account? <a onClick={routeToSignin} style={{ color: 'blue' }}>Log In</a></p>
                 </form>
+
               </div>
             </div>
           </div>
@@ -193,3 +197,4 @@ export default function Signup() {
     </>
   )
 }
+

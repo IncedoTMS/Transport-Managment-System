@@ -39,7 +39,7 @@ export default function Signin() {
         </div>
         <div className="column two col-sm">
           <div className="formbox">
-            <div className="welcome d-flex justify-content-around">
+            <div className="welcome d-flex justify-content-between">
               <h3 className="sign-in-h3">Sign In</h3>
               <p className="register-link">
                 New to Transportation Hub? <a onClick={routeToSignup}>Register</a>
@@ -55,7 +55,7 @@ export default function Signin() {
                     onChange={handleOnChange}
                     className="form-control"
                     aria-describedby="emailHelp"
-                    placeholder="example@gmail.com"
+                    placeholder="example@incedoinc.com"
                   />
                   <p>{message}</p>
                 </div>
@@ -74,7 +74,7 @@ export default function Signin() {
               <a href="#">Forget Password</a>
             </div>
 
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-end">
               <button
                 type="submit"
                 e={email}
