@@ -23,7 +23,9 @@ const Adhoc = () => {
           <div>
             <h3 className="title-bar">Adhoc Requests</h3>{" "}
           </div>
-          <div className="expand-sym">{isActive ? "-" : "+"}</div>
+          <div className="expand-sym">
+            {!isActive ? <i class="arrow down"></i> : <i class="arrow up"></i>}
+          </div>
         </div>
         <div className="accordion-content">
           {isActive && (

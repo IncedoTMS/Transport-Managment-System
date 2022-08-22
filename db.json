@@ -74,7 +74,7 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 322",
+      "dropLocation": "Phase aa",
       "managerApproval": "Approved",
       "status": "Active"
     }
@@ -140,7 +140,7 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase aa",
+      "dropLocation": "Phase 123",
       "managerApproval": "Approved",
       "status": "Active"
     }
