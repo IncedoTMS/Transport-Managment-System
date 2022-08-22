@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import Signin from './Signin'
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import Signin from "./Signin";
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import Admin from './components/admin';
+import Admin from "./components/admin";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  {/* <App /> */}
-  {/* <Signin /> */}
-  <Admin />
+    {/* <App /> */}
+    {/* <Signin /> */}
+    <Admin />
   </BrowserRouter>
 );
 
