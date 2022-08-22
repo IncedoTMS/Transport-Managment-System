@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+
+
+  html,
+  body {
+    min-height: 100%;
+    width: 98%;
+  }
+
+
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: auto;
+  }
+
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+  .two {
+    display: flex;
+    height: 700px;
+    width: 50%;
+  }
+
+  .formbox {
+    border-style: solid;
+    border-color: orange;
+    border-width: 3px;
+    position: relative;
+    border-radius: 1.5%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    /* height: 80%;
+  width: 90%; */
+    margin-top: 50px;
+    margin-left: 7%;
+    background-image: url("./orange.png");
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
+  .myForm {
+
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
+  .headings {
+    display: flex;
+    gap: 180px;
+    color: white;
+
+  }
+
+  .left {
+    position: relative;
+    left: auto;
+    bottom: 10px;
+    top: 10px;
+  }
+
+
+
+  img {
+    max-width: 50%;
+    height: auto;
+    opacity: 80%;
+    margin: 30%;
+  }
+
+  @media screen and (max-width: 600px) {
+
+    .column {
+      width: 100%;
+    }
+
+    .headings {
+      display: block;
+    }
+
+  }
+
+  .left {
+    margin-left: 2.5%;
+    margin-top: 5%;
+  }
+
+  button {
+    border: none;
+  }
+
+
+  .row {
+    padding-top: 20px;
+  }
+
+  .form-control {
+    background-color: white;
+    color: black;
+    width: max-content;
+  }
+
+  ::placeholder {
+    color: rgb(178, 157, 157) !important;
+
+  }
+
+  input:focus::placeholder {
+    color: transparent !important;
+  }
+
+
+  button {
+    margin-top: 4%;
+    position: relative;
+    left: 30%;
+  }
+
+
+  @media screen {}
+
+  .btn {
+    border-radius: 0 0 0 0;
+  }
+
+
+
+  form {
+    margin: auto;
+    display : block;
+  }
+
+
+  .add1 {
+    width: 100%;
+  }
+
+  .para {
+    display: block;
+    color: white;
+
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
+
+
+  .btn {
+    margin: 7%;
+    margin-right: 2%;
+    display: block
+  }
+
+  p {
+    margin: 0 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .formbox{
+      margin-left: 40%;
+      width: 180%;
+    }
+    .row{
+      padding-top: 2%;
+    }
+
+    .form-control{
+      margin-top: 5%;
+    }
+    
+  }
+
+  @media screen and (max-width: 900px)
+  {
+    .add1{
+      max-width: 100%;
+    }
+
+    .form-control{
+      width: 100%;
+    }
+    .formbox{
+      margin-right: 10%;
+    }
+  }
