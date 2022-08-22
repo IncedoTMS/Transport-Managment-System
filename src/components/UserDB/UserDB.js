@@ -24,14 +24,13 @@ export default function Admin() {
             path="/dashboard/monthly/edit/:id"
             component={Edit}
           ></Route>
-          {/* <Route exact path="/" component={Adhoc}><Adhoc /></Route> */}
+
           <Route
             exact
             path="/dashboard/adhoc/edit/:id"
             component={Edit2}
           ></Route>
         </Switch>
-        {/* <Adhoc/> */}
       </div>
     </BrowserRouter>
   );

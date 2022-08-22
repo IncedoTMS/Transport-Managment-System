@@ -14,11 +14,6 @@ const Adhoc = () => {
     setUser(result.data);
   };
 
-  //   const deleteUser = async id => {
-  //     await axios.delete(`http://localhost:3000/monthly/${id}`);
-  //     loadUsers();
-  //   };
-
   const [isActive, setIsActive] = useState(true);
 
   return (
@@ -40,13 +35,6 @@ const Adhoc = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
-                        {/* <th scope="col">Employee Id</th>
-              <th scope="col">Employee Name</th>
-              <th scope="col">Mobile No.</th>
-              <th scope="col">Department</th>
-              <th scope="col">Project Id</th>
-              <th scope="col">Project Name</th> */}
-                        {/* <th scope="col">Manager</th> */}
                         <th scope="col">Pickup Location</th>
                         <th scope="col">Pickup Time</th>
                         <th scope="col">Drop Location</th>
@@ -60,35 +48,18 @@ const Adhoc = () => {
                         <tr>
                           <th scope="row">{index + 1}</th>
                           <td>{user.date}</td>
-                          {/* <td>{user.empId}</td>
-                <td>{user.empName}</td>
-                <td>{user.mobNo}</td>
-                <td>{user.department}</td>
-                <td>{user.projectId}</td>
-                <td>{user.projectName}</td>
-                <td>{user.manager}</td> */}
                           <td>{user.pickupLocation}</td>
                           <td>{user.pickupTime}</td>
                           <td>{user.dropLocation}</td>
                           <td>{user.managerApproval}</td>
                           <td>{user.status}</td>
                           <td>
-                            {/* <Link class="btn btn-primary mr-4" to={`/users/${user.id}`}>
-                    View
-                  </Link> */}
                             <Link
                               class="btn btn-primary mr-2"
                               to={`/dashboard/adhoc/edit/${user.id}`}
-                              // to="/monthly/edit"
                             >
                               <div style={{ color: "white" }}>Edit</div>
                             </Link>
-                            {/* <Link
-                    class="btn btn-danger"
-                    onClick={() => deleteUser(user.id)}
-                  >
-                    Delete
-                  </Link> */}
                           </td>
                         </tr>
                       ))}
