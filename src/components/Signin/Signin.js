@@ -10,13 +10,13 @@ export default function Signin() {
   const [message, setMessage] = useState("");
   const b=true;
 
-  const emailValidation = () => {
-    // const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
-    // if (!emailValidator.test(email) && email !== "") {
-    //   setMessage("Email is Invalid");
-    // } else {
-    //   setMessage("");
-    // }
+  const emailValidation = (email) => {
+    const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
+    if (!emailValidator.test(email) && email !== "") {
+      setMessage("Email is Invalid");
+    } else {
+      setMessage("");
+    }
   };
 
   const [loginData, setLoginData]= useState({
@@ -25,7 +25,7 @@ export default function Signin() {
   });
 
   const handleOnChange = (e) => {
-    setLoginData({...loginData, [e.target.name]: e.target.value})
+    setLoginData({...loginData, [e.target.name]: e.target.value});
     console.log(loginData);
   };
 
@@ -38,7 +38,7 @@ export default function Signin() {
 
 
     const  login= async ()=>{
-      console.log(loginData);
+      emailValidation();
 
      await axios.post('https://localhost:44371/api/v1/user/login',loginData).then((res)=>{
        History.push('/dashboard');
