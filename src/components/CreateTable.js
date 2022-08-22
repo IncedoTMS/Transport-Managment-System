@@ -19,11 +19,16 @@ export default function Table({ tableData , searchData}) {
         <td class="req-date">{tableData.reqdate}
         </td>
         <td class="status">
-          <input
+          <select name="" id="" disabled={isDisabled}>
+            <option value="">Requested</option>
+            <option value="">Inactive</option>
+            <option value="">Active</option>
+          </select>
+          {/* <input
             type="text"
             placeholder={tableData.status}
             disabled={isDisabled}
-          ></input>
+          ></input> */}
         </td>
         <td class="confirm-button">
           <button
