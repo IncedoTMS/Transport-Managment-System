@@ -1,14 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet"; //React Helmet use to Dynamically set what's in the document's head section.
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  useHistory,
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Signup.scss";
+
+//const { useHistory } = BrowserRouter;
 
 export default function Signup() {
   const History = useHistory();
@@ -34,7 +30,6 @@ export default function Signup() {
       .then((response) => console.log(response));
   }
   function changeHandler(e) {
-
     const name = e.target.name;
     const value = e.target.value;
     setformdata({ ...formData, [name]: value });
@@ -49,7 +44,7 @@ export default function Signup() {
       <div>
         <div className="row">
           <div className="column">
-            <img src="img.jpg" />
+            <img src="img.jpg" alt="tsmLogo" />
           </div>
           <div className="two">
             <div className="formbox">

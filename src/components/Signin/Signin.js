@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet"; //React Helmet use to Dynamically set what's in the document's head section.
-import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Signin.scss";
+//const { useHistory } = BrowserRouter;
 
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const emailValidation = () => {
-    const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
+    const emailValidator = /^([a-z\d._])+@incedoinc.com/;
     if (!emailValidator.test(email) && email !== "") {
       setMessage("Email is Invalid");
     } else {
@@ -21,10 +22,10 @@ export default function Signin() {
   };
 
   const History = useHistory();
-    
-    const routeToSignup = () => {
-          History.push('/signup');
-    };
+
+  const routeToSignup = () => {
+    History.push("/signup");
+  };
 
   return (
     <div className="pageTwo">
@@ -35,14 +36,15 @@ export default function Signin() {
 
       <div className="row">
         <div className="column one col-sm">
-          <img src="img.jpg"/>
+          <img src="img.jpg" />
         </div>
         <div className="column two col-sm">
           <div className="formbox">
             <div className="welcome d-flex justify-content-between">
               <h3 className="sign-in-h3">Sign In</h3>
               <p className="register-link">
-                New to Transportation Hub? <a onClick={routeToSignup}>Register</a>
+                New to Transportation Hub?{" "}
+                <a onClick={routeToSignup}>Register</a>
               </p>
             </div>
 
