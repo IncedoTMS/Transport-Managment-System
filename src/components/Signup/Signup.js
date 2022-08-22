@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet"; //React Helmet use to Dynamically set what's in the document's head section.
 import {
   BrowserRouter as Router,
@@ -84,6 +85,10 @@ export default function Signup() {
   return (
   <>
     <div className="pageOne">
+    <Helmet>
+        <title>Incedo-TMS-Register</title>
+        {/*Changes the Title bar of the current page to-Incedo-TMS-Register */}
+      </Helmet>
       </div>
     <div>
       <div className="row">
