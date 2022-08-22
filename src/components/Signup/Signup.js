@@ -57,7 +57,7 @@ export default function Signup() {
                         <input type="email" class="form-control" placeholder="Email Address" name="emailid" required />
                       </div>
                       <div class="col">
-                        <input type="digit" class="form-control" placeholder="Phone number" name="Phno" />
+                        <input type="digit" class="form-control" placeholder="Phone Number" name="Phno" />
                       </div>
                     </div>
 
@@ -66,7 +66,7 @@ export default function Signup() {
                         <input type="password" class="form-control" placeholder="Password" name="pswd" required />
                       </div>
                       <div class="col">
-                        <input type="password" class="form-control" placeholder="confirm password" name="pswd" required />
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="pswd" required />
                       </div>
                     </div>
 

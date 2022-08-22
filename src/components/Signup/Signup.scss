@@ -28,8 +28,11 @@
 
   .two {
     display: flex;
-    height: 700px;
-    width: 50%;
+    flex: 50%;
+    margin: 0;
+    background-color: #ff6620;
+    height: 100vh;
+    margin-top: -20px;
   }
 
   .formbox {
@@ -38,14 +41,7 @@
     border-width: 3px;
     position: relative;
     border-radius: 1.5%;
-    // padding-top: 5%;
-    // padding-left: 10%;
-    // padding-right: 10%;
     padding: 5%;
-    /* height: 80%;
-  width: 90%; */
-    // margin-top: 50px;
-    // margin-left: 7%;
     margin: auto;
     background-image: url("./orange.png");
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -168,20 +164,37 @@
     margin:auto;
     width: 70%;
   }
+  
+  .formbox {
+    position: relative;
+    padding: 4%;
+    margin-left: 5%;
+  }
+  .two{
+    background-color: white;
+  }
 
   .add1{
-  margin-left:0%;
-  max-width: max-content;
+    width: 0%;
+    max-width: auto;
   }
 }
 
-@media screen and (max-width:374px) {
+@media screen and (max-width:400px) {
   img{
     display: none;
   } 
-  
+
+  .formbox {
+    position: relative;
+    padding: 3%;
+    margin: 0;
+    margin-bottom: 15%;
+    margin-top: 20%;
+  }
+
   .form-control{
-    padding: 0%;
+    padding: 2%;
     margin:auto;
     width: 100%;
   }
@@ -191,36 +204,21 @@
   max-width: 100%;
   }
 
+  .two{
+    background-color: white;
+  }
 }
-
-  
-  // @media screen and (max-width: 900px)
-  // {
-  //   .add1{
-  //     max-width: 100%;
-  //   }
-
-  //   .form-control{
-  //     width: 100%;
-  //   }
-  //   .formbox{
-  //     margin-right: 10%;
-  //   }
-  // }
 
 
   @media screen and (max-width: 886px ){
     .add1{
-      max-width: max-content;
+      width: 0%;
     }
 
     .form-control{
       width: max-content;
     }
 
-    .formbox{
-      margin: auto;
-    }
     .two{
       width: 100%;
     }
@@ -231,6 +229,9 @@
     .column{
       display: none;
     }
+    .add1{
+      width: 100%;
+    }
   }
   
   @media screen and (max-width: 1024px){
@@ -239,4 +240,26 @@
     }
   }
 
+  @media screen and (max-width: 480px) {
+    .formbox{
+      margin-left: auto;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .formbox{
+      margin: 0;
+      margin-left: 14px;
+      margin-top: 5%;
+      margin-bottom: 20%;
+    }
+    .two{
+      background-color: white;
+    }
+    
+    .form-control{
+      width: 100%;
+    }
+  }
 }
+

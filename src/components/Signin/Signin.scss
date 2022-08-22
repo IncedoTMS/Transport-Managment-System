@@ -57,11 +57,12 @@
   padding: 50px;
   box-shadow: 0 2.8px 2.2px rgba(244, 241, 241, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
   position: relative;
-  background-image: linear-gradient(90deg, #ff7b3e 0%, #ff4e02 60%);
+  background-image: url("./orange.png");
   border-radius: 1.5%;
   top: 10%;
   left: 12%;
   margin-right: 15%;
+  justify-content: center;
   }
   
   @media all and (max-width: 500px) {
@@ -122,6 +123,7 @@
     margin-top: 10%;
     background-color: #2d8ef6;
     border-color: #2d8ef6;
+    border-radius: 0 0 0 0;
   }
   
   .signin-button:hover {
@@ -131,5 +133,11 @@
   
   .forget-password {
     font-size: 0.8em;
+  }
+
+  @media screen and (max-width: 1024px){
+    img{
+      margin-top: 50%;
+    }
   }
   }
