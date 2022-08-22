@@ -8,7 +8,7 @@ import Edit2 from "./Edit/Edit2";
 import Adhoc from "./Adhoc/Adhoc.js";
 import "./fancy.css";
 
-export default function Admin() {
+export default function UserDB() {
   return (
     <BrowserRouter>
       <div>

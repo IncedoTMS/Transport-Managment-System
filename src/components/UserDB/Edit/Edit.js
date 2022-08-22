@@ -57,24 +57,22 @@ const Edit = () => {
     setUser(result.data);
   };
   return (
-    <div className="container">
-      <div className="w-75 mx-auto shadow p-5">
+    <div className=" mx-auto shadow p-5 edit-box">
+      <form onSubmit={(e) => onSubmit(e)}>
         <h2 className="text-center mb-4">Edit Drop Location</h2>
-        <form onSubmit={(e) => onSubmit(e)}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter your drop location"
-              name="dropLocation"
-              value={dropLocation}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control form-control-lg"
+            placeholder="Enter your drop location"
+            name="dropLocation"
+            value={dropLocation}
+            onChange={(e) => onInputChange(e)}
+          />
+        </div>
 
-          <button className="btn btn-warning btn-block">Update User</button>
-        </form>
-      </div>
+        <button className="btn btn-warning btn-block">Update User</button>
+      </form>
     </div>
   );
 };
