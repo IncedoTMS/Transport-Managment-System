@@ -7,11 +7,12 @@ import Edit from "./Edit/Edit";
 import Edit2 from "./Edit/Edit2";
 import Adhoc from "./Adhoc/Adhoc.js";
 import "./fancy.css";
+import "./UserDB.css";
 
 export default function UserDB() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="db-body">
         <Post />
 
         <Switch>
