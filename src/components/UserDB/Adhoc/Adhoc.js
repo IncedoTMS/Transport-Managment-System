@@ -67,6 +67,14 @@ const Adhoc = () => {
                       ))}
                     </tbody>
                   </table>
+                  <div className="add">
+                    <Link
+                      class="btn btn-primary mr-2"
+                      to={"/dashboard/monthly/addadhoc"}
+                    >
+                      <div style={{ color: "white" }}>Add Adhoc Request</div>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

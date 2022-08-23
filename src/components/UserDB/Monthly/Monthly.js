@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 const Monthly = () => {
   const [users, setUser] = useState([]);
+  // const [isExpired,setIsExpired]=useState("false");
 
   useEffect(() => {
     loadUsers();
   }, []);
-
   const loadUsers = async () => {
     const result = await axios.get("http://localhost:3000/monthly");
     setUser(result.data);
@@ -69,6 +69,14 @@ const Monthly = () => {
                       ))}
                     </tbody>
                   </table>
+                  <div className="add">
+                <Link
+                  class="btn btn-primary mr-2"
+                  to={"/dashboard/monthly/addmonthly"}
+                >
+                  <div style={{ color: "white" }}>Add Monthly Request</div>
+                </Link>
+              </div>
                 </div>
               </div>
             </div>
