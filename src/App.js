@@ -1,32 +1,40 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
-import UserDB from "./components/UserDB/UserDB";
-import Signup from "./components/Signup/Signup";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import Signup from './components/Signup/Signup';
 import Signin from "./components/Signin/Signin";
-import Header from "./components/Common/Header";
-import Footer from "./components/Common/Footer";
-import "./App.css";
+import UserDB from "./components/userDashboard/UserDB/UserDB"
+import Header from './components/Common/Header';
+import Footer from './components/Common/Footer';
+import Admin from './components/admin/Admin';
 
-const App = () => {
-
+function App() {
   return (
     <>
-      <Header />
+    <Header />
+    
       <Router>
+      
         <Switch>
-          <Route exact path="/" component={Signin}>
+          <Route exact path='/' component={Signin}>
             <Signin />
           </Route>
-          <Route path="/signup" component={Signup}>
+          <Route path='/signup' component={Signup}>
             <Signup />
           </Route>
-          <Route path="/dashboard" component={UserDB}></Route>
+          <Route path='/dashboard' component={UserDB}>
+          </Route>
+
+          <Route path ='/admin' component={Admin}>
+
+          </Route>
         </Switch>
+
       </Router>
-      <Footer />
+      
+      <Footer/>
+
     </>
   );
-};
+}
 
 export default App;
