@@ -34,11 +34,11 @@ export default function UserDB() {
             component={Edit2}
           ></Route>
 
-          <Route
+          {/* <Route
             exact
             path="/dashboard/monthly/addmonthly"
             component={AddMonthly}
-          ></Route>
+          ></Route> */}
           <Route
             exact
             path="/dashboard/monthly/addadhoc"

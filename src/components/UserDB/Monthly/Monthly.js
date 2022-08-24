@@ -58,25 +58,38 @@ const Monthly = () => {
                           <td>{user.managerApproval}</td>
                           <td>{user.status}</td>
                           <td>
-                            <Link
-                              class="btn btn-primary mr-2"
-                              to={`/dashboard/monthly/edit/${user.id}`}
-                            >
-                              <div style={{ color: "white" }}>Edit</div>
-                            </Link>
+                            {user.month === "Aug-22" ? (
+                              <>
+                                <Link
+                                  class="btn btn-primary disabled mr-2"
+                                  to={`/dashboard/monthly/edit/${user.id}`}
+                                >
+                                  <div style={{ color: "white" }}>Edit</div>
+                                </Link>
+                              </>
+                            ) : (
+                              <>
+                                <Link
+                                  class="btn btn-primary mr-2"
+                                  to={`/dashboard/monthly/edit/${user.id}`}
+                                >
+                                  <div style={{ color: "white" }}>Edit</div>
+                                </Link>
+                              </>
+                            )}
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  <div className="add">
+                  {/* <div className="add">
                 <Link
                   class="btn btn-primary mr-2"
                   to={"/dashboard/monthly/addmonthly"}
                 >
                   <div style={{ color: "white" }}>Add Monthly Request</div>
                 </Link>
-              </div>
+              </div> */}
                 </div>
               </div>
             </div>

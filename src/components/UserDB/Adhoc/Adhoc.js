@@ -56,12 +56,25 @@ const Adhoc = () => {
                           <td>{user.managerApproval}</td>
                           <td>{user.status}</td>
                           <td>
-                            <Link
-                              class="btn btn-primary mr-2"
-                              to={`/dashboard/adhoc/edit/${user.id}`}
-                            >
-                              <div style={{ color: "white" }}>Edit</div>
-                            </Link>
+                          {user.status === "Expired" ? (
+                              <>
+                                <Link
+                                  class="btn btn-primary disabled mr-2"
+                                  to={`/dashboard/adhoc/edit/${user.id}`}
+                                >
+                                  <div style={{ color: "white" }}>Edit</div>
+                                </Link>
+                              </>
+                            ) : (
+                              <>
+                                <Link
+                                  class="btn btn-primary mr-2"
+                                  to={`/dashboard/adhoc/edit/${user.id}`}
+                                >
+                                  <div style={{ color: "white" }}>Edit</div>
+                                </Link>
+                              </>
+                            )}
                           </td>
                         </tr>
                       ))}
