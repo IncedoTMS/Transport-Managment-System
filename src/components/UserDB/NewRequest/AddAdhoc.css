@@ -1,0 +1,12 @@
+.form-control {
+    color: black !important;
+  }
+  h2 {
+    color: white;
+  }
+  .adhoc-box {
+    background-color: #337ab7;
+    border: white 1.25px solid;
+    width: 50% !important;
+    margin-bottom: 1.85%;
+  }

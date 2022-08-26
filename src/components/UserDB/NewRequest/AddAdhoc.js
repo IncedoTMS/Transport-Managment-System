@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import "./AddAdhoc.css"
 
 const AddAdhoc = () => {
   let history = useHistory();
@@ -46,7 +47,7 @@ const AddAdhoc = () => {
     history.push("/dashboard");
   };
   return (
-    <div className=" mx-auto shadow p-5 edit-box">
+    <div className=" mx-auto shadow p-5 adhoc-box">
       <form onSubmit={(e) => onSubmit(e)}>
         <h2 className="text-center mb-4">Add Adhoc Drop Request</h2>
 
