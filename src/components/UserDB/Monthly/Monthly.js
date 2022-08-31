@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Demo from "./demo";
 
 const Monthly = () => {
   const [users, setUser] = useState([]);
@@ -29,70 +30,64 @@ const Monthly = () => {
         </div>
         <div className="accordion-content">
           {isActive && (
-            <div className="container">
-              <div className="py-4">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead className="thead-dark">
-                      <tr className="heading-text">
-                        <th scope="col">#</th>
-                        <th scope="col">Month</th>
+            // <div className="container">
+            //   <div className="py-4">
+            //     <div class="table-responsive">
+            //       <table class="table table-striped">
+            //         <thead className="thead-dark">
+            //           <tr className="heading-text">
+            //             <th scope="col">#</th>
+            //             <th scope="col">Month</th>
 
-                        <th scope="col">Pickup Location</th>
-                        <th scope="col">Pickup Time</th>
-                        <th scope="col">Drop Location</th>
-                        <th scope="col">Manager Approval</th>
-                        <th scope="col">Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.map((user, index) => (
-                        <tr>
-                          <th scope="row">{index + 1}</th>
-                          <td>{user.month}</td>
+            //             <th scope="col">Pickup Location</th>
+            //             <th scope="col">Pickup Time</th>
+            //             <th scope="col">Drop Location</th>
+            //             <th scope="col">Manager Approval</th>
+            //             <th scope="col">Status</th>
+            //             <th>Action</th>
+            //           </tr>
+            //         </thead>
+            //         <tbody>
+            //           {users.map((user, index) => (
+            //             <tr>
+            //               <th scope="row">{index + 1}</th>
+            //               <td>{user.month}</td>
 
-                          <td>{user.pickupLocation}</td>
-                          <td>{user.pickupTime}</td>
-                          <td>{user.dropLocation}</td>
-                          <td>{user.managerApproval}</td>
-                          <td>{user.status}</td>
-                          <td>
-                            {user.month === "Aug-22" ? (
-                              <>
-                                <Link
-                                  class="btn btn-primary disabled mr-2"
-                                  to={`/dashboard/monthly/edit/${user.id}`}
-                                >
-                                  <div style={{ color: "white" }}>Edit</div>
-                                </Link>
-                              </>
-                            ) : (
-                              <>
-                                <Link
-                                  class="btn btn-primary mr-2"
-                                  to={`/dashboard/monthly/edit/${user.id}`}
-                                >
-                                  <div style={{ color: "white" }}>Edit</div>
-                                </Link>
-                              </>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {/* <div className="add">
-                <Link
-                  class="btn btn-primary mr-2"
-                  to={"/dashboard/monthly/addmonthly"}
-                >
-                  <div style={{ color: "white" }}>Add Monthly Request</div>
-                </Link>
-              </div> */}
-                </div>
-              </div>
-            </div>
+            //               <td>{user.pickupLocation}</td>
+            //               <td>{user.pickupTime}</td>
+            //               <td>{user.dropLocation}</td>
+            //               <td>{user.managerApproval}</td>
+            //               <td>{user.status}</td>
+            //               <td>
+            //                 {user.month === "Aug-22" ? (
+            //                   <>
+            //                     <Link
+            //                       class="btn btn-primary disabled mr-2"
+            //                       to={`/dashboard/monthly/edit/${user.id}`}
+            //                     >
+            //                       <div style={{ color: "white" }}>Edit</div>
+            //                     </Link>
+            //                   </>
+            //                 ) : (
+            //                   <>
+            //                     <Link
+            //                       class="btn btn-primary mr-2"
+            //                       to={`/dashboard/monthly/edit/${user.id}`}
+            //                     >
+            //                       <div style={{ color: "white" }}>Edit</div>
+            //                     </Link>
+            //                   </>
+            //                 )}
+            //               </td>
+            //             </tr>
+            //           ))}
+            //         </tbody>
+            //       </table>
+
+            //     </div>
+            //   </div>
+            // </div>
+            <Demo data={users} />
           )}
         </div>
       </div>

@@ -26,9 +26,9 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Sector 34",
+      "dropLocation": "Plot number 248, Gurgaon sector18, Gurgaon, Delhi 122015",
       "managerApproval": "Approved",
-      "status": "Active"
+      "status": "Expired"
     },
     {
       "id": 2,
@@ -42,8 +42,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number 248, Gurgaon sector18, Gurgaon, Delhi 122015",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -58,8 +58,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number 248, Gurgaon sector18, Gurgaon, Delhi 122015",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -74,8 +74,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 2",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number 248, Gurgaon sector18, Gurgaon, Delhi 122015",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -90,8 +90,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number 248, Gurgaon sector18, Gurgaon, Delhi 122015",
+      "managerApproval": "Pending",
       "status": "Active"
     }
   ],
@@ -171,7 +171,7 @@
       "manager": "",
       "pickupLocation": "Gurgaon",
       "pickupTime": "21:00",
-      "dropLocation": "Sector 25",
+      "dropLocation": "Sector 252",
       "managerApproval": "Pending",
       "status": "Active",
       "id": 5

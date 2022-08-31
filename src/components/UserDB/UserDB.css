@@ -9,10 +9,11 @@
   width: fit-content;
   padding: 2px;
   margin: auto;
+  font-size: medium;
 }
 
 .db-body {
-  position: absolute;
+  /* position: absolute; */
   height: auto;
   width: 100vw;
   padding-top: 4%;
