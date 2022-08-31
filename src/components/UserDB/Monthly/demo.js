@@ -25,67 +25,7 @@ import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
-
-// function createData(
-//   month,
-//   pickupLocation,
-//   pickupTime,
-//   dropLocation,
-//   managerApproval,
-//   status
-// ) {
-//   return {
-//     month,
-//     pickupLocation,
-//     pickupTime,
-//     dropLocation,
-//     managerApproval,
-//     status,
-//   };
-// }
-
-// const rows = [
-//   createData(
-//     "Aug-22",
-//     " Gurgaon",
-//     "22:00",
-//     "248-Udyog Vihar, Phase 4, Gurugram, Haryana",
-//     "Approved",
-//     "Expired"
-//   ),
-//   createData(
-//     "Sep-22",
-//     "Gurgaon",
-//     "22:00",
-//     "248-Udyog Vihar, Phase 4, Gurugram, Haryana",
-//     "Approved",
-//     "Active"
-//   ),
-//   createData(
-//     "Oct-22",
-//     "Gurgaon",
-//     "22:00",
-//     "248-Udyog Vihar, Phase 4, Gurugram, Haryana",
-//     "Approved",
-//     "Active"
-//   ),
-//   createData(
-//     "Nov-22",
-//     " Gurgaon",
-//     "22:00",
-//     "248-Udyog Vihar, Phase 4, Gurugram, Haryana",
-//     "Approved",
-//     "Active"
-//   ),
-//   createData(
-//     "Dec-22",
-//     "Gurgaon",
-//     "22:00",
-//     "248-Udyog Vihar, Phase 4, Gurugram, Haryana",
-//     "Approved",
-//     "Active"
-//   ),
-// ];
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -275,7 +215,7 @@ EnhancedTableHead.propTypes = {
 //           id="tableTitle"
 //           component="div"
 //         >
-//           Nutrition
+//           Monthly Drop Requests
 //         </Typography>
 //       )}
 
@@ -310,22 +250,6 @@ export default function EnhancedTable(props) {
 
   const rows = props.data;
   console.log(rows);
-
-  // const rows = [];
-
-  // rows = monthlydata.map((md) => {
-  //   md.month,
-  //     md.pickupLocation,
-  //     md.pickupTime,
-  //     md.dropLocation,
-  //     md.managerApproval,
-  //     md.status;
-  // });
-  // console.log(rows);
-  // const newdata = monthlydata.map((obj) => {
-  //   return [obj.month, obj.pickupLocation];
-  // });
-  // console.log("NEw Data: " + newdata);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -407,7 +331,7 @@ export default function EnhancedTable(props) {
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
-                  const TCELLFONT = "1.125rem";
+                  const TCELLFONT = "1.16rem";
 
                   return (
                     <TableRow

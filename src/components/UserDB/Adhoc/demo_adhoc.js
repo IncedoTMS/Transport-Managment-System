@@ -407,7 +407,7 @@ export default function EnhancedTable(props) {
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
-                  const TCELLFONT = "1.125rem";
+                  const TCELLFONT = "1.16rem";
 
                   return (
                     <TableRow

@@ -10,7 +10,7 @@ import AddMonthly from "./NewRequest/AddMonthly.js";
 import AddAdhoc from "./NewRequest/AddAdhoc.js";
 import "./fancy.css";
 import "./UserDB.css";
-
+import Tabs from "./Tabs";
 export default function UserDB() {
   return (
     <BrowserRouter>
@@ -18,9 +18,9 @@ export default function UserDB() {
         <Post />
 
         <Switch>
-          <Route exact path="/dashboard" component={Monthly}>
-            <Monthly />
-            <Adhoc />
+          <Route exact path="/dashboard" component={Tabs}>
+            {/* <Monthly /> */}
+            {/* <Adhoc /> */}
           </Route>
           <Route
             exact
