@@ -1,0 +1,274 @@
+* {
+  box-sizing: border-box;
+}
+
+.pageOne {
+
+  html,
+  body {
+    min-height: 100%;
+    width: 98%;
+  }
+
+
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: auto;
+  }
+
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+  .two {
+    display: flex;
+    flex: 50%;
+    margin: 0;
+    background-color: #ff6620;
+    height: 100vh;
+    margin-top: -20px;
+  }
+
+  .formbox {
+    border-style: solid;
+    border-color: orange;
+    border-width: 3px;
+    position: relative;
+    border-radius: 1.5%;
+    padding: 5%;
+    margin: auto;
+    background-image: url("./orange.png");
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
+  .myForm {
+
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
+  .headings {
+    display: flex;
+    gap: 180px;
+    color: white;
+
+  }
+
+  .left {
+    position: relative;
+    left: auto;
+    bottom: 10px;
+    top: 10px;
+  }
+
+
+
+  img {
+    max-width: 50%;
+    height: auto;
+    opacity: 80%;
+    margin: 30%;
+  }
+
+
+
+  .left {
+    margin-left: 2.5%;
+    margin-top: 5%;
+  }
+
+  button {
+    border: none;
+  }
+
+
+  .row {
+    padding-top: 20px;
+  }
+
+  .form-control {
+    background-color: white;
+    color: black;
+    width: max-content;
+  }
+
+  ::placeholder {
+    color: rgb(178, 157, 157) !important;
+
+  }
+
+  input:focus::placeholder {
+    color: transparent !important;
+  }
+
+
+  button {
+    margin-top: 4%;
+    position: relative;
+    left: 30%;
+  }
+
+
+  .btn {
+    border-radius: 0 0 0 0;
+  }
+
+
+
+  form {
+    margin: auto;
+    display : block;
+  }
+
+
+  .add1 {
+    width: 100%;
+  }
+
+  .para {
+    display: block;
+    color: white;
+
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
+
+
+  .btn {
+    margin: 7%;
+    margin-right: 2%;
+    display: block
+  }
+
+  p {
+    margin: 0 10px;
+  }
+
+  @media screen and (max-width: 428px) {
+   img{
+    display: none;
+  } 
+  
+  .form-control{
+    padding: 2%;
+    margin:auto;
+    width: 70%;
+  }
+  
+  .formbox {
+    position: relative;
+    padding: 4%;
+    margin-left: 5%;
+  }
+  .two{
+    background-color: white;
+  }
+
+  .add1{
+    width: 0%;
+    max-width: auto;
+  }
+}
+
+
+.signin-button {
+  // margin-top: 10%;
+  background-color: #2d8ef6;
+  border-color: #2d8ef6;
+  border-radius: 0 0 0 0;
+}
+
+@media screen and (max-width:400px) {
+  img{
+    display: none;
+  } 
+
+  .formbox {
+    position: relative;
+    padding: 3%;
+    margin: 0;
+    margin-bottom: 15%;
+    margin-top: 20%;
+  }
+
+  .form-control{
+    padding: 2%;
+    margin:auto;
+    width: 100%;
+  }
+
+  .add1{
+  margin-left:auto;
+  max-width: 100%;
+  }
+
+  .two{
+    background-color: white;
+  }
+}
+
+
+  @media screen and (max-width: 886px ){
+    .add1{
+      width: 0%;
+    }
+
+    .form-control{
+      width: max-content;
+    }
+
+    .two{
+      width: 100%;
+    }
+
+    img{
+      display: none;
+    }
+    .column{
+      display: none;
+    }
+    .add1{
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 1024px){
+    img{
+      margin-top: 50%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .formbox{
+      margin-left: auto;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .formbox{
+      margin: 0;
+      margin-left: 14px;
+      margin-top: 5%;
+      margin-bottom: 20%;
+    }
+    .two{
+      background-color: white;
+    }
+    
+    .form-control{
+      width: 100%;
+    }
+  }
+}
+
+
