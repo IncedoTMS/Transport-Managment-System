@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 import axios from "axios";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { fontSize } from "@mui/system";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export default function Post() {
   const [users, setUser] = useState([]);
@@ -11,6 +21,63 @@ export default function Post() {
     const res = await axios.get("http://localhost:3000/users");
     setUser(res.data);
   };
+
+  const headCells = [
+    {
+      id: "empId",
+      numeric: true,
+      disablePadding: false,
+      label: "Emp ID",
+    },
+    {
+      id: "empName",
+      numeric: false,
+      disablePadding: false,
+      label: "Emp Name",
+    },
+    {
+      id: "mobileNo",
+      numeric: true,
+      disablePadding: false,
+      label: "Mobile No.",
+    },
+    {
+      id: "department",
+      numeric: false,
+      disablePadding: false,
+      label: "Department",
+    },
+    {
+      id: "projectId",
+      numeric: false,
+      disablePadding: false,
+      label: "Project ID",
+    },
+    {
+      id: "projectName",
+      numeric: false,
+      disablePadding: false,
+      label: "Project Name",
+    },
+    {
+      id: "manager",
+      numeric: false,
+      disablePadding: false,
+      label: "Manager",
+    },
+    {
+      id: "resAddress",
+      numeric: false,
+      disablePadding: false,
+      label: "Residence Address",
+    },
+    {
+      id: "office",
+      numeric: false,
+      disablePadding: false,
+      label: "Office",
+    },
+  ];
 
   const [isActive, setIsActive] = useState(true);
 
@@ -24,42 +91,78 @@ export default function Post() {
         </div>
         <div>
           <div className="accordion-content">
-            <div className="container">
-              <div className="py-4">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead className="thead-dark">
-                      <tr>
-                        <th scope="col">Emp ID</th>
-                        <th scope="col">Emp Name</th>
-                        <th scope="col">Mobile No.</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Project ID</th>
-                        <th scope="col">Project Name</th>
-                        <th scope="col">Manager</th>
-                        <th scope="col">Residence Address</th>
-                        <th scope="col">Office</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.map((user, index) => (
-                        <tr>
-                          <td>{user.empId}</td>
-                          <td>{user.empName}</td>
-                          <td>{user.mobileNo}</td>
-                          <td>{user.department}</td>
-                          <td>{user.projectId}</td>
-                          <td>{user.projectName}</td>
-                          <td>{user.manager}</td>
-                          <td>{user.resAddress}</td>
-                          <td>{user.office}</td>
-                        </tr>
+            <Box
+              sx={{ bgcolor: "background.paper", width: "95%", margin: "auto" }}
+            >
+              <TableContainer component={Paper}>
+                <Table
+                  sx={{ minWidth: 650, fontSize: "1.1rem" }}
+                  aria-label="simple table"
+                >
+                  <TableHead>
+                    <TableRow
+                      sx={{
+                        backgroundColor: "#78146a",
+                        borderBottom: "2px solid white",
+                        "& th": {
+                          fontSize: "1.25rem",
+                          color: "white",
+                        },
+                      }}
+                    >
+                      {headCells.map((headCell) => (
+                        <TableCell
+                          key={headCell.id}
+                          align="center"
+                          padding="normal"
+                        >
+                          {headCell.label}
+                        </TableCell>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {users.map((user, index) => (
+                      <TableRow
+                        key={user.empId}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                          fontSize: "1.16rem",
+                        }}
+                      >
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.empId}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.empName}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.mobileNo}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.department}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.projectId}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.projectName}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.manager}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.resAddress}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                          {user.office}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </div>
         </div>
       </div>

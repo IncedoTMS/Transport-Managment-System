@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 import Demo_Adhoc from "./demo_adhoc";
 
 const Adhoc = () => {
@@ -20,8 +22,10 @@ const Adhoc = () => {
       <Demo_Adhoc data={users} />
 
       <div className="add">
-        <Link class="btn btn-primary mr-2" to={"/dashboard/monthly/addadhoc"}>
-          <div style={{ color: "white" }}>Add Adhoc Request</div>
+        <Link to={"/dashboard/monthly/addadhoc"}>
+          <Button variant="contained" startIcon={<AddIcon fontSize="large" />}>
+            Add New Request
+          </Button>
         </Link>
       </div>
     </>

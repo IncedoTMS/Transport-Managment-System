@@ -1,4 +1,4 @@
-.thead-dark {
+/* .thead-dark {
   background-color: #ef4815;
   color: white;
 }
@@ -7,4 +7,9 @@ tbody {
 }
 th {
   text-align: center;
+} */
+
+.userDetails {
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
