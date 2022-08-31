@@ -21,17 +21,20 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import { Chip } from '@mui/material';
+const axios= require('axios');
 
-function createData(empId, empName, dropLocation,month) {
-  return {
-    empId, empName, dropLocation,month
-  };
-}
 
-var rows = [
-];
+
+
+
+
+
+
+
 
 function descendingComparator(a, b, orderBy) {
+  console.log(a);
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -63,45 +66,63 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'EMP ID',
+    id: 'empId',
+    numeric: false,
+    disablePadding: true,
+    label: 'Employee Id',
   },
   {
-    id: 'fat',
+    id: 'empName',
     numeric: true,
     disablePadding: false,
     label: 'Employee Name',
   },
   {
-    id: 'carbs',
+    id: 'pickupLocation',
+    numeric: true,
+    disablePadding: false,
+    label: 'Pickup Location',
+  },
+  {
+    id: 'dropLocation',
     numeric: true,
     disablePadding: false,
     label: 'Drop Location',
   },
   {
-    id: 'protein',
+    id: 'date',
     numeric: true,
     disablePadding: false,
-    label: 'Month',
+    label: 'Date',
   },
+
+  {
+    id: 'managerApproval',
+    numeric: true,
+    disablePadding: false,
+    label: 'Manager Approval',
+  },
+  {
+    id: 'Confirm',
+    numeric: true,
+    disablePadding: false,
+    label: 'Status',
+  },
+
+
+
 ];
 
 function EnhancedTableHead(props) {
-  const { displayData,onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
-  console.log(displayData);
-
   return (
     <TableHead>
-      <TableRow
-      
-      sx={{
+      <TableRow     sx={{
         "& th":{
             backgroundColor: "#FF4500",
             color: "white",
@@ -111,23 +132,12 @@ function EnhancedTableHead(props) {
         
 
       }}
-
       >
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell> */}
+      
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align='center'
+            align='right' 
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -160,17 +170,124 @@ EnhancedTableHead.propTypes = {
 };
 
 
+
+function Display({row}){
+
+ 
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [isDisabled, setIsDisabled] = React.useState(false);
+  const [isConfirm,setIsconfirm]=React.useState(false);
+const [Dropdown, setDropdown]=React.useState(row.managerApproval);
+
+  function handleEdit(rowID) {
+    setIsEditing(!isEditing);
+    setIsDisabled(!isDisabled);
+  }
+
+  const [userData, setUserData] = React.useState({
+
+    empid: "",
+    name: "",
+    role: "",
+    reqdate: "",
+    status: ""
+  })
+
+  React.useEffect(() => {
+    loadUser();
+  }, [Dropdown])
+
+  const loadUser = async () => {
+
+
+    const result = await axios.get(`http://localhost:3000/monthly/${row.id}`);
+    setUserData({ ...result.data, managerApproval: [Dropdown] })
+
+  }
+
+  const sendData = (e) => {
+
+    console.log(userData);
+    axios.put(`http://localhost:3000/monthly/${row.id}`, userData).then((resp)=>{
+      console.log(resp);
+    }).catch(e=>{
+      console.log(e);
+    });
+    setIsconfirm(true);
+    setIsDisabled(true);
+
+
+  }
+
+
+
+  return (
+
+       
+    <TableRow
+    role="checkbox"
+    tabIndex={-1}
+    
+  >
+
+    <TableCell
+      component="th"
+      // id={labelId}
+      scope="row"
+      padding="none"
+      sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}
+      align="right"
+    >
+      {row.empId}
+    </TableCell>
+    <TableCell sx={{fontSize: "1.25rem", position:'relative', right:"10px"}} align="right">{row.empName}</TableCell>
+    <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}  align="right">{row.pickupLocation}</TableCell>
+    <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}align="right">{row.dropLocation}</TableCell>
+    <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}  align="right">{row.month}</TableCell>
+    <TableCell sx={{fontSize: "1.25rem"}}  align="right">
+    
+              <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                 <Chip color ='info' label={Dropdown} style={{fontSize:"1.25rem"}} />
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onClick={()=>setDropdown("Hold")}>Hold</a></li>
+                  <li><a class="dropdown-item" onClick={()=>setDropdown("Approved")}>Approved</a></li>
+                  <li><a class="dropdown-item" onClick={()=>setDropdown("Rejected")}>Rejected</a></li>
+
+                </ul>
+              </div>
+    
+    
+    
+    
+    </TableCell>
+
+    <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}>
+<Chip color='success' label="Confirm" sx={{fontSize: "1.25rem"}} 
+
+
+name="status"
+onClick={sendData}
+disabled={(row.month.toLowerCase().includes("aug"))?true: false}
+
+/>
+    </TableCell>
+  </TableRow>
+
+  );
+
+}
+
+
 export default function EnhancedTable({tableData}) {
 
-    tableData.map((data,id)=>{
-        // console.log(data);
-        rows.push(data);
-    })
-        
-console.log(rows);
-    
+  var rows=[];
 
-
+  tableData.map((data,id)=>{
+    rows.push(data);
+    // console.log(data);
+  })
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -178,11 +295,16 @@ console.log(rows);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
+  
 
   const handleRequestSort = (event, property) => {
+    
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
+
+    // console.log(order,property,orderBy);
   };
 
   const handleSelectAllClick = (event) => {
@@ -234,11 +356,12 @@ console.log(rows);
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%', fontSize: "1.5rem !important" }}>
-      <Paper sx={{ width: '100%', mb: 2, fontSize: "1.5rem !important" }}>
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.5rem !important" }}
+            sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >
@@ -260,30 +383,9 @@ console.log(rows);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                    //   onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                      sx={{fontSize: "1.5rem !important"}}
-                    >
-                      <TableCell
-                      align="center"
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        sx={{fontSize: "1.25rem"}}
-                      >
-                        {row.empId}
-                      </TableCell>
-                      <TableCell  align="center" sx={{fontSize: "1.25rem"}}>{row.empName}</TableCell>
-                      <TableCell  align="center" sx={{fontSize: "1.25rem"}}>{row.pickupLocation}</TableCell>
-                      <TableCell  align="center" sx={{fontSize: "1.25rem"}}>{row.month}</TableCell>
-                    </TableRow>
+                    
+                    <Display row={row}/>
+                 
                   );
                 })}
               {emptyRows > 0 && (

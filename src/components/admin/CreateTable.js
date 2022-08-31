@@ -6,7 +6,7 @@ import "./Admin.css";
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
+// import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -28,7 +28,7 @@ import { visuallyHidden } from '@mui/utils';
 
 
 
-export default function TableDisplay({ tableData, searchData }) {
+export default function Table({ tableData, searchData }) {
 
 
   const Row = ({ tableData }) => {

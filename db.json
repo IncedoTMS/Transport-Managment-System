@@ -43,7 +43,9 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
       "dropLocation": "Phase 4",
-      "managerApproval": "Rejected",
+      "managerApproval": [
+        "Hold"
+      ],
       "status": "Active"
     },
     {
@@ -140,7 +142,9 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "21:00",
       "dropLocation": "Phase 58",
-      "managerApproval": "Pending",
+      "managerApproval": [
+        "Reject"
+      ],
       "status": "Active",
       "id": 12
     },
