@@ -22,7 +22,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Chip } from '@mui/material';
+import './tables.css';
+
 const axios= require('axios');
+
+
 
 
 
@@ -64,30 +68,35 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: 'Employee Id',
+    sortable:true
   },
   {
     id: 'empName',
     numeric: true,
     disablePadding: false,
     label: 'Employee Name',
+    sortable:true
   },
   {
     id: 'pickupLocation',
     numeric: true,
     disablePadding: false,
     label: 'Pickup Location',
+    sortable:true
   },
   {
     id: 'dropLocation',
     numeric: true,
     disablePadding: false,
     label: 'Drop Location',
+    sortable:true
   },
   {
     id: 'date',
     numeric: true,
     disablePadding: false,
     label: 'Date',
+    sortable:true
   },
 
   {
@@ -95,12 +104,14 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'Manager Approval',
+    sortable:false
   },
   {
     id: 'Confirm',
     numeric: true,
     disablePadding: false,
     label: 'Status',
+    sortable:true
   },
 
 
@@ -135,7 +146,7 @@ function EnhancedTableHead(props) {
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+           {headCell.sortable?(<TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -146,7 +157,8 @@ function EnhancedTableHead(props) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
-            </TableSortLabel>
+            </TableSortLabel>):(<>{headCell.label}</>)
+}
           </TableCell>
         ))}
       </TableRow>
@@ -238,7 +250,7 @@ const [Dropdown, setDropdown]=React.useState(row.managerApproval);
     <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}  align="right">{row.date}</TableCell>
     <TableCell sx={{fontSize: "1.25rem"}}  align="right">
     
-              <div class="btn-group">
+    <div class="btn-group">
                 <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                  <Chip color ='info' label={Dropdown} style={{fontSize:"1.25rem"}} />
                 </button>
@@ -249,6 +261,9 @@ const [Dropdown, setDropdown]=React.useState(row.managerApproval);
 
                 </ul>
               </div>
+              
+
+              
     
     
     

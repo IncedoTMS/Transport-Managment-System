@@ -22,6 +22,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Chip } from '@mui/material';
+// import DropDownMenu from 'material-ui/DropDownMenu';
+import './tables.css';
 const axios= require('axios');
 
 
@@ -34,7 +36,7 @@ const axios= require('axios');
 
 
 function descendingComparator(a, b, orderBy) {
-  console.log(a);
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -70,30 +72,35 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: 'Employee Id',
+    sortable: true
   },
   {
     id: 'empName',
     numeric: true,
     disablePadding: false,
     label: 'Employee Name',
+    sortable: true
   },
   {
     id: 'pickupLocation',
     numeric: true,
     disablePadding: false,
     label: 'Pickup Location',
+    sortable: true
   },
   {
     id: 'dropLocation',
     numeric: true,
     disablePadding: false,
     label: 'Drop Location',
+    sortable: true
   },
   {
     id: 'date',
     numeric: true,
     disablePadding: false,
     label: 'Date',
+    sortable: true,
   },
 
   {
@@ -101,12 +108,14 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'Manager Approval',
+    sortable: false
   },
   {
     id: 'Confirm',
     numeric: true,
     disablePadding: false,
     label: 'Status',
+    sortable: true
   },
 
 
@@ -141,7 +150,7 @@ function EnhancedTableHead(props) {
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+            {headCell.sortable?(<TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -152,7 +161,8 @@ function EnhancedTableHead(props) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
-            </TableSortLabel>
+            </TableSortLabel>):(<>{headCell.label}</>)
+}
           </TableCell>
         ))}
       </TableRow>
@@ -201,7 +211,7 @@ const [Dropdown, setDropdown]=React.useState(row.managerApproval);
 
 
     const result = await axios.get(`http://localhost:3000/monthly/${row.id}`);
-    setUserData({ ...result.data, managerApproval: [Dropdown] })
+    setUserData({ ...result.data, managerApproval: Dropdown })
 
   }
 
@@ -280,14 +290,26 @@ disabled={(row.month.toLowerCase().includes("aug"))?true: false}
 }
 
 
-export default function EnhancedTable({tableData}) {
+export default function EnhancedTable({tableData, searchData}) {
 
   var rows=[];
 
+ if(searchData.length==0)
+ {  
+  
   tableData.map((data,id)=>{
     rows.push(data);
-    // console.log(data);
   })
+}
+
+else {
+
+  // console.log(searchData);
+  searchData.map((data,id)=>{
+    rows.push(data);
+  })
+
+}
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -401,6 +423,7 @@ export default function EnhancedTable({tableData}) {
           </Table>
         </TableContainer>
         <TablePagination
+          sx={{fontSize:"1.25rem"}}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}

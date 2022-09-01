@@ -1,0 +1,31 @@
+.css-pdct74-MuiTablePagination-selectLabel {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 12px !important;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.MuiSelect-select {
+  height: auto;
+  font-size: 12px !important;
+  min-height: 2em !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.css-levciy-MuiTablePagination-displayedRows {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 12px !important;
+  line-height: 2.43 !important;
+  letter-spacing: 0.01071em;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}

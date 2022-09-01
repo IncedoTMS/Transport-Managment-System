@@ -43,9 +43,7 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
       "dropLocation": "Phase 4",
-      "managerApproval": [
-        "Hold"
-      ],
+      "managerApproval": "Approved",
       "status": "Active"
     },
     {
@@ -77,7 +75,7 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
       "dropLocation": "Phase 2",
-      "managerApproval": "Approved",
+      "managerApproval": "Rejected",
       "status": "Active"
     },
     {
@@ -110,7 +108,9 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "21:00",
       "dropLocation": "Delhi",
-      "managerApproval": "Pending",
+      "managerApproval": 
+        "Approved"
+      ,
       "status": "Active",
       "id": 10
     },
@@ -142,9 +142,7 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "21:00",
       "dropLocation": "Phase 58",
-      "managerApproval": [
-        "Reject"
-      ],
+      "managerApproval": "Reject",
       "status": "Active",
       "id": 12
     },
@@ -160,7 +158,11 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
       "dropLocation": "sector 5",
-      "managerApproval": "Approved",
+      "managerApproval": 
+        
+          "Rejected"
+        
+      ,
       "status": "Active",
       "id": 13
     },
@@ -176,7 +178,9 @@
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
       "dropLocation": "Phase 56",
-      "managerApproval": "Pending",
+      "managerApproval": 
+        "Rejected"
+      ,
       "status": "Active",
       "id": 14
     },

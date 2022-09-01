@@ -6,6 +6,58 @@ import TableDisplay from './CreateTable';
 import AdhocDataMethod from './GetAdhoc';
 import AdhocTable from './CreateAdhoc';
 import EnhancedTable from './EnhancedTable';
+// import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+  
+//   export default function BasicTabs() {
+//     const [value, setValue] = React.useState(0);
+  
+//     const handleChange = (event, newValue) => {
+//       setValue(newValue);
+//     };
+
+
+
+
 
 
 
@@ -16,6 +68,7 @@ export default function Admin() {
     const [tableDataState, setTableDataState] = useState([]);
     const [adhocDataState, setAdhocState] = useState([]);
     // const [searchData, setSearchData] = useState([]);
+    const [value, setValue] = useState(0);
 
     const [temp, setTemp] = useState([]);
     const [input, setInput] = useState("");
@@ -59,11 +112,29 @@ export default function Admin() {
         setInput(e.target.value);
         let targ = e.target.value.toLowerCase();
         let temp_arr = tableDataState;
-        var f_arr = temp_arr.filter((el, i) => {
-          // console.log(el);
-          return el.id == targ || el.name.toLowerCase().includes(targ);
+        var f_arr = temp_arr.filter((el) => {
+        
+            return el.id==targ ||  el.month.toLowerCase().includes(targ) || el.managerApproval.toLowerCase().includes(targ);
+            
+        
         });
-        // console.log(f_arr
+        console.log(f_arr);
+            setTemp(f_arr);
+        
+      };
+
+      const handleSearch2 = (e) => {
+        // console.log('Entered Search Function');
+        setInput(e.target.value);
+        let targ = e.target.value.toLowerCase();
+        let temp_arr = adhocDataState;
+        var f_arr = temp_arr.filter((el) => {
+            
+            console.log(el.id)
+            
+        
+        });
+        // console.log(f_arr);
             setTemp(f_arr);
         
       };
@@ -98,7 +169,7 @@ export default function Admin() {
                 <div class='container' style={{marginBottom:"2.5%", marginTop:"2.5%"}}>
                     <div className='d-flex justify-content-between'>
                         <h2 className='admin-header'>Monthly Requests</h2> 
-                        <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                        <input className='fontAwesome searchBar' onChange={handleSearch2} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
                     </div>
                     {console.log(tableDataMethod, "tester")}
                     {/* Checks if the length of the JSON array is not 0. 
@@ -144,38 +215,106 @@ export default function Admin() {
 
       }
 
+      const handleChange = (event, newValue) => {
+        setValue(newValue);
+      }
+
 
     
 
     return(
-         !isTrue? ( <form style={{marginLeft:"30%", marginRight: "30%", marginTop: "10%", marginBottom: "20%"}}>
-            <div class="mb-3">
-              <h1>Admin Login</h1>
-              <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input type="text" name="userName" value={cred.userName} onChange={changeHandler} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  autoComplete='false'/>
-          
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" value={cred.password}  name="password" onChange={changeHandler}class="form-control" id="exampleInputPassword1" autoComplete='false'/>
-            </div>
+
+
+        <>
+
+        <hr /><hr /><hr /><hr />
+
+        <Box sx={{ width: '100%'}}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"  variant="fullWidth" TabIndicatorProps={{style: {background:'orange'}}}>
+            <Tab label={<h5 className='admin-header'>Monthly Requests</h5>} {...a11yProps(0)} />
+            <Tab label={<h5 className='admin-header'>Adhoc Requests</h5> } {...a11yProps(1)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+
+        <div class='container' style={{marginBottom:"2.5%", marginTop:"2.5%"}}>
+                    <div className='d-flex justify-content-between'>
+                        {/* <h2 className='admin-header'>Monthly Requests</h2>  */}
+                        <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                    
+                    </div>
+                    {console.log(tableDataMethod, "tester")}
+                    {/* Checks if the length of the JSON array is not 0. 
+                    If 0 Display nothing, else display table */}
+                    {tableDataState.length === 0 ? <></> : <EnhancedTable tableData={tableDataState} searchData={temp} />}
     
-            <button type="submit" onClick={submitHandler} class="btn btn-primary">Submit</button>
-          </form>
+                </div>
 
-):(<> 
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+        <>
+              <div class='container' style={{marginBottom:"2.5%"}}>
+                  <div className='d-flex justify-content-between'>
+                      {/* <h2 className='admin-header'>Adhoc Request</h2>  */}
+                      <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                     
+                  </div>
+                  {/* {console.log(tableDataMethod, "tester")} */}
+                  {/* Checks if the length of the JSON array is not 0. 
+                  If 0 Display nothing, else display table */}
+                  {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={temp} />}
+  
+              </div>
+          </>
+        </TabPanel>
+      </Box>
 
-<div>
-<hr /><hr />
-<MaterialTable />
-<AdhocRequest />
-<hr /><hr />
-</div>
-</>)
+      <hr /><hr /><hr /><hr />
+
+      </>
+
+
+
+/* <> */
+/* <div> */
+/* <hr /><hr /> */
+
+
+/* <div class='container' style={{marginBottom:"2.5%", marginTop:"2.5%"}}> */
+                    // <div className='d-flex justify-content-between'>
+                        // <h2 className='admin-header'>Monthly Requests</h2> 
+                        // <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                    // </div>
+                    // {console.log(tableDataMethod, "tester")}
+                    /* Checks if the length of the JSON array is not 0. 
+                    If 0 Display nothing, else display table */
+                    // {tableDataState.length === 0 ? <></> : <EnhancedTable tableData={tableDataState} searchData={temp} />}
+    
+// </div>
+                // <hr /><hr />
+
+                //  <div class='container' style={{marginBottom:"2.5%"}}>
+                //   <div className='d-flex justify-content-between'>
+                    //   <h2 className='admin-header'>Adhoc Request</h2> 
+                    //   <input className='fontAwesome searchBar' onChange={handleSearch2} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                //   </div>
+                //   {console.log(tableDataMethod, "tester")}
+                  /* Checks if the length of the JSON array is not 0. 
+                  If 0 Display nothing, else display table */
+                //   {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={temp} />}
+  
+            //   </div>    
+
+
+/* <hr /><hr /> */
+// </div>
+// </>
         
-    )
+    
  
 
 
     
+    )
 }
