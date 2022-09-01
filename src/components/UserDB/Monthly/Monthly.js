@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import styles from "./Monthly.module.css";
 
 const Monthly = () => {
   const [users, setUser] = useState([]);
@@ -21,7 +22,7 @@ const Monthly = () => {
       <div className="accordion-item">
         <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
           <div>
-            <h3 className="title-bar">Monthly Drop Requests</h3>
+            <h3 className={styles.titleBar}>Monthly Drop Requests</h3>
           </div>
           <div className="expand-sym">
             {!isActive ? <i class="arrow down"></i> : <i class="arrow up"></i>}
@@ -33,38 +34,36 @@ const Monthly = () => {
               <div className="py-4">
                 <div class="table-responsive">
                   <table class="table table-striped">
-                    <thead className="thead-dark">
+                    <thead className={styles.theadDark}>
                       <tr className="heading-text">
-                        <th scope="col">#</th>
-                        <th scope="col">Month</th>
-
-                        <th scope="col">Pickup Location</th>
-                        <th scope="col">Pickup Time</th>
-                        <th scope="col">Drop Location</th>
-                        <th scope="col">Manager Approval</th>
-                        <th scope="col">Status</th>
-                        <th>Action</th>
+                      <th scope="col" className={styles.tableHead}>#</th>
+                        <th scope="col" className={styles.tableHead}>Month</th>
+                        <th scope="col" className={styles.tableHead}>Pickup Location</th>
+                        <th scope="col" className={styles.tableHead}>Pickup Time</th>
+                        <th scope="col" className={styles.tableHead}>Drop Location</th>
+                        <th scope="col" className={styles.tableHead}>Manager Approval</th>
+                        <th scope="col" className={styles.tableHead}>Status</th>
+                        <th scope="col" className={styles.tableHead}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {users.map((user, index) => (
                         <tr>
                           <th scope="row">{index + 1}</th>
-                          <td>{user.month}</td>
-
-                          <td>{user.pickupLocation}</td>
-                          <td>{user.pickupTime}</td>
-                          <td>{user.dropLocation}</td>
-                          <td>{user.managerApproval}</td>
-                          <td>{user.status}</td>
-                          <td>
+                          <td className={styles.tableData}>{user.date}</td>
+                          <td className={styles.tableData}>{user.pickupLocation}</td>
+                          <td className={styles.tableData}>{user.pickupTime}</td>
+                          <td className={styles.tableData}>{user.dropLocation}</td>
+                          <td className={styles.tableData}>{user.managerApproval}</td>
+                          <td className={styles.tableData}>{user.status}</td>
+                          <td className={styles.tableData}>
                             {user.month === "Aug-22" ? (
                               <>
                                 <Link
                                   class="btn btn-primary disabled mr-2"
                                   to={`/dashboard/monthly/edit/${user.id}`}
                                 >
-                                  <div style={{ color: "white" }}>Edit</div>
+                                  <div style={{ color: "white" , fontSize: "smaller" }}>Edit</div>
                                 </Link>
                               </>
                             ) : (
@@ -73,7 +72,7 @@ const Monthly = () => {
                                   class="btn btn-primary mr-2"
                                   to={`/dashboard/monthly/edit/${user.id}`}
                                 >
-                                  <div style={{ color: "white" }}>Edit</div>
+                                  <div style={{ color: "white" , fontSize: "smaller" }}>Edit</div>
                                 </Link>
                               </>
                             )}

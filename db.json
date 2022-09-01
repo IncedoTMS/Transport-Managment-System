@@ -26,7 +26,7 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Sector 34",
+      "dropLocation": "Plot number-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015",
       "managerApproval": "Approved",
       "status": "Active"
     },
@@ -42,8 +42,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015  ",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -58,8 +58,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plotnumber-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015  ",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -74,8 +74,8 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 2",
-      "managerApproval": "Approved",
+      "dropLocation": "Plot number-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015  ",
+      "managerApproval": "Pending",
       "status": "Active"
     },
     {
@@ -90,46 +90,14 @@
       "manager": "Rishi",
       "pickupLocation": "Gurgaon",
       "pickupTime": "22:00",
-      "dropLocation": "Phase 4",
-      "managerApproval": "Approved",
+      "dropLocation": "Plotnumber-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015  ",
+      "managerApproval": "Pending",
       "status": "Active"
     }
   ],
   "adhoc": [
     {
       "id": 1,
-      "date": "12-Aug-22",
-      "empId": "1122",
-      "empName": "Akash",
-      "mobNo": "9999293747",
-      "department": "Delivery",
-      "projectId": "1",
-      "projectName": "TMS",
-      "manager": "Rishi",
-      "pickupLocation": "Gurgaon",
-      "pickupTime": "22:00",
-      "dropLocation": "Sector 11",
-      "managerApproval": "Approved",
-      "status": "Expired"
-    },
-    {
-      "id": 2,
-      "date": "16-Aug-22",
-      "empId": "1122",
-      "empName": "Akash",
-      "mobNo": "9999293747",
-      "department": "Delivery",
-      "projectId": "1",
-      "projectName": "TMS",
-      "manager": "Rishi",
-      "pickupLocation": "Gurgaon",
-      "pickupTime": "22:00",
-      "dropLocation": "Sector 22",
-      "managerApproval": "Approved",
-      "status": "Expired"
-    },
-    {
-      "id": 3,
       "date": "19-Aug-22",
       "empId": "1122",
       "empName": "Akash",
@@ -145,7 +113,7 @@
       "status": "Expired"
     },
     {
-      "id": 4,
+      "id": 2,
       "date": "20-Aug-22",
       "empId": "1122",
       "empName": "Akash",
@@ -171,10 +139,10 @@
       "manager": "",
       "pickupLocation": "Gurgaon",
       "pickupTime": "21:00",
-      "dropLocation": "Sector 25",
+      "dropLocation": "Plot number-248, Udyog Vihar, Phase 4, Sector 18, Gurgaon, Delhi 122015",
       "managerApproval": "Pending",
       "status": "Active",
-      "id": 5
+      "id": 3
     },
     {
       "date": "24-Aug-22",
@@ -190,7 +158,7 @@
       "dropLocation": "Sector 21",
       "managerApproval": "Pending",
       "status": "Active",
-      "id": 6
+      "id": 4
     }
   ]
 }

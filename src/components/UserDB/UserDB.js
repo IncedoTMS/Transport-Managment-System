@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
-import Post from "./UserMaster/Post.js";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
+import UserMaster from "./UserMaster/UserMaster.js";
 import "./UserDB.css";
 import Monthly from "./Monthly/Monthly.js";
 import Edit from "./Edit/Edit";
@@ -8,19 +14,28 @@ import Edit2 from "./Edit/Edit2";
 import Adhoc from "./Adhoc/Adhoc.js";
 import AddMonthly from "./NewRequest/AddMonthly.js";
 import AddAdhoc from "./NewRequest/AddAdhoc.js";
-import "./fancy.css";
-import "./UserDB.css";
+import Signin from "../Signin/Signin.js";
 
 export default function UserDB() {
+  const history = useHistory();
+  const logOut = () => {
+    history.push("/");
+  };
+
   return (
     <BrowserRouter>
       <div className="db-body">
-        <Post />
+        <div className="logout">
+          <button className="btn btn-danger" onClick={logOut}>
+            Log Out
+          </button>
+        </div>
+        <UserMaster />
 
         <Switch>
           <Route exact path="/dashboard" component={Monthly}>
-            <Monthly />
             <Adhoc />
+            <Monthly />
           </Route>
           <Route
             exact
@@ -44,6 +59,7 @@ export default function UserDB() {
             path="/dashboard/monthly/addadhoc"
             component={AddAdhoc}
           ></Route>
+          <Route exact path="/" component={Signin}></Route>
         </Switch>
       </div>
     </BrowserRouter>

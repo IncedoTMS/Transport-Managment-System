@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Post.css";
+import styles from "./UserMaster.module.css";
 import axios from "axios";
 
-export default function Post() {
+export default function UserMaster() {
   const [users, setUser] = useState([]);
   useEffect(() => {
     loadUsers();
@@ -19,7 +19,7 @@ export default function Post() {
       <div className="accordion-item">
         <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
           <div>
-            <h3 className="title-bar">User Master</h3>
+            <h3 className={styles.titleBar}>User Master</h3>
           </div>
         </div>
         <div>
@@ -28,7 +28,7 @@ export default function Post() {
               <div className="py-4">
                 <div class="table-responsive">
                   <table class="table table-striped">
-                    <thead className="thead-dark">
+                    <thead className={styles.theadDark}>
                       <tr>
                         <th scope="col">Emp ID</th>
                         <th scope="col">Emp Name</th>

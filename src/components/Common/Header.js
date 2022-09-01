@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import thehub from "./inet_logo.png";
+import { useHistory, useState } from "react-router-dom";
 
-function Header() {
+const Header = () => {
+  
+
+  const isSignInPage = window.location.pathname === "/";
+
   return (
     <React.Fragment>
       <div className="header">
@@ -14,6 +19,6 @@ function Header() {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default Header;
