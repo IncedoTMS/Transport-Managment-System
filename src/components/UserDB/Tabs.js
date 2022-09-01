@@ -64,8 +64,16 @@ export default function BasicTabs() {
           indicatorColor="primary"
           variant="fullWidth"
         >
-          <Tab label="Monthly Requests" {...a11yProps(0)} />
-          <Tab label="Adhoc Requests" {...a11yProps(1)} />
+          <Tab
+            label="Monthly Requests"
+            sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
+            {...a11yProps(0)}
+          />
+          <Tab
+            label="Adhoc Requests"
+            sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
+            {...a11yProps(1)}
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
