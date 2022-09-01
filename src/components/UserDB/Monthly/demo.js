@@ -253,10 +253,10 @@ export default function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+    <Box sx={{ width: "97.5%" , margin: "auto" }}>
+      {/* <Paper sx={{ width: "100%", mb: 2 }}> */}
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-        <TableContainer>
+        <TableContainer component ={Paper}>
           <Table
             sx={{ minWidth: 750, fontSize: "1.1rem" }}
             aria-labelledby="tableTitle"
@@ -382,7 +382,7 @@ export default function EnhancedTable(props) {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Paper>
+      {/* </Paper> */}
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"

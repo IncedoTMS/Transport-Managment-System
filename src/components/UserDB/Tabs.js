@@ -48,7 +48,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ bgcolor: "background.paper", width: "95%", margin: "auto" }}>
+    <Box sx={{ bgcolor: "background.paper", width: "96%", margin: "auto" ,border:"1px solid white" , borderRadius: "5px",}}>
       <Box
         sx={{
           borderBottom: 1,
