@@ -9,12 +9,12 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <header>
-        <Header />
-      </header>
-      <main>
-        <Router>
+    <Router>
+      <div className="wrapper">
+        <header>
+          <Header />
+        </header>
+        <main>
           <Switch>
             <Route exact path="/" component={Signin}>
               <Signin />
@@ -24,12 +24,12 @@ const App = () => {
             </Route>
             <Route path="/dashboard" component={UserDB}></Route>
           </Switch>
-        </Router>
-      </main>
-      <footer>
-        <Footer />
-      </footer>
-    </div>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
+    </Router>
   );
 };
 

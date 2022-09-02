@@ -132,7 +132,8 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow
         sx={{
-          backgroundColor: "#78146a",
+          // backgroundColor: "#78146a",
+          backgroundColor: "#1976d2",
 
           borderBottom: "2px solid white",
           "& th": {
@@ -252,140 +253,142 @@ export default function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{width: "97.5%" , margin: "auto" }}>
+    <Box sx={{ width: "97.5%", margin: "auto" }}>
       {/* <Paper sx={{ width: "100%", mb: 2 }}> */}
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-        <TableContainer component={Paper}>
-          <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem" }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+      {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+      <TableContainer component={Paper}>
+        <Table
+          sx={{ minWidth: 750, fontSize: "1.1rem" }}
+          aria-labelledby="tableTitle"
+          size={dense ? "small" : "medium"}
+        >
+          <EnhancedTableHead
+            numSelected={selected.length}
+            order={order}
+            orderBy={orderBy}
+            onSelectAllClick={handleSelectAllClick}
+            onRequestSort={handleRequestSort}
+            rowCount={rows.length}
+          />
+          <TableBody>
+            {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-                  const TCELLFONT = "1.16rem";
+            {stableSort(rows, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                const isItemSelected = isSelected(row.name);
+                const labelId = `enhanced-table-checkbox-${index}`;
+                const TCELLFONT = "1.16rem";
 
-                  return (
-                    <TableRow
-                      hover
-                      //   onClick={(event) => handleClick(event, row.name)}
-                      //   role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                      sx={{ fontSize: TCELLFONT }}
-                    >
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {index + 1}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.date}
-                      </TableCell>
+                return (
+                  <TableRow
+                    hover
+                    //   onClick={(event) => handleClick(event, row.name)}
+                    //   role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.name}
+                    selected={isItemSelected}
+                    sx={{ fontSize: TCELLFONT }}
+                  >
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {index + 1}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.date}
+                    </TableCell>
 
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.pickupLocation}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.pickupTime}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.dropLocation}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.managerApproval}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.status === "Active" ? (
-                          <Chip
-                            label={row.status}
-                            color="success"
-                            variant="outlined"
-                            sx={{ fontSize: TCELLFONT }}
-                          />
-                        ) : (
-                          <Chip
-                            label={row.status}
-                            color="error"
-                            variant="outlined"
-                            sx={{ fontSize: TCELLFONT }}
-                          />
-                        )}
-                      </TableCell>
-                      <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                        {row.status === "Expired" ? (
-                          <>
-                            <Link
-                              to={`/dashboard/adhoc/edit/${row.id}`}
-                              onClick={(event) => event.preventDefault()}
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.pickupLocation}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.pickupTime}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.dropLocation}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.managerApproval}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.status === "Active" ? (
+                        <Chip
+                          label={row.status}
+                          color="success"
+                          variant="outlined"
+                          size="small"
+                          sx={{ fontSize: TCELLFONT }}
+                        />
+                      ) : (
+                        <Chip
+                          label={row.status}
+                          color="error"
+                          variant="outlined"
+                          size="small"
+                          sx={{ fontSize: TCELLFONT }}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
+                      {row.status === "Expired" ? (
+                        <>
+                          <Link
+                            to={`/dashboard/adhoc/edit/${row.id}`}
+                            onClick={(event) => event.preventDefault()}
+                          >
+                            <Button
+                              variant="contained"
+                              startIcon={<EditIcon fontSize="15px" disabled />}
+                              disabled
+                              size="small"
                             >
-                              <Button
-                                variant="contained"
-                                startIcon={
-                                  <EditIcon fontSize="large" disabled />
-                                }
-                                disabled
-                              >
-                                Edit
-                              </Button>
-                            </Link>
-                          </>
-                        ) : (
-                          <>
-                            <Link to={`/dashboard/adhoc/edit/${row.id}`}>
-                              <Button
-                                variant="contained"
-                                startIcon={<EditIcon fontSize="large" />}
-                              >
-                                Edit
-                              </Button>
-                            </Link>
-                          </>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+                              Edit
+                            </Button>
+                          </Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link to={`/dashboard/adhoc/edit/${row.id}`}>
+                            <Button
+                              variant="contained"
+                              startIcon={<EditIcon fontSize="15px" />}
+                              size="small"
+                            >
+                              Edit
+                            </Button>
+                          </Link>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: (dense ? 33 : 53) * emptyRows,
+                }}
+              >
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
       {/* </Paper> */}
-      <FormControlLabel
+      {/* <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
-      />
+      /> */}
     </Box>
   );
 }
