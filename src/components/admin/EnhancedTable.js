@@ -301,7 +301,7 @@ export default function EnhancedTable({tableData, searchData}) {
     rows.push(data);
   })
 }
-
+// console.log(rows)
 else {
 
   // console.log(searchData);

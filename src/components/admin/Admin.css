@@ -16,9 +16,13 @@
   }
 
 .searchBar{
-    height: fit-content;
+    height: 25px;
+    border-width: 1.5px;
     margin-top: 2%;
     width: 17%;
+    margin-bottom:2% !important ;
+    position: relative !important;
+    left: 82.735% !important;
 }
 
 

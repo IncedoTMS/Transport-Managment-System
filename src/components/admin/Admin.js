@@ -77,6 +77,8 @@ export default function Admin() {
         password:""
     })
 
+    const [adhocTemp, setAdhocTemp]=useState([]);
+
     const [isTrue, setIsTrue]=useState(false);
 
     useEffect(()=>{
@@ -112,13 +114,13 @@ export default function Admin() {
         setInput(e.target.value);
         let targ = e.target.value.toLowerCase();
         let temp_arr = tableDataState;
-        var f_arr = temp_arr.filter((el) => {
+        let f_arr = temp_arr.filter((el) => {
         
-            return el.id==targ ||  el.month.toLowerCase().includes(targ) || el.managerApproval.toLowerCase().includes(targ);
+            return el.id===targ || el.empName.toLowerCase().includes(targ) || el.month.toLowerCase().includes(targ);
             
         
         });
-        console.log(f_arr);
+        // console.log(f_arr);
             setTemp(f_arr);
         
       };
@@ -128,14 +130,15 @@ export default function Admin() {
         setInput(e.target.value);
         let targ = e.target.value.toLowerCase();
         let temp_arr = adhocDataState;
-        var f_arr = temp_arr.filter((el) => {
-            
-            console.log(el.id)
+        let f_arr = temp_arr.filter((el) => {
+            // console.log(el.managerApproval);
+          return el.id===targ || el.empName.toLowerCase().includes(targ)  || el.date.toLowerCase().includes(targ);
             
         
         });
-        // console.log(f_arr);
-            setTemp(f_arr);
+        console.log(f_arr);
+            setAdhocTemp(f_arr)
+            console.log(adhocTemp);
         
       };
 
@@ -169,7 +172,7 @@ export default function Admin() {
                 <div class='container' style={{marginBottom:"2.5%", marginTop:"2.5%"}}>
                     <div className='d-flex justify-content-between'>
                         <h2 className='admin-header'>Monthly Requests</h2> 
-                        <input className='fontAwesome searchBar' onChange={handleSearch2} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                        <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
                     </div>
                     {console.log(tableDataMethod, "tester")}
                     {/* Checks if the length of the JSON array is not 0. 
@@ -227,7 +230,7 @@ export default function Admin() {
 
         <>
 
-        <hr /><hr /><hr /><hr />
+        <hr /><hr /><hr />
 
         <Box sx={{ width: '100%'}}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -240,13 +243,12 @@ export default function Admin() {
 
         <div class='container' style={{marginBottom:"2.5%", marginTop:"2.5%"}}>
                     <div className='d-flex justify-content-between'>
-                        {/* <h2 className='admin-header'>Monthly Requests</h2>  */}
-                        <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+                       
+                        <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Month"/>
                     
                     </div>
                     {console.log(tableDataMethod, "tester")}
-                    {/* Checks if the length of the JSON array is not 0. 
-                    If 0 Display nothing, else display table */}
+                    
                     {tableDataState.length === 0 ? <></> : <EnhancedTable tableData={tableDataState} searchData={temp} />}
     
                 </div>
@@ -256,14 +258,12 @@ export default function Admin() {
         <>
               <div class='container' style={{marginBottom:"2.5%"}}>
                   <div className='d-flex justify-content-between'>
-                      {/* <h2 className='admin-header'>Adhoc Request</h2>  */}
-                      <input className='fontAwesome searchBar' onChange={handleSearch} value={input} placeholder="&#xF002; Search Name or Emp ID"/>
+        
+                      <input className='fontAwesome searchBar' onChange={handleSearch2} value={input} placeholder="&#xF002; Search Name or Date"/>
                      
                   </div>
-                  {/* {console.log(tableDataMethod, "tester")} */}
-                  {/* Checks if the length of the JSON array is not 0. 
-                  If 0 Display nothing, else display table */}
-                  {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={temp} />}
+                 
+                  {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={adhocTemp} />}
   
               </div>
           </>

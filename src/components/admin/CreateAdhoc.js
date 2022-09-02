@@ -32,7 +32,7 @@ const axios= require('axios');
 
 
 function descendingComparator(a, b, orderBy) {
-  console.log(a);
+  // console.log(a);
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -287,14 +287,27 @@ onClick={sendData}
 }
 
 
-export default function CreateAdhoc({tableData}) {
+export default function CreateAdhoc({tableData, searchData}) {
 
   var rows=[];
 
-  tableData.map((data,id)=>{
+  if(searchData.length==0)
+  {  
+   
+   tableData.map((data,id)=>{
+     rows.push(data);
+   })
+ }
+
+ else {
+
+  // console.log(searchData);
+  searchData.map((data,id)=>{
     rows.push(data);
-    // console.log(data);
   })
+
+}
+//  console.log(rows);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
