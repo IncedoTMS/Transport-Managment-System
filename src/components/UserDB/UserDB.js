@@ -4,7 +4,6 @@ import Post from "./UserMaster/Post.js";
 import Edit from "./Edit/Edit";
 import Edit2 from "./Edit/Edit2";
 import AddAdhoc from "./NewRequest/AddAdhoc.js";
-import "./fancy.css";
 import "./UserDB.css";
 import Tabs from "./Tabs";
 
@@ -29,7 +28,7 @@ export default function UserDB() {
           ></Route>
           <Route
             exact
-            path="/dashboard/monthly/addadhoc"
+            path="/dashboard/adhoc/addadhoc"
             component={AddAdhoc}
           ></Route>
         </Switch>

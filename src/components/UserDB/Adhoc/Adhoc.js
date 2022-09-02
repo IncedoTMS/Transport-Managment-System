@@ -21,8 +21,8 @@ const Adhoc = () => {
     <>
       <Demo_Adhoc data={users} />
 
-      <div className="add">
-        <Link to={"/dashboard/monthly/addadhoc"}>
+      <div style={{ textAlign: "center" }}>
+        <Link to={"/dashboard/adhoc/addadhoc"}>
           <Button variant="contained" startIcon={<AddIcon fontSize="large" />}>
             Add New Request
           </Button>

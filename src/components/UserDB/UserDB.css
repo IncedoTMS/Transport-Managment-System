@@ -1,20 +1,6 @@
-.title-bar {
-  /* border: solid black 2px; */
-  color: white;
-  display: flex;
-  /* background-color: whitesmoke; */
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-weight: bold;
-  text-align: center;
-  width: fit-content;
-  padding: 2px;
-  margin: auto;
-  font-size: medium;
-}
-
 .db-body {
   /* position: absolute; */
-  height: auto;
+  height: 100%;
   width: 100vw;
   padding-top: 4%;
   padding-bottom: 4%;

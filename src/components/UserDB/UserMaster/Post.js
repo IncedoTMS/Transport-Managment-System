@@ -92,7 +92,11 @@ export default function Post() {
         <div>
           <div className="accordion-content">
             <Box
-              sx={{ bgcolor: "background.paper", width: "95%", margin: "auto" }}
+              sx={{
+                bgcolor: "background.paper",
+                width: "96%",
+                margin: "auto",
+              }}
             >
               <TableContainer component={Paper}>
                 <Table
