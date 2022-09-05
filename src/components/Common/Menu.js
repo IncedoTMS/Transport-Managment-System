@@ -86,7 +86,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem sx={{ fontSize: "12px" }}>
           <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
             <ListItemIcon>
               <Home fontSize="small" />
@@ -95,7 +95,7 @@ export default function AccountMenu() {
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem sx={{ fontSize: "12px" }}>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <ListItemIcon>
               <Logout fontSize="small" />
