@@ -25,18 +25,29 @@ export default function AccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Typography sx={{ minWidth: 100 }}>akash.rai@incedoinc.com</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          textAlign: "center",
+          border: "1px solid white",
+          borderRadius: "20px",
+          paddingLeft: "10px",
+        }}
+      >
+        <Typography sx={{ minWidth: 100, fontSize: "1.1rem" }}>
+          akash.rai@incedoinc.com
+        </Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ ml: 0.5 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }} src="/broken-image.jpg" />
+            <Avatar sx={{ width: 26, height: 26 }} src="/broken-image.jpg" />
           </IconButton>
         </Tooltip>
       </Box>
@@ -76,17 +87,21 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <ListItemIcon>
-            <Home fontSize="small" />
-          </ListItemIcon>
-          <Link to={"/dashboard"}>Home</Link>
+          <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
+            <ListItemIcon>
+              <Home fontSize="small" />
+            </ListItemIcon>
+            Home
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          <Link to={"/"}>Logout</Link>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </Link>
         </MenuItem>
       </Menu>
     </React.Fragment>
