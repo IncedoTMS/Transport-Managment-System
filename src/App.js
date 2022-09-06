@@ -6,6 +6,7 @@ import Signin from "./components/Signin/Signin";
 import Header from "./components/Common/Header";
 import Footer from "./components/Common/Footer";
 import NoMatch from "./components/Common/NoMatch";
+import Admin from "./components/admin/Admin";
 import "./App.css";
 
 const App = () => {
@@ -23,6 +24,8 @@ const App = () => {
             <Signup />
           </Route>
           <Route exact path="/dashboard" component={UserDB}></Route>
+
+          <Route path="/admin" component={Admin}></Route>
           <Route path="*" component={NoMatch}></Route>
         </Switch>
       </main>
