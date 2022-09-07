@@ -18,6 +18,11 @@
   overflow: hidden;
 }
 
+.btn-group>.btn:first-child {
+  margin-left: 0;
+  border: none;
+}
+
 
 .css-levciy-MuiTablePagination-displayedRows {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
