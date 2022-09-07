@@ -8,13 +8,22 @@ var data = [];
 // Setter function for adhocTableDataState
 
 const AdhocDataMethod = (setter) => {
-    if(oneTime){
-    axios.get('http://localhost:3000/adhoc')
+    adhocTableData=[];
+    axios.get('http://localhost:3000/adhoc',
+    
+    {headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      }}
+    
+    )
         .then(resp => {
             // const [oneTime, setOneTime] = useState(2)
             data = resp.data;
             data.forEach(e => {
                 adhocTableData.push(e);
+                console.log(e);
 
                 // console.log(`${e.id}, ${e.name}, ${e.status}`);
             });
@@ -26,7 +35,7 @@ const AdhocDataMethod = (setter) => {
         .catch(error => {
             console.log(error);
         });
-    }
+
 };
 export default AdhocDataMethod;
 

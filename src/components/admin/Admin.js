@@ -101,6 +101,7 @@ export default function Admin() {
             console.log(error);
         });
     },[]);
+    
     useEffect(()=>{AdhocDataMethod(setAdhocState)},[]);
 
     // Calling tableDataMethod to set state
@@ -263,7 +264,7 @@ export default function Admin() {
                      
                   </div>
                  
-                  {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={adhocTemp} />}
+                  {adhocDataState.length === 0 ? <></> : <AdhocTable tableData={adhocDataState} searchData={adhocTemp} loader={AdhocDataMethod} apiDataSetter={setAdhocState}/>}
   
               </div>
           </>

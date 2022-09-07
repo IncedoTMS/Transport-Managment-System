@@ -23,6 +23,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Chip } from '@mui/material';
 import './tables.css';
+import { MenuItem } from '@mui/material';
+import Select from '@mui/material/Select';
 
 const axios= require('axios');
 
@@ -32,6 +34,10 @@ const axios= require('axios');
 
 
 function descendingComparator(a, b, orderBy) {
+
+  console.log('a',a)
+  console.log('b',b)
+  console.log('orderBy',orderBy);
   // console.log(a);
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -42,7 +48,8 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
-function getComparator(order, orderBy) {
+function getComparator(order, orderBy) { 
+
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -175,18 +182,15 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-function Display({row}){
+function Display({row,loader,apiDataSetter}){
 
  
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm,setIsconfirm]=React.useState(false);
-const [Dropdown, setDropdown]=React.useState(row.managerApproval);
+const [Dropdown, setDropdown]=React.useState("None");
 
-  function handleEdit(rowID) {
-    setIsEditing(!isEditing);
-    setIsDisabled(!isDisabled);
-  }
+
 
   const [userData, setUserData] = React.useState({
 
@@ -198,29 +202,52 @@ const [Dropdown, setDropdown]=React.useState(row.managerApproval);
   })
 
   React.useEffect(() => {
+    console.log(1);
     loadUser();
-  }, [Dropdown])
+  }, [Dropdown]);
 
   const loadUser = async () => {
 
+    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`,
+    {headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+    }}
+    ,);
 
-    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`);
-    setUserData({ ...result.data, managerApproval: [Dropdown] })
+    // console.log(result);
+   setUserData({ ...result.data, managerApproval: [Dropdown] });
+   
 
   }
+
+  // const loadUserAgain= async()=>{
+
+
+  //   const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`);
+  //  setUserData({ ...result.data});
+  //  setDropdown("None");
+
+  // }
 
   const sendData = (e) => {
 
     console.log(userData);
-    axios.put(`http://localhost:3000/adhoc/${row.id}`, userData).then((resp)=>{
+    if(Dropdown!="None") axios.put(`http://localhost:3000/adhoc/${row.id}`, userData).then((resp)=>{
       console.log(resp);
     }).catch(e=>{
       console.log(e);
     });
-    setIsconfirm(true);
-    setIsDisabled(true);
 
 
+    apiDataSetter([]);
+    loader(apiDataSetter);
+
+
+    
+
+    
   }
 
 
@@ -248,16 +275,19 @@ const [Dropdown, setDropdown]=React.useState(row.managerApproval);
     <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}  align="right">{row.pickupLocation}</TableCell>
     <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}align="right">{row.dropLocation}</TableCell>
     <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}  align="right">{row.date}</TableCell>
-    <TableCell sx={{fontSize: "1.25rem"}}  align="right">
+    <TableCell sx={{fontSize: "1.25rem"}}  align="right" >
+
+
+
     
     <div class="btn-group">
                 <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                 <Chip color ='info' label={Dropdown} style={{fontSize:"1.25rem"}} />
+                <Chip color ='info' label={(Dropdown=="None")?row.managerApproval: Dropdown} style={{fontSize:"1.25rem"}} />
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" onClick={()=>setDropdown("Hold")}>Hold</a></li>
-                  <li><a class="dropdown-item" onClick={()=>setDropdown("Approved")}>Approved</a></li>
-                  <li><a class="dropdown-item" onClick={()=>setDropdown("Rejected")}>Rejected</a></li>
+                  <li><a class="dropdown-item" value="Hold" onClick={()=>setDropdown("Hold")}>Hold</a></li>
+                  <li><a class="dropdown-item" value="Approved" onClick={()=>setDropdown("Approved")}>Approved</a></li>
+                  <li><a class="dropdown-item" value="Rejected" onClick={()=>setDropdown("Rejected")}>Rejected</a></li>
 
                 </ul>
               </div>
@@ -287,7 +317,7 @@ onClick={sendData}
 }
 
 
-export default function CreateAdhoc({tableData, searchData}) {
+export default function CreateAdhoc({tableData, searchData,loader, apiDataSetter}) {
 
   var rows=[];
 
@@ -404,7 +434,7 @@ export default function CreateAdhoc({tableData, searchData}) {
 
                   return (
                     
-                    <Display row={row}/>
+                    <Display row={row} loader={loader} apiDataSetter={apiDataSetter}/>
                  
                   );
                 })}
