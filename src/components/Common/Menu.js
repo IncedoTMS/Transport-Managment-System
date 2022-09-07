@@ -13,8 +13,10 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Home from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 
 export default function AccountMenu() {
+  const isMobile = useMediaQuery("(max-width:767px)");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -25,20 +27,8 @@ export default function AccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          border: "1px solid white",
-          borderRadius: "20px",
-          paddingLeft: "10px",
-        }}
-      >
-        <Typography sx={{ minWidth: 100, fontSize: "1.1rem" }}>
-          akash.rai@incedoinc.com
-        </Typography>
-        <Tooltip title="Account settings">
+      {isMobile ? (
+        <>
           <IconButton
             onClick={handleClick}
             size="small"
@@ -49,8 +39,41 @@ export default function AccountMenu() {
           >
             <Avatar sx={{ width: 26, height: 26 }} src="/broken-image.jpg" />
           </IconButton>
-        </Tooltip>
-      </Box>
+        </>
+      ) : (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+              border: "1px solid white",
+              borderRadius: "20px",
+              paddingLeft: "10px",
+            }}
+          >
+            <Typography sx={{ minWidth: 100, fontSize: "1.1rem" }}>
+              akash.rai@incedoinc.com
+            </Typography>
+
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 0.5 }}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+              >
+                <Avatar
+                  sx={{ width: 26, height: 26 }}
+                  src="/broken-image.jpg"
+                />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        </>
+      )}
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
