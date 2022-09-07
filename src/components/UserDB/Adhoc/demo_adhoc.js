@@ -27,6 +27,9 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
 function descendingComparator(a, b, orderBy) {
+  if (orderBy === "date") {
+    return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
+  }
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -252,6 +255,32 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const getDateString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let dateStr = day + "-" + months[month] + "-" + year;
+    return dateStr;
+  };
+
   return (
     <Box sx={{ width: "97.5%", margin: "auto" }}>
       {/* <Paper sx={{ width: "100%", mb: 2 }}> */}
@@ -295,7 +324,7 @@ export default function EnhancedTable(props) {
                       {index + 1}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.date}
+                      {getDateString(row.date)}
                     </TableCell>
 
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>

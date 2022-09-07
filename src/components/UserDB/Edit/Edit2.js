@@ -48,6 +48,7 @@ const Edit2 = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    user.managerApproval = "Pending";
     await axios.put(`http://localhost:3000/adhoc/${id}`, user);
     history.push("/dashboard");
   };
