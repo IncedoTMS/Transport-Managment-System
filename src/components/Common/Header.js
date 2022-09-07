@@ -10,7 +10,7 @@ function Header() {
   return (
     <React.Fragment>
       <div className="header">
-        {isDashboard || isAdmin ? (
+        {isDashboard ? (
           <>
             <a href="https://thehub.incedoinc.com/" target="_blank">
               <img src={thehub} alt="" />
