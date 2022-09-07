@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import axios from "axios";
-import tableDataMethod from "./get_tableData";
-import TableDisplay from "./CreateTable";
-import AdhocDataMethod from "./GetAdhoc";
-import AdhocTable from "./CreateAdhoc";
-import EnhancedTable from "./EnhancedTable";
+import GetMonthlyApi from "./GetMonthlyApi";
+import GetAdhocApi from "./GetAdhocApi";
+import CreateAdhoc from "./CreateAdhoc";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import CreateMonthly from "./CreateMonthly";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,42 +52,24 @@ export default function Admin() {
 
   const [temp, setTemp] = useState([]);
   const [input, setInput] = useState("");
-  const [cred, setCred] = useState({
-    userName: "",
-    password: "",
-  });
 
   const [adhocTemp, setAdhocTemp] = useState([]);
-
   const [isTrue, setIsTrue] = useState(false);
 
   useEffect(() => {
-    const tableData = [];
-    axios
-      .get("http://localhost:3000/monthly")
-      .then((resp) => {
-        const data = resp.data;
-        data.forEach((e) => {
-          tableData.push(e);
-        });
-        // Once API call is complete and array is not empty,
-        // setter sets the state and sends tableData to Admin.js
-        setTableDataState(tableData);
-        // oneTime = !oneTime
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    GetMonthlyApi(setTableDataState);
   }, []);
 
   useEffect(() => {
-    AdhocDataMethod(setAdhocState);
+    GetAdhocApi(setAdhocState);
   }, []);
 
   // Calling tableDataMethod to set state
   useEffect(() => {
     console.log(input);
   }, [input]);
+
+
   const handleSearch = (e) => {
     setInput(e.target.value);
     let targ = e.target.value.toLowerCase();
@@ -119,104 +100,16 @@ export default function Admin() {
     console.log(adhocTemp);
   };
 
-  function AdhocRequest() {
-    return (
-      <>
-        <div class="container" style={{ marginBottom: "2.5%" }}>
-          <div className="d-flex justify-content-between">
-            <h2 className="admin-header">Adhoc Request</h2>
-            <input
-              className="fontAwesome searchBar"
-              onChange={handleSearch}
-              value={input}
-              placeholder="&#xF002; Search Name or Emp ID"
-            />
-          </div>
-          {/* Checks if the length of the JSON array is not 0. 
-                  If 0 Display nothing, else display table */}
-          {adhocDataState.length === 0 ? (
-            <></>
-          ) : (
-            <AdhocTable tableData={adhocDataState} searchData={temp} />
-          )}
-        </div>
-      </>
-    );
-  }
 
-  function MonthlyRequest() {
-    return (
-      <>
-        <div
-          class="container"
-          style={{ marginBottom: "2.5%", marginTop: "2.5%" }}
-        >
-          <div className="d-flex justify-content-between">
-            <h2 className="admin-header">Monthly Requests</h2>
-            <input
-              className="fontAwesome searchBar"
-              onChange={handleSearch}
-              value={input}
-              placeholder="&#xF002; Search Name or Emp ID"
-            />
-          </div>
-          {console.log(tableDataMethod, "tester")}
-          {/* Checks if the length of the JSON array is not 0. 
-                    If 0 Display nothing, else display table */}
-          {tableDataState.length === 0 ? (
-            <></>
-          ) : (
-            <TableDisplay tableData={tableDataState} searchData={temp} />
-          )}
-        </div>
-      </>
-    );
-  }
 
-  function MaterialTable() {
-    return (
-      <>
-        <div
-          class="container"
-          style={{ marginBottom: "2.5%", marginTop: "2.5%" }}
-        >
-          <div className="d-flex justify-content-between">
-            <h2 className="admin-header">Monthly Requests</h2>
-            <input
-              className="fontAwesome searchBar"
-              onChange={handleSearch}
-              value={input}
-              placeholder="&#xF002; Search Name or Emp ID"
-            />
-          </div>
-          {console.log(tableDataMethod, "tester")}
-          {/* Checks if the length of the JSON array is not 0. 
-                    If 0 Display nothing, else display table */}
-          {tableDataState.length === 0 ? (
-            <></>
-          ) : (
-            <EnhancedTable tableData={tableDataState} searchData={temp} />
-          )}
-        </div>
-      </>
-    );
-  }
 
-  function changeHandler(e) {
-    setCred({ ...cred, [e.target.name]: e.target.value });
-    console.log(cred);
-  }
 
-  function submitHandler(e) {
-    e.preventDefault();
-    cred.userName == "admin" && cred.password == "admin"
-      ? setIsTrue(true)
-      : setIsTrue(false);
-  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
 
   return (
     <>
@@ -256,12 +149,18 @@ export default function Admin() {
                 placeholder="&#xF002; Search Name or Month"
               />
             </div>
-            {console.log(tableDataMethod, "tester")}
+            {console.log(GetMonthlyApi, "tester")}
 
             {tableDataState.length === 0 ? (
               <></>
             ) : (
-              <EnhancedTable tableData={tableDataState} searchData={temp} />
+              <CreateMonthly
+                tableData={tableDataState}
+                searchData={temp}
+                loader={GetMonthlyApi}
+                apiDataSetter={setTableDataState}
+
+              />
             )}
           </div>
         </TabPanel>
@@ -280,10 +179,10 @@ export default function Admin() {
               {adhocDataState.length === 0 ? (
                 <></>
               ) : (
-                <AdhocTable
+                <CreateAdhoc
                   tableData={adhocDataState}
                   searchData={adhocTemp}
-                  loader={AdhocDataMethod}
+                  loader={GetAdhocApi}
                   apiDataSetter={setAdhocState}
                 />
               )}

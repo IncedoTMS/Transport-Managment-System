@@ -6,7 +6,6 @@ import UserDB from "./components/userDashboard/UserDB/UserDB"
 import Header from './components/Common/Header';
 import Footer from './components/Common/Footer';
 import Admin from './components/admin/Admin';
-import BasicTabs from "./components/admin/Tabs";
 
 function App() {
   return (

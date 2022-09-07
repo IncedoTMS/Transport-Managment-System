@@ -173,7 +173,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-function Display({ row }) {
+function Display({ row, loader, apiDataSetter }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
@@ -211,8 +211,8 @@ function Display({ row }) {
       .catch((e) => {
         console.log(e);
       });
-    setIsconfirm(true);
-    setIsDisabled(true);
+    apiDataSetter([]);
+    loader(apiDataSetter);
   };
 
   return (
@@ -301,7 +301,7 @@ function Display({ row }) {
   );
 }
 
-export default function EnhancedTable({ tableData, searchData }) {
+export default function CreateMonthly({ tableData, searchData, loader, apiDataSetter }) {
   var rows = [];
 
   if (searchData.length == 0) {
@@ -404,7 +404,7 @@ export default function EnhancedTable({ tableData, searchData }) {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return <Display row={row} />;
+                  return <Display row={row} loader={loader} apiDataSetter={apiDataSetter} />;
                 })}
               {emptyRows > 0 && (
                 <TableRow

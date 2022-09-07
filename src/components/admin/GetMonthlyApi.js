@@ -5,10 +5,21 @@ var data = [];
 
 // Setter function for TableDataState
 
-const tableDataMethod = (setter) => {
-  if (oneTime) {
+const GetMonthlyApi = (setter) => {
+  tableData = [];
     axios
-      .get("http://localhost:3000/monthly")
+      .get("http://localhost:3000/monthly",
+      
+      {
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
+      
+      
+      )
       .then((resp) => {
         data = resp.data;
         data.forEach((e) => {
@@ -21,6 +32,6 @@ const tableDataMethod = (setter) => {
       .catch((error) => {
         console.log(error);
       });
-  }
+  
 };
-export default tableDataMethod;
+export default GetMonthlyApi;

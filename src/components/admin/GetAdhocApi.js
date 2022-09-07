@@ -5,7 +5,7 @@ var data = [];
 
 // Setter function for adhocTableDataState
 
-const AdhocDataMethod = (setter) => {
+const GetAdhocApi = (setter) => {
   adhocTableData = [];
   axios
     .get(
@@ -33,4 +33,4 @@ const AdhocDataMethod = (setter) => {
       console.log(error);
     });
 };
-export default AdhocDataMethod;
+export default GetAdhocApi;
