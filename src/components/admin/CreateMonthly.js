@@ -301,7 +301,12 @@ function Display({ row, loader, apiDataSetter }) {
   );
 }
 
-export default function CreateMonthly({ tableData, searchData, loader, apiDataSetter }) {
+export default function CreateMonthly({
+  tableData,
+  searchData,
+  loader,
+  apiDataSetter,
+}) {
   var rows = [];
 
   if (searchData.length == 0) {
@@ -404,7 +409,13 @@ export default function CreateMonthly({ tableData, searchData, loader, apiDataSe
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return <Display row={row} loader={loader} apiDataSetter={apiDataSetter} />;
+                  return (
+                    <Display
+                      row={row}
+                      loader={loader}
+                      apiDataSetter={apiDataSetter}
+                    />
+                  );
                 })}
               {emptyRows > 0 && (
                 <TableRow

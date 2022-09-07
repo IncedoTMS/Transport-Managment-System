@@ -69,7 +69,6 @@ export default function Admin() {
     console.log(input);
   }, [input]);
 
-
   const handleSearch = (e) => {
     setInput(e.target.value);
     let targ = e.target.value.toLowerCase();
@@ -100,16 +99,9 @@ export default function Admin() {
     console.log(adhocTemp);
   };
 
-
-
-
-
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
 
   return (
     <>
@@ -152,14 +144,20 @@ export default function Admin() {
             {console.log(GetMonthlyApi, "tester")}
 
             {tableDataState.length === 0 ? (
-              <></>
+              <>
+                <center>
+                  <img
+                    src="https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif"
+                    style={{ height: "50%", width: "50%" }}
+                  />
+                </center>
+              </>
             ) : (
               <CreateMonthly
                 tableData={tableDataState}
                 searchData={temp}
                 loader={GetMonthlyApi}
                 apiDataSetter={setTableDataState}
-
               />
             )}
           </div>
@@ -177,7 +175,14 @@ export default function Admin() {
               </div>
 
               {adhocDataState.length === 0 ? (
-                <></>
+                <>
+                  <center>
+                    <img
+                      src="https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif"
+                      style={{ height: "50%", width: "50%" }}
+                    />
+                  </center>
+                </>
               ) : (
                 <CreateAdhoc
                   tableData={adhocDataState}
