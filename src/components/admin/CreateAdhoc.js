@@ -1,44 +1,37 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
-import { Chip } from '@mui/material';
-import './tables.css';
-import { MenuItem } from '@mui/material';
-import Select from '@mui/material/Select';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import { visuallyHidden } from "@mui/utils";
+import { Chip } from "@mui/material";
+import "./tables.css";
+import { MenuItem } from "@mui/material";
+import Select from "@mui/material/Select";
 
-const axios= require('axios');
-
-
-
-
-
+const axios = require("axios");
 
 function descendingComparator(a, b, orderBy) {
-
-  console.log('a',a)
-  console.log('b',b)
-  console.log('orderBy',orderBy);
-  // console.log(a);
+  console.log("a", a);
+  console.log("b", b);
+  console.log("orderBy", orderBy);
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -48,9 +41,8 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
-function getComparator(order, orderBy) { 
-
-  return order === 'desc'
+function getComparator(order, orderBy) {
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -71,101 +63,106 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'empId',
+    id: "empId",
     numeric: false,
     disablePadding: true,
-    label: 'Employee Id',
-    sortable:true
+    label: "Employee Id",
+    sortable: true,
   },
   {
-    id: 'empName',
+    id: "empName",
     numeric: true,
     disablePadding: false,
-    label: 'Employee Name',
-    sortable:true
+    label: "Employee Name",
+    sortable: true,
   },
   {
-    id: 'pickupLocation',
+    id: "pickupLocation",
     numeric: true,
     disablePadding: false,
-    label: 'Pickup Location',
-    sortable:true
+    label: "Pickup Location",
+    sortable: true,
   },
   {
-    id: 'dropLocation',
+    id: "dropLocation",
     numeric: true,
     disablePadding: false,
-    label: 'Drop Location',
-    sortable:true
+    label: "Drop Location",
+    sortable: true,
   },
   {
-    id: 'date',
+    id: "date",
     numeric: true,
     disablePadding: false,
-    label: 'Date',
-    sortable:true
+    label: "Date",
+    sortable: true,
   },
 
   {
-    id: 'managerApproval',
+    id: "managerApproval",
     numeric: true,
     disablePadding: false,
-    label: 'Manager Approval',
-    sortable:false
+    label: "Manager Approval",
+    sortable: false,
   },
   {
-    id: 'Confirm',
+    id: "Confirm",
     numeric: true,
     disablePadding: false,
-    label: 'Status',
-    sortable:true
+    label: "Status",
+    sortable: true,
   },
-
-
-
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const {
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
   return (
     <TableHead>
-      <TableRow     sx={{
-        "& th":{
+      <TableRow
+        sx={{
+          "& th": {
             backgroundColor: "#FF4500",
             color: "white",
-            fontSize: "1.5rem"
-
-        }
-        
-
-      }}
+            fontSize: "1.5rem",
+          },
+        }}
       >
-      
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align='right' 
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            align="right"
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-           {headCell.sortable?(<TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>):(<>{headCell.label}</>)
-}
+            {headCell.sortable ? (
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                ) : null}
+              </TableSortLabel>
+            ) : (
+              <>{headCell.label}</>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -177,29 +174,24 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-function Display({row,loader,apiDataSetter}){
-
- 
+function Display({ row, loader, apiDataSetter }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
-  const [isConfirm,setIsconfirm]=React.useState(false);
-const [Dropdown, setDropdown]=React.useState("None");
-
-
+  const [isConfirm, setIsconfirm] = React.useState(false);
+  const [Dropdown, setDropdown] = React.useState("None");
 
   const [userData, setUserData] = React.useState({
-
     empid: "",
     name: "",
     role: "",
     reqdate: "",
-    status: ""
-  })
+    status: "",
+  });
 
   React.useEffect(() => {
     console.log(1);
@@ -207,154 +199,157 @@ const [Dropdown, setDropdown]=React.useState("None");
   }, [Dropdown]);
 
   const loadUser = async () => {
-
-    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`,
-    {headers: {
-      'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache',
-      'Expires': '0',
-    }}
-    ,);
-
-    // console.log(result);
-   setUserData({ ...result.data, managerApproval: [Dropdown] });
-   
-
-  }
-
-  // const loadUserAgain= async()=>{
-
-
-  //   const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`);
-  //  setUserData({ ...result.data});
-  //  setDropdown("None");
-
-  // }
+    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`, {
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
+    setUserData({ ...result.data, managerApproval: [Dropdown] });
+  };
 
   const sendData = (e) => {
-
     console.log(userData);
-    if(Dropdown!="None") axios.put(`http://localhost:3000/adhoc/${row.id}`, userData).then((resp)=>{
-      console.log(resp);
-    }).catch(e=>{
-      console.log(e);
-    });
-
+    if (Dropdown != "None")
+      axios
+        .put(`http://localhost:3000/adhoc/${row.id}`, userData)
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
 
     apiDataSetter([]);
     loader(apiDataSetter);
-
-
-    
-
-    
-  }
-
-
+  };
 
   return (
+    <TableRow role="checkbox" tabIndex={-1}>
+      <TableCell
+        component="th"
+        scope="row"
+        padding="none"
+        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
+        align="right"
+      >
+        {row.empId}
+      </TableCell>
+      <TableCell
+        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
+        align="right"
+      >
+        {row.empName}
+      </TableCell>
+      <TableCell
+        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
+        align="right"
+      >
+        {row.pickupLocation}
+      </TableCell>
+      <TableCell
+        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
+        align="right"
+      >
+        {row.dropLocation}
+      </TableCell>
+      <TableCell
+        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
+        align="right"
+      >
+        {row.date}
+      </TableCell>
+      <TableCell sx={{ fontSize: "1.25rem" }} align="right">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <Chip
+              color="info"
+              label={Dropdown == "None" ? row.managerApproval : Dropdown}
+              style={{ fontSize: "1.25rem" }}
+            />
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                value="Hold"
+                onClick={() => setDropdown("Hold")}
+              >
+                Hold
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                value="Approved"
+                onClick={() => setDropdown("Approved")}
+              >
+                Approved
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                value="Rejected"
+                onClick={() => setDropdown("Rejected")}
+              >
+                Rejected
+              </a>
+            </li>
+          </ul>
+        </div>
+      </TableCell>
 
-       
-    <TableRow
-    role="checkbox"
-    tabIndex={-1}
-    
-  >
-
-    <TableCell
-      component="th"
-      // id={labelId}
-      scope="row"
-      padding="none"
-      sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}
-      align="right"
-    >
-      {row.empId}
-    </TableCell>
-    <TableCell sx={{fontSize: "1.25rem", position:'relative', right:"10px"}} align="right">{row.empName}</TableCell>
-    <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}  align="right">{row.pickupLocation}</TableCell>
-    <TableCell    sx={{fontSize: "1.25rem", position:'relative', right:"10px"}}align="right">{row.dropLocation}</TableCell>
-    <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}  align="right">{row.date}</TableCell>
-    <TableCell sx={{fontSize: "1.25rem"}}  align="right" >
-
-
-
-    
-    <div class="btn-group">
-                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <Chip color ='info' label={(Dropdown=="None")?row.managerApproval: Dropdown} style={{fontSize:"1.25rem"}} />
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" value="Hold" onClick={()=>setDropdown("Hold")}>Hold</a></li>
-                  <li><a class="dropdown-item" value="Approved" onClick={()=>setDropdown("Approved")}>Approved</a></li>
-                  <li><a class="dropdown-item" value="Rejected" onClick={()=>setDropdown("Rejected")}>Rejected</a></li>
-
-                </ul>
-              </div>
-              
-
-              
-    
-    
-    
-    
-    </TableCell>
-
-    <TableCell sx={{fontSize: "1.25rem", position:'relative', left:'20px'}}>
-<Chip color='success' label="Confirm" sx={{fontSize: "1.25rem"}} 
-
-
-name="status"
-onClick={sendData}
-// disabled={(row.month.toLowerCase().includes("aug"))?true: false}
-
-/>
-    </TableCell>
-  </TableRow>
-
+      <TableCell
+        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
+      >
+        <Chip
+          color="success"
+          label="Confirm"
+          sx={{ fontSize: "1.25rem" }}
+          name="status"
+          onClick={sendData}
+        />
+      </TableCell>
+    </TableRow>
   );
-
 }
 
+export default function CreateAdhoc({
+  tableData,
+  searchData,
+  loader,
+  apiDataSetter,
+}) {
+  var rows = [];
 
-export default function CreateAdhoc({tableData, searchData,loader, apiDataSetter}) {
+  if (searchData.length == 0) {
+    tableData.map((data, id) => {
+      rows.push(data);
+    });
+  } else {
+    searchData.map((data, id) => {
+      rows.push(data);
+    });
+  }
 
-  var rows=[];
-
-  if(searchData.length==0)
-  {  
-   
-   tableData.map((data,id)=>{
-     rows.push(data);
-   })
- }
-
- else {
-
-  // console.log(searchData);
-  searchData.map((data,id)=>{
-    rows.push(data);
-  })
-
-}
-//  console.log(rows);
-
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
-  
 
   const handleRequestSort = (event, property) => {
-    
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-
-    // console.log(order,property,orderBy);
   };
 
   const handleSelectAllClick = (event) => {
@@ -379,7 +374,7 @@ export default function CreateAdhoc({tableData, searchData,loader, apiDataSetter
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -406,14 +401,13 @@ export default function CreateAdhoc({tableData, searchData,loader, apiDataSetter
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+    <Box sx={{ width: "100%" }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -433,9 +427,11 @@ export default function CreateAdhoc({tableData, searchData,loader, apiDataSetter
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    
-                    <Display row={row} loader={loader} apiDataSetter={apiDataSetter}/>
-                 
+                    <Display
+                      row={row}
+                      loader={loader}
+                      apiDataSetter={apiDataSetter}
+                    />
                   );
                 })}
               {emptyRows > 0 && (

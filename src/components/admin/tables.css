@@ -1,5 +1,5 @@
 .css-pdct74-MuiTablePagination-selectLabel {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size: 12px !important;
   line-height: 1.43;
@@ -18,14 +18,13 @@
   overflow: hidden;
 }
 
-.btn-group>.btn:first-child {
+.btn-group > .btn:first-child {
   margin-left: 0;
   border: none;
 }
 
-
 .css-levciy-MuiTablePagination-displayedRows {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size: 12px !important;
   line-height: 2.43 !important;
