@@ -15,7 +15,7 @@ import Home from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 
-export default function AccountMenu() {
+export default function AccountMenu({ userData }) {
   const isMobile = useMediaQuery("(max-width:767px)");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -53,7 +53,8 @@ export default function AccountMenu() {
             }}
           >
             <Typography sx={{ minWidth: 100, fontSize: "1.1rem" }}>
-              akash.rai@incedoinc.com
+              {/* akash.rai@incedoinc.com */}
+              {userData.userName}
             </Typography>
 
             <Tooltip title="Account settings">

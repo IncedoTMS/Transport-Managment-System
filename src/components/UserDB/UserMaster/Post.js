@@ -12,7 +12,7 @@ import { fontSize } from "@mui/system";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export default function Post() {
+export default function Post({ userData }) {
   const [users, setUser] = useState([]);
   useEffect(() => {
     loadUsers();
@@ -125,13 +125,16 @@ export default function Post() {
                   }}
                 >
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.empId}
+                    {/* {user.empId} */}
+                    {userData.empCode}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.empName}
+                    {/* {user.empName} */}
+                    {userData.firstName + " " + userData.lastName}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.mobileNo}
+                    {/* {user.mobileNo} */}
+                    {userData.phone}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                     {user.department}

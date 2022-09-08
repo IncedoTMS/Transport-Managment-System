@@ -6,12 +6,13 @@ import Edit2 from "./Edit/Edit2";
 import AddAdhoc from "./NewRequest/AddAdhoc.js";
 import "./UserDB.css";
 import Tabs from "./Tabs";
+import { userData } from "./../Signin/Signin";
 
 export default function UserDB() {
   return (
     <BrowserRouter>
       <div className="db-body">
-        <Post />
+        <Post userData={userData} />
 
         <Switch>
           <Route exact path="/dashboard" component={Tabs}></Route>

@@ -3,6 +3,7 @@ import "./Header.css";
 import thehub from "./inet_logo.png";
 import Menu from "./Menu";
 import { useRouteMatch } from "react-router-dom";
+import { userData } from "./../Signin/Signin";
 
 function Header() {
   const isDashboard = useRouteMatch("/dashboard");
@@ -15,7 +16,8 @@ function Header() {
             <a href="https://thehub.incedoinc.com/" target="_blank">
               <img src={thehub} alt="" />
             </a>
-            <Menu />
+            <Menu userData={userData} />
+            {/* <Menu /> */}
           </>
         ) : (
           <>
