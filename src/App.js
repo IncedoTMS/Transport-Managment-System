@@ -1,40 +1,39 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import React from 'react';
-import Signup from './components/Signup/Signup';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import UserDB from "./components/UserDB/UserDB";
+import Signup from "./components/Signup/Signup";
 import Signin from "./components/Signin/Signin";
-import UserDB from "./components/userDashboard/UserDB/UserDB"
-import Header from './components/Common/Header';
-import Footer from './components/Common/Footer';
-import Admin from './components/admin/Admin';
+import Header from "./components/Common/Header";
+import Footer from "./components/Common/Footer";
+import NoMatch from "./components/Common/NoMatch";
+import Admin from "./components/admin/Admin";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <>
-    <Header />
-    
-      <Router>
-      
+    <div className="wrapper">
+      <header>
+        <Header />
+      </header>
+      <main>
         <Switch>
-          <Route exact path='/' component={Signin}>
+          <Route exact path="/" component={Signin}>
             <Signin />
           </Route>
-          <Route path='/signup' component={Signup}>
+          <Route exact path="/signup" component={Signup}>
             <Signup />
           </Route>
-          <Route path='/dashboard' component={UserDB}>
-          </Route>
+          <Route exact path="/dashboard" component={UserDB}></Route>
 
-          <Route path ='/admin' component={Admin}>
-
-          </Route>
+          <Route path="/admin" component={Admin}></Route>
+          <Route path="*" component={NoMatch}></Route>
         </Switch>
-
-      </Router>
-      
-      <Footer/>
-
-    </>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   );
-}
+};
 
 export default App;

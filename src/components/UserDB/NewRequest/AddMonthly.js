@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { userData } from "../../../Signin/Signin";
 
-const AddAdhoc = () => {
+const AddMonthly = () => {
   let history = useHistory();
   const [user, setUser] = useState({
-    date: "",
+    month: "",
     empId: "",
     empName: "",
     mobNo: "",
@@ -22,7 +21,7 @@ const AddAdhoc = () => {
   });
 
   const {
-    date,
+    month,
     empId,
     empName,
     mobNo,
@@ -38,26 +37,26 @@ const AddAdhoc = () => {
   } = user;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value,empId:621671, empName:userData });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/adhoc", user);
+    await axios.post("http://localhost:3000/monthly", user);
     history.push("/dashboard");
   };
   return (
     <div className=" mx-auto shadow p-5 edit-box">
       <form onSubmit={(e) => onSubmit(e)}>
-        <h2 className="text-center mb-4">Add Adhoc Drop Request</h2>
+        <h2 className="text-center mb-4">Add Monthly Drop Request</h2>
 
         <div className="form-group">
           <input
             type="text"
             className="form-control form-control-lg"
-            placeholder="Enter date"
-            name="date"
-            value={date}
+            placeholder="Enter month"
+            name="month"
+            value={month}
             onChange={(e) => onInputChange(e)}
           />
         </div>
@@ -89,4 +88,4 @@ const AddAdhoc = () => {
   );
 };
 
-export default AddAdhoc;
+export default AddMonthly;
