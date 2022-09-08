@@ -1,6 +1,5 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,22 +9,12 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 function descendingComparator(a, b, orderBy) {
   if (orderBy === "month") {
@@ -46,8 +35,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -136,9 +123,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow
         sx={{
-          // backgroundColor: "#78146a",
           backgroundColor: "#1976d2",
-
           borderBottom: "2px solid white",
           "& th": {
             fontSize: "1.25rem",
@@ -149,9 +134,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            // align={headCell.numeric ? "right" : "left"}
             align="center"
-            // padding={headCell.disablePadding ? "none" : "normal"}
             padding="normal"
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -200,7 +183,6 @@ export default function EnhancedTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const rows = props.data;
-  // console.log(rows);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -322,7 +304,7 @@ export default function EnhancedTable(props) {
                     sx={{ fontSize: TCELLFONT }}
                   >
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {index + 1}
+                      {index+ page*rowsPerPage + 1}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
                       {getMonthString(row.month)}

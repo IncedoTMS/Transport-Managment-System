@@ -321,7 +321,7 @@ export default function EnhancedTable(props) {
                     sx={{ fontSize: TCELLFONT }}
                   >
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {index + 1}
+                      {index + page*rowsPerPage + 1}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
                       {getDateString(row.date)}
