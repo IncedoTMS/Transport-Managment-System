@@ -28,6 +28,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function descendingComparator(a, b, orderBy) {
+  if (orderBy === "month") {
+    return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
+  }
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -253,6 +256,32 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const getMonthString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let monthStr = months[month] + "-" + year;
+    return monthStr;
+  };
+
   return (
     <Box sx={{ width: "97.5%", margin: "auto" }}>
       {/* <Paper sx={{ width: "100%", mb: 2 }}> */}
@@ -296,7 +325,7 @@ export default function EnhancedTable(props) {
                       {index + 1}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.month}
+                      {getMonthString(row.month)}
                     </TableCell>
 
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
