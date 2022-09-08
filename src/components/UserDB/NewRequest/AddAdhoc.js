@@ -117,13 +117,14 @@ const AddAdhoc = () => {
         >
           Add Adhoc Drop Request
         </Typography>
-        <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+        <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
+          <TextField type="date"
             margin="normal"
             required
             fullWidth
-            label="Enter date"
+            pickupTime
             name="date"
+            label="Enter pickup date"
             autoComplete="date"
             value={date}
             onChange={(e) => onInputChange(e)}
@@ -139,7 +140,7 @@ const AddAdhoc = () => {
             autoComplete="pickupTime"
             value={pickupTime}
             onChange={(e) => onInputChange(e)}
-            autoFocus
+            
           />
 
           <TextField
@@ -152,7 +153,7 @@ const AddAdhoc = () => {
             autoComplete="dropLocation"
             value={dropLocation}
             onChange={(e) => onInputChange(e)}
-            autoFocus
+            
           />
 
           <Button

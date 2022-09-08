@@ -91,7 +91,7 @@ export default function Edit2() {
         >
           Edit Drop Location
         </Typography>
-        <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
