@@ -3,7 +3,22 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import "./Edit.css";
 
-const Edit2 = () => {
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+
+export default function Edit2() {
   let history = useHistory();
   const { id } = useParams();
   const [user, setUser] = useState({
@@ -48,6 +63,7 @@ const Edit2 = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    user.managerApproval = "Pending";
     await axios.put(`http://localhost:3000/adhoc/${id}`, user);
     history.push("/dashboard");
   };
@@ -56,24 +72,49 @@ const Edit2 = () => {
     const result = await axios.get(`http://localhost:3000/adhoc/${id}`);
     setUser(result.data);
   };
+
   return (
-    <div className="mx-auto shadow p-5 edit-box">
-      <form onSubmit={(e) => onSubmit(e)}>
-        <h2 className="text-center mb-4">Edit Drop Location</h2>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control form-control-lg"
-            placeholder="Enter your drop location"
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 6,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ margin: "-6px", padding: "14px", marginTop: "4px" }}
+        >
+          Edit Drop Location
+        </Typography>
+        <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Enter drop location"
             name="dropLocation"
+            autoComplete="email"
             value={dropLocation}
             onChange={(e) => onInputChange(e)}
+            autoFocus
           />
-        </div>
-        <button className="btn btn-warning btn-block">Update User</button>
-      </form>
-    </div>
-  );
-};
 
-export default Edit2;
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Update drop location
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  );
+}
