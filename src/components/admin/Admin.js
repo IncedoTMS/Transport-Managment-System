@@ -143,7 +143,7 @@ export default function Admin() {
             onChange={handleChange}
             aria-label="basic tabs example"
             variant="fullWidth"
-            TabIndicatorProps={{ style: { background: "orange" } }}
+            TabIndicatorProps={{ style: { background: "#1976d2" } }}
           >
             <Tab
               label={<h5 className="admin-header">Monthly Requests</h5>}

@@ -441,7 +441,7 @@ export default function CreateMonthly({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem" }}
+            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight:200 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >

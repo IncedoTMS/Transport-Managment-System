@@ -5,6 +5,8 @@ var data = [];
 
 // Setter function for adhocTableDataState
 
+
+
 const GetAdhocApi = (setter) => {
   adhocTableData = [];
   axios

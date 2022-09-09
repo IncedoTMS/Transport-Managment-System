@@ -271,6 +271,7 @@ function Display({ row, loader, apiDataSetter }) {
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            style={{overflow: "visible"}}
             
           >
             <Chip
@@ -286,7 +287,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Hold"
                 onClick={() => setDropdown("Hold")}
-                style={{zIndex:"+2!important"}} 
+                style={{overflow: "visible"}}
               >
                 Hold
               </a>
@@ -297,7 +298,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Approved"
                 onClick={() => setDropdown("Approved")}
-                style={{zIndex:"+2!important"}} 
+                style={{overflow: "visible"}}
               >
                 Approved
               </a>
@@ -308,7 +309,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Rejected"
                 onClick={() => setDropdown("Rejected")}
-                style={{zIndex:"+2!important"}} 
+                style={{overflow: "visible"}}
               >
                 Rejected
               </a>
@@ -441,7 +442,7 @@ export default function CreateAdhoc({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem" }}
+            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight: 200 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
