@@ -30,7 +30,7 @@ function App() {
         </Switch>
 
       </Router>
-      
+      <hr/> <hr/> <hr/> <hr/> <hr/> <hr/>
       <Footer/>
 
     </>

@@ -23,9 +23,16 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Chip } from "@mui/material";
 import "./tables.css";
+import { MenuItem } from "@mui/material";
+import Select from "@mui/material/Select";
+import zIndex from "@mui/material/styles/zIndex";
+
 const axios = require("axios");
 
 function descendingComparator(a, b, orderBy) {
+  console.log("a", a);
+  console.log("b", b);
+  console.log("orderBy", orderBy);
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -85,10 +92,10 @@ const headCells = [
     sortable: true,
   },
   {
-    id: "date",
+    id: "month",
     numeric: true,
     disablePadding: false,
-    label: "Date",
+    label: "month",
     sortable: true,
   },
 
@@ -124,18 +131,21 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow
-        sx={{
-          "& th": {
-            backgroundColor: "#FF4500",
-            color: "white",
-            fontSize: "1.5rem",
-          },
-        }}
+          sx={{
+            // backgroundColor: "#78146a",
+            backgroundColor: "#1976d2",
+  
+            borderBottom: "2px solid white",
+            "& th": {
+              fontSize: "1.25rem",
+              color: "white",
+            },
+          }}
       >
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align="right"
+            align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -177,12 +187,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
-  const [Dropdown, setDropdown] = React.useState(row.managerApproval);
-
-  function handleEdit(rowID) {
-    setIsEditing(!isEditing);
-    setIsDisabled(!isDisabled);
-  }
+  const [Dropdown, setDropdown] = React.useState("None");
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -193,91 +198,118 @@ function Display({ row, loader, apiDataSetter }) {
   });
 
   React.useEffect(() => {
+    console.log(1);
     loadUser();
   }, [Dropdown]);
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/monthly/${row.id}`);
-    setUserData({ ...result.data, managerApproval: Dropdown });
+    const result = await axios.get(`http://localhost:3000/monthly/${row.id}`, {
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
+    setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
   const sendData = (e) => {
     console.log(userData);
-    axios
-      .put(`http://localhost:3000/monthly/${row.id}`, userData)
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (Dropdown != "None")
+      axios
+        .put(`http://localhost:3000/monthly/${row.id}`, userData)
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
     apiDataSetter([]);
     loader(apiDataSetter);
   };
 
   return (
-    <TableRow role="checkbox" tabIndex={-1}>
+    <TableRow role="checkbox" tabIndex={-1} sx={{fontSize: "1.16rem"}} disabled={true}>
       <TableCell
         component="th"
-        // id={labelId}
         scope="row"
         padding="none"
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem" }}
+        align="center"
       >
         {row.empId}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.empName}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.pickupLocation}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.dropLocation}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.month}
       </TableCell>
-      <TableCell sx={{ fontSize: "1.25rem" }} align="right">
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         <div class="btn-group">
           <button
             type="button"
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            
           >
             <Chip
               color="info"
-              label={Dropdown}
-              style={{ fontSize: "1.25rem" }}
+              label={Dropdown == "None" ? row.managerApproval : Dropdown}
+              style={{ fontSize: "1.16rem" }}
             />
           </button>
-          <ul class="dropdown-menu">
+          <ul class="btn-outline-dark dropdown-menu" style={{zIndex:"+2!important", overflow: "visible !important"}} role="menu" boundary="scrollParent">
             <li>
-              <a class="dropdown-item" onClick={() => setDropdown("Hold")}>
+              <a
+              href="#"
+                class="dropdown-item"
+                value="Hold"
+                onClick={() => setDropdown("Hold")}
+                style={{zIndex:"+2!important"}} 
+              >
                 Hold
               </a>
             </li>
             <li>
-              <a class="dropdown-item" onClick={() => setDropdown("Approved")}>
+              <a
+              href="#"
+                class="dropdown-item"
+                value="Approved"
+                onClick={() => setDropdown("Approved")}
+                style={{zIndex:"+2!important"}} 
+              >
                 Approved
               </a>
             </li>
             <li>
-              <a class="dropdown-item" onClick={() => setDropdown("Rejected")}>
+              <a
+              href="#"
+                class="dropdown-item"
+                value="Rejected"
+                onClick={() => setDropdown("Rejected")}
+                style={{zIndex:"+2!important"}} 
+              >
                 Rejected
               </a>
             </li>
@@ -286,16 +318,30 @@ function Display({ row, loader, apiDataSetter }) {
       </TableCell>
 
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
+        sx={{ fontSize: "1.16rem", position: "relative" }}
       >
-        <Chip
+
+    {row.status==="Expired"?(
+
+      <Chip
+                          label={row.status}
+                          color="error"
+                          variant="outlined"
+                          size="small"
+                          sx={{ fontSize: "1.16rem" }}
+                        />
+
+
+    ):
+(<Chip
           color="success"
           label="Confirm"
-          sx={{ fontSize: "1.25rem" }}
+          sx={{ fontSize: "1.16rem" }}
           name="status"
           onClick={sendData}
-          disabled={row.month.toLowerCase().includes("aug") ? true : false}
-        />
+          disabled={(row.managerApproval=="Approved" || row.managerApproval=="Rejected") && Dropdown=="None"}
+        />)
+        }
       </TableCell>
     </TableRow>
   );
@@ -306,19 +352,26 @@ export default function CreateMonthly({
   searchData,
   loader,
   apiDataSetter,
+  searchInput
 }) {
   var rows = [];
 
-  if (searchData.length == 0) {
+  if (searchData.length == 0 ) {
+
+    if(searchInput.length==0)
+    {
+
     tableData.map((data, id) => {
+      if(data.status=="Active")
       rows.push(data);
     });
   }
-  // console.log(rows)
+
+  }
+  
   else {
-    // console.log(searchData);
     searchData.map((data, id) => {
-      rows.push(data);
+      if(data.status=="Active") rows.push(data);
     });
   }
 
@@ -384,11 +437,11 @@ export default function CreateMonthly({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "97.5%", margin: "auto" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 750, fontSize: "1.1rem" }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -407,14 +460,19 @@ export default function CreateMonthly({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <Display
+
+                    row.status=="Active"?
+                    (<Display
                       row={row}
                       loader={loader}
                       apiDataSetter={apiDataSetter}
-                    />
+                    />):
+                    (<></>)
+
+                    
                   );
                 })}
               {emptyRows > 0 && (
@@ -430,7 +488,6 @@ export default function CreateMonthly({
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ fontSize: "1.25rem" }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}

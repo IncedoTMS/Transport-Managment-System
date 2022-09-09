@@ -25,6 +25,7 @@ import { Chip } from "@mui/material";
 import "./tables.css";
 import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
+import zIndex from "@mui/material/styles/zIndex";
 
 const axios = require("axios");
 
@@ -130,18 +131,21 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow
-        sx={{
-          "& th": {
-            backgroundColor: "#FF4500",
-            color: "white",
-            fontSize: "1.5rem",
-          },
-        }}
+          sx={{
+            // backgroundColor: "#78146a",
+            backgroundColor: "#1976d2",
+  
+            borderBottom: "2px solid white",
+            "& th": {
+              fontSize: "1.25rem",
+              color: "white",
+            },
+          }}
       >
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align="right"
+            align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -226,78 +230,85 @@ function Display({ row, loader, apiDataSetter }) {
   };
 
   return (
-    <TableRow role="checkbox" tabIndex={-1}>
+    <TableRow role="checkbox" tabIndex={-1} sx={{fontSize: "1.16rem"}} disabled={true}>
       <TableCell
         component="th"
         scope="row"
         padding="none"
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem" }}
+        align="center"
       >
         {row.empId}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.empName}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.pickupLocation}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", right: "10px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.dropLocation}
       </TableCell>
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
-        align="right"
+        sx={{ fontSize: "1.16rem"}}
+        align="center"
       >
         {row.date}
       </TableCell>
-      <TableCell sx={{ fontSize: "1.25rem" }} align="right">
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         <div class="btn-group">
           <button
             type="button"
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            
           >
             <Chip
               color="info"
               label={Dropdown == "None" ? row.managerApproval : Dropdown}
-              style={{ fontSize: "1.25rem" }}
+              style={{ fontSize: "1.16rem" }}
             />
           </button>
-          <ul class="dropdown-menu">
+          <ul class="btn-outline-dark dropdown-menu" style={{zIndex:"+2!important", overflow: "visible !important"}} role="menu" boundary="scrollParent">
             <li>
               <a
+              href="#"
                 class="dropdown-item"
                 value="Hold"
                 onClick={() => setDropdown("Hold")}
+                style={{zIndex:"+2!important"}} 
               >
                 Hold
               </a>
             </li>
             <li>
               <a
+              href="#"
                 class="dropdown-item"
                 value="Approved"
                 onClick={() => setDropdown("Approved")}
+                style={{zIndex:"+2!important"}} 
               >
                 Approved
               </a>
             </li>
             <li>
               <a
+              href="#"
                 class="dropdown-item"
                 value="Rejected"
                 onClick={() => setDropdown("Rejected")}
+                style={{zIndex:"+2!important"}} 
               >
                 Rejected
               </a>
@@ -307,15 +318,30 @@ function Display({ row, loader, apiDataSetter }) {
       </TableCell>
 
       <TableCell
-        sx={{ fontSize: "1.25rem", position: "relative", left: "20px" }}
+        sx={{ fontSize: "1.16rem", position: "relative" }}
       >
-        <Chip
+
+    {row.status==="Expired"?(
+
+      <Chip
+                          label={row.status}
+                          color="error"
+                          variant="outlined"
+                          size="small"
+                          sx={{ fontSize: "1.16rem" }}
+                        />
+
+
+    ):
+(<Chip
           color="success"
           label="Confirm"
-          sx={{ fontSize: "1.25rem" }}
+          sx={{ fontSize: "1.16rem" }}
           name="status"
           onClick={sendData}
-        />
+          disabled={(row.managerApproval=="Approved" || row.managerApproval=="Rejected") && Dropdown=="None"}
+        />)
+        }
       </TableCell>
     </TableRow>
   );
@@ -326,16 +352,26 @@ export default function CreateAdhoc({
   searchData,
   loader,
   apiDataSetter,
+  searchInput
 }) {
   var rows = [];
 
-  if (searchData.length == 0) {
+  if (searchData.length == 0 ) {
+
+    if(searchInput.length==0)
+    {
+
     tableData.map((data, id) => {
+      if(data.status=="Active")
       rows.push(data);
     });
-  } else {
+  }
+
+  }
+  
+  else {
     searchData.map((data, id) => {
-      rows.push(data);
+      if(data.status=="Active") rows.push(data);
     });
   }
 
@@ -401,11 +437,11 @@ export default function CreateAdhoc({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "97.5%", margin: "auto" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 750, fontSize: "1.1rem" }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -424,7 +460,7 @@ export default function CreateAdhoc({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <Display
@@ -432,6 +468,7 @@ export default function CreateAdhoc({
                       loader={loader}
                       apiDataSetter={apiDataSetter}
                     />
+
                   );
                 })}
               {emptyRows > 0 && (
