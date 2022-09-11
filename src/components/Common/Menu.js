@@ -119,7 +119,13 @@ export default function AccountMenu({ userData }) {
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ fontSize: "12px" }}>
+        <MenuItem
+          sx={{ fontSize: "12px" }}
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("loadedData");
+          }}
+        >
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <ListItemIcon>
               <Logout fontSize="small" />

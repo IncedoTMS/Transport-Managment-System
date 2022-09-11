@@ -6,6 +6,7 @@ import { useRouteMatch } from "react-router-dom";
 import { userData } from "./../Signin/Signin";
 
 function Header() {
+  const loadedData = JSON.parse(localStorage.getItem("loadedData"));
   const isDashboard = useRouteMatch("/dashboard");
   const isAdmin = useRouteMatch("/admin");
   return (
@@ -16,8 +17,8 @@ function Header() {
             <a href="https://thehub.incedoinc.com/" target="_blank">
               <img src={thehub} alt="" />
             </a>
-            <Menu userData={userData} />
-            {/* <Menu /> */}
+            {/* <Menu userData={userData} /> */}
+            <Menu userData={loadedData} />
           </>
         ) : (
           <>

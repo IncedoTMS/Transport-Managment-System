@@ -13,18 +13,31 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 export default function Post({ userData }) {
+  console.log("Loaded Data: ");
+  console.log(userData);
   const [users, setUser] = useState([]);
   useEffect(() => {
     loadUsers();
   }, []);
   const loadUsers = async () => {
-    const res = await axios.get("http://localhost:3000/users");
+    // const res = await axios.get("http://localhost:3000/users");
+    const res = await axios
+      .get("https://localhost:44371/api/v1/user/(empcode,name,email)", {
+        params: {
+          EmpCode: userData.empCode,
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     setUser(res.data);
+    console.log("Fetched data: ");
+    console.log(res.data);
   };
 
   const headCells = [
     {
-      id: "empId",
+      id: "empCode",
       numeric: true,
       disablePadding: false,
       label: "Emp ID",
@@ -36,7 +49,7 @@ export default function Post({ userData }) {
       label: "Emp Name",
     },
     {
-      id: "mobileNo",
+      id: "phone",
       numeric: true,
       disablePadding: false,
       label: "Mobile No.",
@@ -118,23 +131,23 @@ export default function Post({ userData }) {
             <TableBody>
               {users.map((user, index) => (
                 <TableRow
-                  key={user.empId}
+                  key={user.empCode}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     fontSize: "1.16rem",
                   }}
                 >
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.empId} */}
-                    {userData.empCode}
+                    {user.empCode}
+                    {/* {userData.empCode} */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.empName} */}
-                    {userData.firstName + " " + userData.lastName}
+                    {user.firstName + " " + user.lastName}
+                    {/* {userData.firstName + " " + userData.lastName} */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.mobileNo} */}
-                    {userData.phone}
+                    {user.phone}
+                    {/* {userData.phone} */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                     {user.department}
