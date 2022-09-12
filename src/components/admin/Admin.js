@@ -128,7 +128,7 @@ export default function Admin() {
     setTimeout(()=>{
       setShowComponent(!showComponent)
     },3000)
-  },[]);
+  },[tableDataState.length == 0, adhocDataState.length == 0]);
 
   return (
     <>

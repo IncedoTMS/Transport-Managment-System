@@ -95,7 +95,7 @@ const headCells = [
     id: "month",
     numeric: true,
     disablePadding: false,
-    label: "month",
+    label: "Month",
     sortable: true,
   },
 
@@ -217,7 +217,7 @@ function Display({ row, loader, apiDataSetter }) {
     console.log(userData);
     if (Dropdown != "None")
       axios
-        .put(`http://localhost:3000/monthly/${row.id}`, userData)
+        .patch(`http://localhost:3000/monthly/${row.id}`, {managerApproval: [Dropdown]})
         .then((resp) => {
           console.log(resp);
         })

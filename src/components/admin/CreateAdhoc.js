@@ -217,7 +217,7 @@ function Display({ row, loader, apiDataSetter }) {
     console.log(userData);
     if (Dropdown != "None")
       axios
-        .put(`http://localhost:3000/adhoc/${row.id}`, userData)
+        .patch(`http://localhost:3000/adhoc/${row.id}`, {managerApproval:[Dropdown]})
         .then((resp) => {
           console.log(resp);
         })

@@ -25,7 +25,7 @@ const GetAdhocApi = (setter) => {
       data = resp.data;
       data.forEach((e) => {
         adhocTableData.push(e);
-        console.log(e);
+        // console.log(e);
       });
       // Once API call is complete and array is not empty,
       // setter sets the state and sends adhocTableData to Admin.js

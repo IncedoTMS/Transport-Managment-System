@@ -6,6 +6,7 @@ import UserDB from "./components/userDashboard/UserDB/UserDB"
 import Header from './components/Common/Header';
 import Footer from './components/Common/Footer';
 import Admin from './components/admin/Admin';
+import CreateAccount from "./components/createAccount/CreateAccount";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
           <Route exact path='/' component={Signin}>
             <Signin />
           </Route>
-          <Route path='/signup' component={Signup}>
-            <Signup />
+          <Route path='/signup' component={CreateAccount}>
+          <CreateAccount />
           </Route>
           <Route path='/dashboard' component={UserDB}>
           </Route>
