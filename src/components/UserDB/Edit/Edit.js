@@ -1,86 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { useHistory, useParams } from "react-router-dom";
-// import "./Edit.css";
-
-// const Edit = () => {
-//   let history = useHistory();
-//   const { id } = useParams();
-//   const [user, setUser] = useState({
-//     month: "",
-//     empId: "",
-//     empName: "",
-//     mobNo: "",
-//     department: "",
-//     projectId: "",
-//     projectName: "",
-//     manager: "",
-//     pickupLocation: "",
-//     pickupTime: "",
-//     dropLocation: "",
-//     managerApproval: "",
-//     status: "",
-//   });
-
-//   const {
-//     month,
-//     empId,
-//     empName,
-//     mobNo,
-//     department,
-//     projectId,
-//     projectName,
-//     manager,
-//     pickupLocation,
-//     pickupTime,
-//     dropLocation,
-//     managerApproval,
-//     status,
-//   } = user;
-
-//   const onInputChange = (e) => {
-//     setUser({ ...user, [e.target.name]: e.target.value });
-//   };
-
-//   useEffect(() => {
-//     loadUser();
-//   }, []);
-
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
-//     user.managerApproval="Pending";
-//     await axios.put(`http://localhost:3000/monthly/${id}`, user);
-//     history.push("/dashboard");
-//   };
-
-//   const loadUser = async () => {
-//     const result = await axios.get(`http://localhost:3000/monthly/${id}`);
-//     setUser(result.data);
-//   };
-//   return (
-//     <div className=" mx-auto shadow p-5 edit-box">
-//       <form onSubmit={(e) => onSubmit(e)}>
-//         <h2 className="text-center mb-4">Edit Drop Location</h2>
-//         <div className="form-group">
-//           <input
-//             type="text"
-//             className="form-control form-control-lg"
-//             placeholder="Enter your drop location"
-//             name="dropLocation"
-//             value={dropLocation}
-//             onChange={(e) => onInputChange(e)}
-//           />
-//         </div>
-
-//         <button className="btn btn-warning btn-block">Update User</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Edit;
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
@@ -104,56 +21,69 @@ import Paper from "@mui/material/Paper";
 export default function Edit() {
   let history = useHistory();
   const { id } = useParams();
-  const [user, setUser] = useState({
-    date: "",
-    empId: "",
-    empName: "",
-    mobNo: "",
-    department: "",
-    projectId: "",
-    projectName: "",
-    manager: "",
-    pickupLocation: "",
-    pickupTime: "",
+
+  const [cabRecord, setCabRecord] = useState({
+    userId: "",
+    timeSlotId: "",
+    requestDate: "",
+    isApproved: "",
+    pickUpLocation: "",
     dropLocation: "",
-    managerApproval: "",
-    status: "",
+    isAdhoc: "",
   });
 
   const {
-    date,
-    empId,
-    empName,
-    mobNo,
-    department,
-    projectId,
-    projectName,
-    manager,
-    pickupLocation,
-    pickupTime,
+    userId,
+    timeSlotId,
+    requestDate,
+    isApproved,
+    pickUpLocation,
     dropLocation,
-    managerApproval,
-    status,
-  } = user;
+    isAdhoc,
+  } = cabRecord;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setCabRecord({ ...cabRecord, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    loadUser();
+    loadCabs();
   }, []);
+
+  const loadCabs = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
+        {
+          params: {
+            Id: id,
+          },
+        }
+      );
+      res.data.map((onecab) => {
+        setCabRecord(onecab);
+      });
+      // setCabRecord(res.data);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // if (cabs) {
+  //   cabs.map((cab) => {
+  //     setCabRecord(cab);
+  //   });
+  // }
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    user.managerApproval = "Pending";
-    await axios.put(`http://localhost:3000/monthly/${id}`, user);
+    cabRecord.isApproved = 0;
+    await axios.put(
+      `https://localhost:44371/api/v1/cabrequirment/${id}`,
+      cabRecord
+    );
     history.push("/dashboard");
-  };
-
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/monthly/${id}`);
-    setUser(result.data);
   };
 
   return (
@@ -201,4 +131,3 @@ export default function Edit() {
     </Container>
   );
 }
-

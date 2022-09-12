@@ -28,11 +28,10 @@ const Adhoc = ({ userId }) => {
     loadCabs();
   }, []);
 
-  const filteredCabs = cabs.filter((cab) =>  cab.isAdhoc===true )
-  console.log(filteredCabs);
+  const filteredCabs = cabs.filter((cab) => cab.isAdhoc === true);
+  // console.log(filteredCabs);
   return (
     <>
-      
       <Demo_Adhoc data={filteredCabs} />
 
       <div style={{ textAlign: "center" }}>

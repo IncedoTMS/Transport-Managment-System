@@ -25,8 +25,8 @@ const Monthly = ({ userId }) => {
     loadCabs();
   }, []);
 
-  const filteredCabs = cabs.filter((cab) =>  cab.isAdhoc===false )
-  console.log(filteredCabs);
+  const filteredCabs = cabs.filter((cab) => cab.isAdhoc === false);
+  // console.log(filteredCabs);
 
   return <Demo data={filteredCabs} />;
 };

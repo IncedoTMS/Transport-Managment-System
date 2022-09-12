@@ -21,56 +21,62 @@ import Paper from "@mui/material/Paper";
 export default function Edit2() {
   let history = useHistory();
   const { id } = useParams();
-  const [user, setUser] = useState({
-    date: "",
-    empId: "",
-    empName: "",
-    mobNo: "",
-    department: "",
-    projectId: "",
-    projectName: "",
-    manager: "",
-    pickupLocation: "",
-    pickupTime: "",
+  const [cabRecord, setCabRecord] = useState({
+    userId: "",
+    timeSlotId: "",
+    requestDate: "",
+    isApproved: "",
+    pickUpLocation: "",
     dropLocation: "",
-    managerApproval: "",
-    status: "",
+    isAdhoc: "",
   });
 
   const {
-    date,
-    empId,
-    empName,
-    mobNo,
-    department,
-    projectId,
-    projectName,
-    manager,
-    pickupLocation,
-    pickupTime,
+    userId,
+    timeSlotId,
+    requestDate,
+    isApproved,
+    pickUpLocation,
     dropLocation,
-    managerApproval,
-    status,
-  } = user;
+    isAdhoc,
+  } = cabRecord;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setCabRecord({ ...cabRecord, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    loadUser();
+    loadCabs();
   }, []);
+
+  const loadCabs = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
+        {
+          params: {
+            Id: id,
+          },
+        }
+      );
+      res.data.map((onecab) => {
+        setCabRecord(onecab);
+      });
+      // setCabRecord(res.data);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    user.managerApproval = "Pending";
-    await axios.put(`http://localhost:3000/adhoc/${id}`, user);
+    cabRecord.isApproved = 0;
+    await axios.put(
+      `https://localhost:44371/api/v1/cabrequirment/${id}`,
+      cabRecord
+    );
     history.push("/dashboard");
-  };
-
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/adhoc/${id}`);
-    setUser(result.data);
   };
 
   return (

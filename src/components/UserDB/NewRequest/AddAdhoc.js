@@ -96,11 +96,10 @@ const AddAdhoc = () => {
           <TextField
             margin="normal"
             select
-            label="Select"
+            label="Select pickup time"
             value={timeSlotId}
             onChange={(e) => onInputChange(e)}
             name="timeSlotId"
-            helperText="Select pickup time"
             required
             fullWidth
           >
