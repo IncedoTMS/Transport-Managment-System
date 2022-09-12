@@ -27,10 +27,12 @@ export default function UserDB() {
       <BrowserRouter>
         <div className="db-body">
           {/* <Post userData={userData} /> */}
-          <Post userData={loadedData} />
+          {loadedData != null ? <Post userData={loadedData} /> : null}
 
           <Switch>
-            <Route exact path="/dashboard" component={Tabs}></Route>
+            <Route exact path="/dashboard">
+              {loadedData != null ? <Tabs userData={loadedData} /> : null}
+            </Route>
             <Route
               exact
               path="/dashboard/monthly/edit/:id"

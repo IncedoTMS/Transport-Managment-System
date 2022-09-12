@@ -14,11 +14,13 @@ import axios from "axios";
 var userData = "";
 
 export default function Signin() {
+  //setting token for session storage
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
     loggedIn = false;
   }
+  //
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -67,11 +69,11 @@ export default function Signin() {
 
   return (
     <>
+      {/* Check if logged in */}
       {loggedIn ? <Redirect to="/dashboard" /> : null}
       <div className="pageTwo">
         <Helmet>
           <title>Incedo-TMS-SignIn</title>
-          {/*Changes the Title bar of the current page to-Incedo-TMS-SignIn */}
         </Helmet>
 
         <div className="row">

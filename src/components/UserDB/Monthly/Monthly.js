@@ -3,18 +3,29 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Demo from "./demo";
 
-const Monthly = () => {
-  const [users, setUser] = useState([]);
+const Monthly = ({ userId }) => {
+  const [cabs, setCabs] = useState([]);
 
-  useEffect(() => {
-    loadUsers();
-  }, []);
-  const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3000/monthly");
-    setUser(result.data);
+  const loadCabs = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
+        {
+          params: {
+            UserID: userId,
+          },
+        }
+      );
+      setCabs(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  useEffect(() => {
+    loadCabs();
+  }, []);
 
-  return <Demo data={users} />;
+  return <Demo data={cabs} />;
 };
 
 export default Monthly;

@@ -25,6 +25,7 @@ export default function AccountMenu({ userData }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       {isMobile ? (
@@ -53,7 +54,6 @@ export default function AccountMenu({ userData }) {
             }}
           >
             <Typography sx={{ minWidth: 100, fontSize: "1.1rem" }}>
-              {/* akash.rai@incedoinc.com */}
               {userData.userName}
             </Typography>
 

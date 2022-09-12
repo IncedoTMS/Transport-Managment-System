@@ -13,26 +13,24 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 export default function Post({ userData }) {
-  console.log("Loaded Data: ");
-  console.log(userData);
   const [users, setUser] = useState([]);
   useEffect(() => {
     loadUsers();
   }, []);
   const loadUsers = async () => {
-    // const res = await axios.get("http://localhost:3000/users");
-    const res = await axios
-      .get("https://localhost:44371/api/v1/user/(empcode,name,email)", {
-        params: {
-          EmpCode: userData.empCode,
-        },
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setUser(res.data);
-    console.log("Fetched data: ");
-    console.log(res.data);
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/user/(empcode,name,email)",
+        {
+          params: {
+            EmpCode: userData.empCode,
+          },
+        }
+      );
+      setUser(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const headCells = [
@@ -150,22 +148,28 @@ export default function Post({ userData }) {
                     {/* {userData.phone} */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.department}
+                    {/* {user.department} */}
+                    Delivery
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.projectId}
+                    {/* {user.projectId} */}
+                    IT-607631
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.projectName}
+                    {/* {user.projectName} */}
+                    TMS
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.manager}
+                    {/* {user.manager} */}
+                    Rishi
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.resAddress}
+                    {/* {user.resAddress} */}
+                    Sector-18, Gurgaon
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.office}
+                    {/* {user.office} */}
+                    Gurgaon
                   </TableCell>
                 </TableRow>
               ))}

@@ -68,21 +68,21 @@ const headCells = [
     sortable: false,
   },
   {
-    id: "date",
+    id: "requestDate",
     numeric: false,
     disablePadding: false,
     label: "Date",
     sortable: true,
   },
   {
-    id: "pickupLocation",
+    id: "pickUpLocation",
     numeric: false,
     disablePadding: false,
     label: "Pickup Location",
     sortable: false,
   },
   {
-    id: "pickupTime",
+    id: "timeSlotId",
     numeric: true,
     disablePadding: false,
     label: "Pickup Time",
@@ -96,7 +96,7 @@ const headCells = [
     sortable: false,
   },
   {
-    id: "managerApproval",
+    id: "isApproved",
     numeric: false,
     disablePadding: false,
     label: "Manager Approval",
@@ -107,7 +107,7 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: "Status",
-    sortable: true,
+    sortable: false,
   },
   {
     id: "action",
@@ -255,6 +255,16 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const getStatus = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const today = new Date();
+    if (date < today) {
+      return "Expired";
+    } else {
+      return "Active";
+    }
+  };
+
   const getDateString = (date_in_iso) => {
     const date = new Date(date_in_iso);
     const [month, day, year] = [
@@ -316,33 +326,37 @@ export default function EnhancedTable(props) {
                     //   role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.id}
                     selected={isItemSelected}
                     sx={{ fontSize: TCELLFONT }}
                   >
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {index + page*rowsPerPage + 1}
+                      {index + page * rowsPerPage + 1}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {getDateString(row.date)}
+                      {getDateString(row.requestDate)}
                     </TableCell>
 
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.pickupLocation}
+                      {row.pickUpLocation}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.pickupTime}
+                      {row.timeSlotId == 1 ? "22:00" : "3:00"}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
                       {row.dropLocation}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.managerApproval}
+                      {row.isApproved == 0
+                        ? "Pending"
+                        : row.isApproved == 1
+                        ? "Approved"
+                        : "Rejected"}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.status === "Active" ? (
+                      {getStatus(row.requestDate) === "Active" ? (
                         <Chip
-                          label={row.status}
+                          label={"Active"}
                           color="success"
                           variant="outlined"
                           size="small"
@@ -350,7 +364,7 @@ export default function EnhancedTable(props) {
                         />
                       ) : (
                         <Chip
-                          label={row.status}
+                          label={"Expired"}
                           color="error"
                           variant="outlined"
                           size="small"
@@ -359,7 +373,7 @@ export default function EnhancedTable(props) {
                       )}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.status === "Expired" ? (
+                      {getStatus(row.requestDate) === "Expired" ? (
                         <>
                           <Link
                             to={`/dashboard/adhoc/edit/${row.id}`}

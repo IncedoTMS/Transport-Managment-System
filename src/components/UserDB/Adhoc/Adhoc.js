@@ -5,21 +5,32 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import Demo_Adhoc from "./demo_adhoc";
 
-const Adhoc = () => {
-  const [users, setUser] = useState([]);
+const Adhoc = ({ userId }) => {
+  const [cabs, setCabs] = useState([]);
+
+  const loadCabs = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
+        {
+          params: {
+            UserID: userId,
+          },
+        }
+      );
+      setCabs(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    loadUsers();
+    loadCabs();
   }, []);
-
-  const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3000/adhoc");
-    setUser(result.data);
-  };
 
   return (
     <>
-      <Demo_Adhoc data={users} />
+      <Demo_Adhoc data={cabs} />
 
       <div style={{ textAlign: "center" }}>
         <Link to={"/dashboard/adhoc/addadhoc"}>

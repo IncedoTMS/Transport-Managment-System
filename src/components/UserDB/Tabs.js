@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Monthly from "./Monthly/Monthly";
 import Adhoc from "./Adhoc/Adhoc";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,7 +42,34 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({ userData }) {
+  const [users, setUser] = useState([]);
+  const [userId, setUserId] = useState();
+
+  const loadUsers = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/user/(empcode,name,email)",
+        {
+          params: {
+            EmpCode: userData.empCode,
+          },
+        }
+      );
+      if (res.data) {
+        res.data.map((user) => {
+          setUser(user);
+          setUserId(user.id);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -85,10 +114,10 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Monthly />
+        {userId != null ? <Monthly userId={userId} /> : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Adhoc />
+        {userId != null ? <Adhoc userId={userId} /> : null}
       </TabPanel>
     </Box>
   );
