@@ -28,9 +28,12 @@ const Adhoc = ({ userId }) => {
     loadCabs();
   }, []);
 
+  const filteredCabs = cabs.filter((cab) =>  cab.isAdhoc===true )
+  console.log(filteredCabs);
   return (
     <>
-      <Demo_Adhoc data={cabs} />
+      
+      <Demo_Adhoc data={filteredCabs} />
 
       <div style={{ textAlign: "center" }}>
         <Link to={`/dashboard/adhoc/addadhoc/${userId}`}>
