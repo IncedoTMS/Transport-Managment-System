@@ -1,10 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid,Paper,Avatar, TextField, Button} from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import { borderRadius } from '@mui/system';
+import axios from 'axios';
+
+
 
 function CreateAccount() {
+  const [userData, setUserData]=useState({
+    firstName:"",
+    lastName: "",
+    phone: "",
+    empCode: "",
+    email: "",
+    password: "",
+    roleId:2
+
+    
+  })
+
+  const changeHandler=(e)=>{
+    e.preventDefault();
+    let key= e.target.name;
+    let value=e.target.value;
+    // console.log(key,value);
+    setUserData({...userData, [key]:value});
+    // console.log(userData);
+  }
+  
+  const onSubmitHandler=()=>{
+    console.log(userData);
+    axios.post("https://localhost:44371/api/v1/user", userData).then((resp)=>{
+      console.log(resp)
+    }).catch((e)=>{
+      console.log(e);
+    })
+  }
 
   const paperStyle={padding: 20, height: '100vh', width: 500, margin:"150px auto"}
   const avatarStyle={backgroundColor:"#1696d6", borderRadius:"50%"}
@@ -18,22 +50,21 @@ function CreateAccount() {
 </Avatar>
 
 
-
 <h4 style={{color: "black"}}>Create New User</h4>
 
 
         </Grid>
-        <TextField style={textStyle} label="First Name" placeholder='Enter Last Name'/>
-        <TextField style={textStyle} label="Last Name" placeholder='Enter Last Name'/>
-        <TextField style={textStyle} label="Employee Code" placeholder='Enter Employee Code'/>
-        <TextField style={textStyle} label="Phone Number" placeholder='Enter Phone Number'/>
-        <TextField style={textStyle} label="Company Email" placeholder='Enter @incedoinc.com id'/>
+        <TextField style={textStyle} onChange={changeHandler} name="firstName" label="First Name" placeholder='Enter First Name' required/>
+        <TextField style={textStyle} onChange={changeHandler} name="lastName" label="Last Name" placeholder='Enter Last Name' />
+        <TextField style={textStyle} onChange={changeHandler} name="empCode" label="Employee Code" placeholder='Enter Employee Code' required/>
+        <TextField style={textStyle} onChange={changeHandler} name="phone" label="Phone Number" placeholder='Enter Phone Number' required/>
+        <TextField style={textStyle} onChange={changeHandler} name="email"label="Company Email" placeholder='Enter @incedoinc.com id' required/>
         <TextField style={textStyle} label="Personal Email" placeholder='Enter Email'/>
-        <TextField style={textStyle} type='password' label="password" placeholder='password'/>
-        <TextField style={textStyle} type='password' label="password" placeholder='confirm password'/>
-        <TextField sx={{margin:"10px 20px", width: "89%"}} label="Address Line 1" placeholder='Enter Address'/>
+        <TextField style={textStyle} onChange={changeHandler} name="password" type='password' label="password" placeholder='password' required/>
+        <TextField style={textStyle} onChange={changeHandler} name="password" type='password' label="password" placeholder='confirm password' required/>
+        <TextField sx={{margin:"10px 20px", width: "89%"}} label="Address Line 1" placeholder='Enter Address' required/>
         <TextField sx={{margin:"10px 20px", width: "89%"}} label="Address Line 2" placeholder='Enter Address'/>
-        <Button sx={{margin:"10px 20px", width: "90%", backgroundColor:"purple"}}  type='submit' color='primary' variant="contained" fullWidth ><h5>Create User</h5></Button>
+        <Button onClick={onSubmitHandler} sx={{margin:"10px 20px", width: "90%", backgroundColor:"purple"}}  type='submit' color='primary' variant="contained" fullWidth ><h5>Create User</h5></Button>
 
      
 
