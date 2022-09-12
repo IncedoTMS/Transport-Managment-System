@@ -16,90 +16,53 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { MenuItem } from "@mui/material";
 
 const AddAdhoc = () => {
   let history = useHistory();
-  const [user, setUser] = useState({
-    date: "",
-    empId: "",
-    empName: "",
-    mobNo: "",
-    department: "",
-    projectId: "",
-    projectName: "",
-    manager: "",
-    pickupLocation: "Gurgaon",
-    pickupTime: "",
+  const { userId } = useParams();
+  const [cabrequirement, setCabrequirement] = useState({
+    userId: userId,
+    timeSlotId: "",
+    requestDate: "",
+    isApproved: 0,
+    pickUpLocation: "Gurugram",
     dropLocation: "",
-    managerApproval: "Pending",
-    status: "Active",
+    isAdhoc: true,
   });
 
   const {
-    date,
-    empId,
-    empName,
-    mobNo,
-    department,
-    projectId,
-    projectName,
-    manager,
-    pickupLocation,
-    pickupTime,
+    timeSlotId,
+    requestDate,
+    isApproved,
+    pickUpLocation,
     dropLocation,
-    managerApproval,
-    status,
-  } = user;
+    isAdhoc,
+  } = cabrequirement;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setCabrequirement({ ...cabrequirement, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/adhoc", user);
+    await axios.post(
+      "https://localhost:44371/api/v1/cabrequirment",
+      cabrequirement
+    );
     history.push("/dashboard");
   };
+  const timeSlots = [
+    {
+      value: 1,
+      label: "22:00",
+    },
+    {
+      value: 2,
+      label: "03:00",
+    },
+  ];
   return (
-    // <div className=" mx-auto shadow p-5 adhoc-box">
-    //   <form onSubmit={(e) => onSubmit(e)}>
-    //     <h2 className="text-center mb-4">Add Adhoc Drop Request</h2>
-
-    //     <div className="form-group">
-    //       <input
-    //         type="text"
-    //         className="form-control form-control-lg"
-    //         placeholder="Enter date"
-    //         name="date"
-    //         value={date}
-    //         onChange={(e) => onInputChange(e)}
-    //       />
-    //     </div>
-
-    //     <div className="form-group">
-    //       <input
-    //         type="text"
-    //         className="form-control form-control-lg"
-    //         placeholder="Enter pickup time"
-    //         name="pickupTime"
-    //         value={pickupTime}
-    //         onChange={(e) => onInputChange(e)}
-    //       />
-    //     </div>
-    //     <div className="form-group">
-    //       <input
-    //         type="text"
-    //         className="form-control form-control-lg"
-    //         placeholder="Enter drop location"
-    //         name="dropLocation"
-    //         value={dropLocation}
-    //         onChange={(e) => onInputChange(e)}
-    //       />
-    //     </div>
-
-    //     <button className="btn btn-warning btn-block">Confirm</button>
-    //   </form>
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -118,30 +81,35 @@ const AddAdhoc = () => {
           Add Adhoc Drop Request
         </Typography>
         <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
-          <TextField type="date"
+          <TextField
+            type="date"
             margin="normal"
             required
             fullWidth
-            pickupTime
-            name="date"
+            name="requestDate"
             label="Enter pickup date"
-            autoComplete="date"
-            value={date}
+            value={requestDate}
             onChange={(e) => onInputChange(e)}
             autoFocus
           />
 
           <TextField
             margin="normal"
+            select
+            label="Select"
+            value={timeSlotId}
+            onChange={(e) => onInputChange(e)}
+            name="timeSlotId"
+            helperText="Select pickup time"
             required
             fullWidth
-            label="Enter pickup time"
-            name="pickupTime"
-            autoComplete="pickupTime"
-            value={pickupTime}
-            onChange={(e) => onInputChange(e)}
-            
-          />
+          >
+            {timeSlots.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
             margin="normal"
@@ -153,7 +121,7 @@ const AddAdhoc = () => {
             autoComplete="dropLocation"
             value={dropLocation}
             onChange={(e) => onInputChange(e)}
-            
+            multiline
           />
 
           <Button

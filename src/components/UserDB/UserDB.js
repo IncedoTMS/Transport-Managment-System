@@ -46,7 +46,7 @@ export default function UserDB() {
             ></Route>
             <Route
               exact
-              path="/dashboard/adhoc/addadhoc"
+              path="/dashboard/adhoc/addadhoc/:userId"
               component={AddAdhoc}
             ></Route>
           </Switch>

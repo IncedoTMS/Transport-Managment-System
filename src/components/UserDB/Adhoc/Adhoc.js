@@ -33,7 +33,7 @@ const Adhoc = ({ userId }) => {
       <Demo_Adhoc data={cabs} />
 
       <div style={{ textAlign: "center" }}>
-        <Link to={"/dashboard/adhoc/addadhoc"}>
+        <Link to={`/dashboard/adhoc/addadhoc/${userId}`}>
           <Button variant="contained" startIcon={<AddIcon fontSize="large" />}>
             Add New Request
           </Button>
