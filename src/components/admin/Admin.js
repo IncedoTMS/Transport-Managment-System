@@ -1,4 +1,4 @@
-import React, { useState, useEffect,Suspense,lazy } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import "./Admin.css";
 import axios from "axios";
 import GetMonthlyApi from "./GetMonthlyApi";
@@ -11,6 +11,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CreateMonthly from "./CreateMonthly";
 import "./tables.css";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import DirectionsIcon from "@mui/icons-material/Directions";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,11 +57,11 @@ export default function Admin() {
   const [tableDataState, setTableDataState] = useState([]);
   const [adhocDataState, setAdhocState] = useState([]);
   const [value, setValue] = useState(0);
-  const [showComponent, setShowComponent]=useState(false);
+  const [showComponent, setShowComponent] = useState(false);
 
   const [temp, setTemp] = useState([]);
   const [inputAdhoc, setInputAdhoc] = useState("");
-  const [inputMonthly, setInputMonthly]=useState("");
+  const [inputMonthly, setInputMonthly] = useState("");
 
   const [adhocTemp, setAdhocTemp] = useState([]);
   const [isTrue, setIsTrue] = useState(false);
@@ -68,7 +75,6 @@ export default function Admin() {
   }, []);
 
   // Calling tableDataMethod to set state
-
 
   const handleSearch = (e) => {
     setInputMonthly(e.target.value);
@@ -96,39 +102,28 @@ export default function Admin() {
       );
     });
     setAdhocTemp(f_arr);
-    
   };
-
-
-
-
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-
-  function NoResults(){
-
+  function NoResults() {
     return (
       <center>
-                <img
-                  src="https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif"
-                  style={{ height: "50%", width: "50%" }}
-                />
-              </center>
-
-
+        <img
+          src="https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif"
+          style={{ height: "50%", width: "50%" }}
+        />
+      </center>
     );
   }
 
-  useEffect(()=>{
-
-    setTimeout(()=>{
-      setShowComponent(!showComponent)
-    },3000)
-  },[tableDataState.length == 0, adhocDataState.length == 0]);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowComponent(!showComponent);
+    }, 1500);
+  }, [tableDataState.length == 0, adhocDataState.length == 0]);
 
   return (
     <>
@@ -160,75 +155,125 @@ export default function Admin() {
             class="container"
             style={{ marginBottom: "2.5%", marginTop: "2.5%" }}
           >
-            
-
             {tableDataState.length == 0 ? (
-
-            showComponent?<NoResults />:<><h1 align="center" style={{color:"gray"}}>Loading...</h1></>
-              
+              showComponent ? (
+                <NoResults />
               ) : (
-
+                <>
+                  <h1 align="center" style={{ color: "gray" }}>
+                    Loading...
+                  </h1>
+                </>
+              )
+            ) : (
               <>
-              <div className="d-flex justify-content-between">
-              <input
-                className="fontAwesome searchBar"
-                onChange={handleSearch}
-                value={inputMonthly}
-                placeholder="&#xF002; Search Name or Month"
-              />
-            </div>
+                <div>
+                  <Paper
+                    component="form"
+                    sx={{
+                      p: "2px 4px",
+                      display: "flex",
+                      alignItems: "center",
+                      width: 300,
+                      marginLeft: "72.4%",
+                      marginBottom: "3%",
+                      marginTop: "-3%",
+                    }}
+                    elevation={5}
+                  >
+                    <InputBase
+                      sx={{ ml: 1, flex: 1 }}
+                      placeholder="Search By Name/Date"
+                      inputProps={{ "aria-label": "search google maps" }}
+                      onChange={handleSearch}
+                    />
+                    <IconButton
+                      type="button"
+                      sx={{ p: "10px" }}
+                      aria-label="search"
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </Paper>
+                  {/* <input
+                    className="fontAwesome searchBar"
+                    onChange={handleSearch}
+                    value={inputMonthly}
+                    placeholder="&#xF002; Search Name or Month"
+                  /> */}
+                </div>
 
-
-              <CreateMonthly
-                tableData={tableDataState}
-                searchData={temp}
-                loader={GetMonthlyApi}
-                apiDataSetter={setTableDataState}
-                searchInput={inputMonthly}
-
-              />
+                <CreateMonthly
+                  tableData={tableDataState}
+                  searchData={temp}
+                  loader={GetMonthlyApi}
+                  apiDataSetter={setTableDataState}
+                  searchInput={inputMonthly}
+                />
               </>
-
-
-
             )}
           </div>
-
-
-
-
         </TabPanel>
         <TabPanel value={value} index={1}>
           <>
             <div class="container" style={{ marginBottom: "2.5%" }}>
-              
-
               {adhocDataState.length == 0 ? (
-              
-              showComponent?<NoResults />:<><h1 align="center" style={{color:"gray"}}>Loading...</h1></>
-            
-
+                showComponent ? (
+                  <NoResults />
+                ) : (
+                  <>
+                    <h1 align="center" style={{ color: "gray" }}>
+                      Loading...
+                    </h1>
+                  </>
+                )
               ) : (
-
                 <>
-                <div className="d-flex justify-content-between">
+                  <div>
+                    <Paper
+                      component="form"
+                      sx={{
+                        p: "2px 4px",
+                        display: "flex",
+                        alignItems: "center",
+                        width: 300,
+                        marginLeft: "72.4%",
+                        marginBottom: "3%",
+                      }}
+                      elevation={5}
+                    >
+                      <InputBase
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search By Name/Date"
+                        inputProps={{ "aria-label": "search google maps" }}
+                        onChange={handleSearch2}
+                      />
+                      <IconButton
+                        type="button"
+                        sx={{ p: "10px" }}
+                        aria-label="search"
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </Paper>
+                  </div>
+                  {/* <div className="d-flex justify-content-between">
                 <input
                   className="fontAwesome searchBar"
                   onChange={handleSearch2}
                   value={inputAdhoc}
                   placeholder="&#xF002; Search Name or Date"
                 />
-              </div>
+              </div> */}
 
-                <CreateAdhoc
-                  tableData={adhocDataState}
-                  searchData={adhocTemp}
-                  loader={GetAdhocApi}
-                  apiDataSetter={setAdhocState}
-                  searchInput={inputAdhoc}
-                />
-
-                  </>
+                  <CreateAdhoc
+                    tableData={adhocDataState}
+                    searchData={adhocTemp}
+                    loader={GetAdhocApi}
+                    apiDataSetter={setAdhocState}
+                    searchInput={inputAdhoc}
+                  />
+                </>
               )}
             </div>
           </>
