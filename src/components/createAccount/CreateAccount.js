@@ -38,9 +38,9 @@ function CreateAccount() {
     })
   }
 
-  const paperStyle={padding: 20, height: '100vh', width: 500, margin:"150px auto"}
+  const paperStyle={padding: 20, height: '80vh', width: 500, margin:"150px auto", backgroundColor:"#e4eeef",}
   const avatarStyle={backgroundColor:"#1696d6", borderRadius:"50%"}
-  const textStyle={margin:"10px 20px", width: "40%"}
+  const textStyle={margin:"8px 20px", width: "40%", }
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
@@ -54,16 +54,16 @@ function CreateAccount() {
 
 
         </Grid>
-        <TextField style={textStyle} onChange={changeHandler} name="firstName" label="First Name" placeholder='Enter First Name' required/>
-        <TextField style={textStyle} onChange={changeHandler} name="lastName" label="Last Name" placeholder='Enter Last Name' />
-        <TextField style={textStyle} onChange={changeHandler} name="empCode" label="Employee Code" placeholder='Enter Employee Code' required/>
-        <TextField style={textStyle} onChange={changeHandler} name="phone" label="Phone Number" placeholder='Enter Phone Number' required/>
-        <TextField style={textStyle} onChange={changeHandler} name="email"label="Company Email" placeholder='Enter @incedoinc.com id' required/>
-        <TextField style={textStyle} label="Personal Email" placeholder='Enter Email'/>
-        <TextField style={textStyle} onChange={changeHandler} name="password" type='password' label="password" placeholder='password' required/>
-        <TextField style={textStyle} onChange={changeHandler} name="password" type='password' label="password" placeholder='confirm password' required/>
-        <TextField sx={{margin:"10px 20px", width: "89%"}} label="Address Line 1" placeholder='Enter Address' required/>
-        <TextField sx={{margin:"10px 20px", width: "89%"}} label="Address Line 2" placeholder='Enter Address'/>
+        <TextField style={textStyle} size="small" onChange={changeHandler} name="firstName" label="First Name" placeholder='Enter First Name' required/>
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="lastName" label="Last Name" placeholder='Enter Last Name' />
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="empCode" label="Employee Code" placeholder='Enter Employee Code' required/>
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="phone" label="Phone Number" placeholder='Enter Phone Number' required/>
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="email"label="Company Email" placeholder='Enter @incedoinc.com id' required/>
+        <TextField style={textStyle} size="small"  label="Personal Email" placeholder='Enter Email'/>
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="password" type='password' label="password" placeholder='password' required/>
+        <TextField style={textStyle} size="small"  onChange={changeHandler} name="password" type='password' label="password" placeholder='confirm password' required/>
+        <TextField sx={{margin:"10px 20px", width: "89%"}} size="small" label="Address Line 1" placeholder='Enter Address' required/>
+        <TextField sx={{margin:"10px 20px", width: "89%"}} size="small" label="Address Line 2" placeholder='Enter Address'/>
         <Button onClick={onSubmitHandler} sx={{margin:"10px 20px", width: "90%", backgroundColor:"purple"}}  type='submit' color='primary' variant="contained" fullWidth ><h5>Create User</h5></Button>
 
      
