@@ -110,7 +110,7 @@ export default function AccountMenu({ userData }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem sx={{ fontSize: "12px" }}>
+        {/* <MenuItem sx={{ fontSize: "12px" }}>
           <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
             <ListItemIcon>
               <Home fontSize="small" />
@@ -118,7 +118,8 @@ export default function AccountMenu({ userData }) {
             Home
           </Link>
         </MenuItem>
-        <Divider />
+        <Divider /> */}
+        
         <MenuItem
           sx={{ fontSize: "12px" }}
           onClick={() => {

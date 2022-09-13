@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import Demo_Adhoc from "./demo_adhoc";
+import Demo_Adhoc from "./AdhocTable";
 
 const Adhoc = ({ userId }) => {
   const [cabs, setCabs] = useState([]);

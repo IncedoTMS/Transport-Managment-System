@@ -7,8 +7,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import Post from "./UserMaster/Post.js";
-import Edit from "./Edit/Edit";
-import Edit2 from "./Edit/Edit2";
+import Edit from "./Edit/EditMonthly";
+import Edit2 from "./Edit/EditAdhoc";
 import AddAdhoc from "./NewRequest/AddAdhoc.js";
 import "./UserDB.css";
 import Tabs from "./Tabs";

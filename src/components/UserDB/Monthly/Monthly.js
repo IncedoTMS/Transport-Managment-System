@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Demo from "./demo";
+import Demo from "./MonthlyTable";
 
 const Monthly = ({ userId }) => {
   const [cabs, setCabs] = useState([]);
