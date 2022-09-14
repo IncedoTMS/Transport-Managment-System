@@ -47,7 +47,6 @@ function CreateAccount() {
   const textStyle = { margin: "8px 20px", width: "40%" };
   return (
     <Grid>
-      <img src="undraw.svg"></img>
       <Paper elevation={5} style={paperStyle}>
         {/* <Grid align="center">
           <Avatar style={avatarStyle} variant="square">
