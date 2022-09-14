@@ -148,28 +148,28 @@ export default function Post({ userData }) {
                     {/* {userData.phone} */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.department} */}
-                    Delivery
+                    {user.department}
+                    {/* Delivery */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.projectId} */}
-                    IT-607631
+                    {user.projectId}
+                    {/* IT-607631 */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.projectName} */}
-                    TMS
+                    {user.projectName}
+                    {/* TMS */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.manager} */}
-                    Rishi
+                    {user.manager}
+                    {/* Rishi */}
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                     {/* {user.resAddress} */}
                     Sector-18, Gurgaon
                   </TableCell>
                   <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.office} */}
-                    Gurgaon
+                    {user.office}
+                    {/* Gurgaon */}
                   </TableCell>
                 </TableRow>
               ))}
