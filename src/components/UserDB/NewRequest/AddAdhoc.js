@@ -25,7 +25,7 @@ const AddAdhoc = () => {
     userId: userId,
     timeSlotId: "",
     requestDate: "",
-    isApproved: 0,
+    isApproved: 3,
     pickUpLocation: "Gurugram",
     dropLocation: "",
     isAdhoc: true,

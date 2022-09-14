@@ -71,7 +71,7 @@ export default function Edit2() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    cabRecord.isApproved = 0;
+    cabRecord.isApproved = 3;
     await axios.put(
       `https://localhost:44371/api/v1/cabrequirment/${id}`,
       cabRecord

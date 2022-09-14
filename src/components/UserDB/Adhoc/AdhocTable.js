@@ -347,11 +347,11 @@ export default function EnhancedTable(props) {
                       {row.dropLocation}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.isApproved == 0
-                        ? "Pending"
-                        : row.isApproved == 1
+                      {row.isApproved == 1
                         ? "Approved"
-                        : "Rejected"}
+                        : row.isApproved == 2
+                        ? "Rejected"
+                        : "Pending"}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
                       {getStatus(row.requestDate) === "Active" ? (
