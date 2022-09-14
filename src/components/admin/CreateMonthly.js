@@ -92,10 +92,10 @@ const headCells = [
     sortable: true,
   },
   {
-    id: "date",
+    id: "month",
     numeric: true,
     disablePadding: false,
-    label: "Date",
+    label: "Month",
     sortable: true,
   },
 
@@ -203,7 +203,7 @@ function Display({ row, loader, apiDataSetter }) {
   }, [Dropdown]);
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`, {
+    const result = await axios.get(`http://localhost:3000/monthly/${row.id}`, {
       headers: {
         "Cache-Control": "no-cache",
         Pragma: "no-cache",
@@ -217,7 +217,7 @@ function Display({ row, loader, apiDataSetter }) {
     console.log(userData);
     if (Dropdown != "None")
       axios
-        .patch(`http://localhost:3000/adhoc/${row.id}`, {managerApproval:[Dropdown]})
+        .patch(`http://localhost:3000/monthly/${row.id}`, {managerApproval: [Dropdown]})
         .then((resp) => {
           console.log(resp);
         })
@@ -262,7 +262,7 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.date}
+        {row.month}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         <div class="btn-group">
@@ -271,7 +271,6 @@ function Display({ row, loader, apiDataSetter }) {
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            style={{overflow: "visible"}}
             
           >
             <Chip
@@ -287,7 +286,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Hold"
                 onClick={() => setDropdown("Hold")}
-                style={{overflow: "visible"}}
+                style={{zIndex:"+2!important"}} 
               >
                 Hold
               </a>
@@ -298,7 +297,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Approved"
                 onClick={() => setDropdown("Approved")}
-                style={{overflow: "visible"}}
+                style={{zIndex:"+2!important"}} 
               >
                 Approved
               </a>
@@ -309,7 +308,7 @@ function Display({ row, loader, apiDataSetter }) {
                 class="dropdown-item"
                 value="Rejected"
                 onClick={() => setDropdown("Rejected")}
-                style={{overflow: "visible"}}
+                style={{zIndex:"+2!important"}} 
               >
                 Rejected
               </a>
@@ -348,7 +347,7 @@ function Display({ row, loader, apiDataSetter }) {
   );
 }
 
-export default function CreateAdhoc({
+export default function CreateMonthly({
   tableData,
   searchData,
   loader,
@@ -442,7 +441,7 @@ export default function CreateAdhoc({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight: 200 }}
+            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight:200 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -464,12 +463,16 @@ export default function CreateAdhoc({
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <Display
+
+                    row.status=="Active"?
+                    (<Display
                       row={row}
                       loader={loader}
                       apiDataSetter={apiDataSetter}
-                    />
+                    />):
+                    (<></>)
 
+                    
                   );
                 })}
               {emptyRows > 0 && (

@@ -7,6 +7,7 @@ import Header from "./components/Common/Header";
 import Footer from "./components/Common/Footer";
 import NoMatch from "./components/Common/NoMatch";
 import Admin from "./components/admin/Admin";
+import CreateAccount from "./components/createAccount/CreateAccount";
 import "./App.css";
 
 const App = () => {
@@ -20,8 +21,8 @@ const App = () => {
           <Route exact path="/" component={Signin}>
             <Signin />
           </Route>
-          <Route exact path="/signup" component={Signup}>
-            <Signup />
+          <Route exact path="/signup" component={CreateAccount}>
+            <CreateAccount />
           </Route>
           <Route exact path="/dashboard" component={UserDB}></Route>
 
