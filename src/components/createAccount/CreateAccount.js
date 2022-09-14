@@ -38,27 +38,27 @@ function CreateAccount() {
   };
 
   const paperStyle = {
-    padding: 20,
-    height: "80vh",
-    width: 500,
-    margin: "150px 0px -150px 500px",
-    backgroundColor: "#e4eeef",
+    padding: 40,
+    height: "auto",
+    width: 700,
+    margin: "150px 0px -150px 750px",
   };
   const avatarStyle = { backgroundColor: "#1696d6", borderRadius: "50%" };
   const textStyle = { margin: "8px 20px", width: "40%" };
   return (
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
-        <Grid align="center">
+      <img src="undraw.svg"></img>
+      <Paper elevation={5} style={paperStyle}>
+        {/* <Grid align="center">
           <Avatar style={avatarStyle} variant="square">
             <PersonAddOutlinedIcon sx={{ width: 30, height: 30 }} />
           </Avatar>
 
           <h4 style={{ color: "black" }}>Create New User</h4>
-        </Grid>
+        </Grid> */}
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
           name="firstName"
           label="First Name"
@@ -67,7 +67,7 @@ function CreateAccount() {
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
           name="lastName"
           label="Last Name"
@@ -75,7 +75,7 @@ function CreateAccount() {
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
           name="empCode"
           label="Employee Code"
@@ -84,7 +84,7 @@ function CreateAccount() {
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
           name="phone"
           label="Phone Number"
@@ -93,7 +93,7 @@ function CreateAccount() {
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
           name="email"
           label="Company Email"
@@ -102,50 +102,54 @@ function CreateAccount() {
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           label="Personal Email"
           placeholder="Enter Email"
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
-          name="password"
-          type="password"
-          label="password"
-          placeholder="password"
+          name="projectid"
+          type="number"
+          label="Project ID"
+          placeholder="Project ID"
           required
         />
         <TextField
           style={textStyle}
-          size="small"
+          size="medium"
           onChange={changeHandler}
-          name="password"
-          type="password"
-          label="password"
-          placeholder="confirm password"
+          name="manager"
+          type="text"
+          label="Manager Name"
+          placeholder="Manager Name"
           required
         />
         <TextField
-          sx={{ margin: "10px 20px", width: "89%" }}
-          size="small"
+          sx={{ margin: "10px 20px", width: "86.5%" }}
+          size="medium"
           label="Address Line 1"
           placeholder="Enter Address"
           required
         />
         <TextField
-          sx={{ margin: "10px 20px", width: "89%" }}
-          size="small"
+          sx={{ margin: "10px 20px", width: "86.5%" }}
+          size="medium"
           label="Address Line 2"
           placeholder="Enter Address"
         />
         <Button
           onClick={onSubmitHandler}
-          sx={{ margin: "10px 20px", width: "90%", backgroundColor: "purple" }}
+          sx={{
+            marginLeft: "60%",
+            width: "30%",
+            backgroundColor: "green",
+            marginTop: "10px",
+          }}
           type="submit"
           color="primary"
           variant="contained"
-          fullWidth
         >
           <h5>Create User</h5>
         </Button>
