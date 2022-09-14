@@ -4,6 +4,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import { borderRadius } from "@mui/system";
 import axios from "axios";
+// import svg from './cab';
 
 function CreateAccount() {
   const [userData, setUserData] = useState({
@@ -41,13 +42,34 @@ function CreateAccount() {
     padding: 40,
     height: "auto",
     width: 700,
-    margin: "150px 0px -150px 750px",
+    margin: "150px auto",
   };
   const avatarStyle = { backgroundColor: "#1696d6", borderRadius: "50%" };
   const textStyle = { margin: "8px 20px", width: "40%" };
   return (
+
+    <>
+
+
+          <h4 style={{color: "rgb(180 36 36)", marginTop: "100px", marginBottom: "-126px",marginLeft: "10%", fontFamily: "Roboto"}}>Create New User</h4>
+
+
+    <div className="row" style={{display: "flex"}}>
+
+      <div className="col 1" style={{width: "50%", margin: "auto", float:"left"}}>
+        <Paper elevation={1} >
+
+
+<img src="cab.svg" style={{width: "50%", height: 500, borderRadius:"10%", backgroundColor:"#dfdfdf"}}/>
+    </Paper>
+      </div>
+
+      <div className="col 2" style={{width: "50%", marginRight: "8%"}}>
+
+   
+
     <Grid>
-      <Paper elevation={5} style={paperStyle}>
+      <Paper elevation={1} style={paperStyle}>
         {/* <Grid align="center">
           <Avatar style={avatarStyle} variant="square">
             <PersonAddOutlinedIcon sx={{ width: 30, height: 30 }} />
@@ -55,6 +77,8 @@ function CreateAccount() {
 
           <h4 style={{ color: "black" }}>Create New User</h4>
         </Grid> */}
+
+        <Grid align="center">
         <TextField
           style={textStyle}
           size="medium"
@@ -152,8 +176,13 @@ function CreateAccount() {
         >
           <h5>Create User</h5>
         </Button>
+        </Grid>
       </Paper>
     </Grid>
+    </div>
+
+    </div>
+    </>
   );
 }
 
