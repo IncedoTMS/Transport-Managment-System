@@ -4,10 +4,13 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Monthly from "./Monthly/Monthly";
-import Adhoc from "./Adhoc/Adhoc";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 import { useState, useEffect } from "react";
+import MonthlyTable from "./Monthly/MonthlyTable";
+import AdhocTable from "./Adhoc/AdhocTable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,33 +45,28 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({ userData }) {
-  const [users, setUser] = useState([]);
-  const [userId, setUserId] = useState();
-
-  const loadUsers = async () => {
+export default function BasicTabs({ userId }) {
+  const [cabs, setCabs] = useState([]);
+  useEffect(() => {
+    loadCabDetails();
+  }, []);
+  const loadCabDetails = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/user/(empcode,name,email)",
+        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
         {
           params: {
-            EmpCode: userData.empCode,
+            UserID: userId,
           },
         }
       );
-      if (res.data) {
-        res.data.map((user) => {
-          setUser(user);
-          setUserId(user.id);
-        });
-      }
+      setCabs(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    loadUsers();
-  }, []);
+  const monthlyCabs = cabs.filter((cab) => cab.isAdhoc === false);
+  const adhocCabs = cabs.filter((cab) => cab.isAdhoc === true);
 
   const [value, setValue] = React.useState(0);
 
@@ -114,10 +112,28 @@ export default function BasicTabs({ userData }) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {userId != null ? <Monthly userId={userId} /> : null}
+        {monthlyCabs.length > 0 ? (
+          <MonthlyTable data={monthlyCabs} />
+        ) : (
+          <p>No Monthly cab data.</p>
+        )}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {userId != null ? <Adhoc userId={userId} /> : null}
+        {adhocCabs.length > 0 ? (
+          <AdhocTable data={adhocCabs} />
+        ) : (
+          <p>No Adhoc cab data.</p>
+        )}
+        <div style={{ textAlign: "center" }}>
+          <Link to={`/dashboard/adhoc/addadhoc/${userId}`}>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon fontSize="large" />}
+            >
+              Add New Request
+            </Button>
+          </Link>
+        </div>
       </TabPanel>
     </Box>
   );

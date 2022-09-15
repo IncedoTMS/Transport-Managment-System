@@ -13,6 +13,7 @@ import AddAdhoc from "./NewRequest/AddAdhoc.js";
 import "./UserDB.css";
 import Tabs from "./Tabs";
 import { userData } from "./../Signin/Signin";
+import axios from "axios";
 
 export default function UserDB() {
   const token = localStorage.getItem("token");
@@ -21,17 +22,49 @@ export default function UserDB() {
   if (token == null) {
     loggedIn = false;
   }
+  const [user, setUser] = useState([]);
+  const [userId, setUserId] = useState();
+  // const [cabs, setCabs] = useState([]);
+
+  useEffect(() => {
+    loadUserDetails();
+    // if (user && userId) {
+    //   loadCabDetails();
+    // }
+  }, []);
+
+  const loadUserDetails = async () => {
+    try {
+      const res = await axios.get(
+        "https://localhost:44371/api/v1/user/(empcode,name,email)",
+        {
+          params: {
+            EmpCode: loadedData.empCode,
+          },
+        }
+      );
+      if (res.data) {
+        res.data.map((u) => {
+          setUser(u);
+          setUserId(u.id);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {loggedIn == false ? <Redirect to="/" /> : null}
       <BrowserRouter>
         <div className="db-body">
           {/* <Post userData={userData} /> */}
-          {loadedData != null ? <Post userData={loadedData} /> : null}
+          {user && userId ? <Post user={user} /> : null}
 
           <Switch>
             <Route exact path="/dashboard">
-              {loadedData != null ? <Tabs userData={loadedData} /> : null}
+              {user && userId ? <Tabs userId={userId} /> : null}
             </Route>
             <Route
               exact

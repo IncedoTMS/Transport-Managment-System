@@ -60,6 +60,8 @@ export default function Signin() {
           localStorage.setItem("loadedData", JSON.stringify(userData));
           loggedIn = true;
           History.push("/dashboard");
+        } else {
+          alert("Wrong credentials!");
         }
       })
       .catch((error) => {

@@ -12,27 +12,7 @@ import { fontSize } from "@mui/system";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export default function Post({ userData }) {
-  const [users, setUser] = useState([]);
-  useEffect(() => {
-    loadUsers();
-  }, []);
-  const loadUsers = async () => {
-    try {
-      const res = await axios.get(
-        "https://localhost:44371/api/v1/user/(empcode,name,email)",
-        {
-          params: {
-            EmpCode: userData.empCode,
-          },
-        }
-      );
-      setUser(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+export default function Post({ user }) {
   const headCells = [
     {
       id: "empCode",
@@ -127,52 +107,50 @@ export default function Post({ userData }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user, index) => (
-                <TableRow
-                  key={user.empCode}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    fontSize: "1.16rem",
-                  }}
-                >
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.empCode}
-                    {/* {userData.empCode} */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.firstName + " " + user.lastName}
-                    {/* {userData.firstName + " " + userData.lastName} */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.phone}
-                    {/* {userData.phone} */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.department}
-                    {/* Delivery */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.projectId}
-                    {/* IT-607631 */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.projectName}
-                    {/* TMS */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.manager}
-                    {/* Rishi */}
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {/* {user.resAddress} */}
-                    Sector-18, Gurgaon
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                    {user.office}
-                    {/* Gurgaon */}
-                  </TableCell>
-                </TableRow>
-              ))}
+              <TableRow
+                key={user.empCode}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  fontSize: "1.16rem",
+                }}
+              >
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.empCode}
+                  {/* {userData.empCode} */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.firstName + " " + user.lastName}
+                  {/* {userData.firstName + " " + userData.lastName} */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.phone}
+                  {/* {userData.phone} */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.department}
+                  {/* Delivery */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.projectId}
+                  {/* IT-607631 */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.projectName}
+                  {/* TMS */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.manager}
+                  {/* Rishi */}
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {/* {user.resAddress} */}
+                  Sector-18, Gurgaon
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.office}
+                  {/* Gurgaon */}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
