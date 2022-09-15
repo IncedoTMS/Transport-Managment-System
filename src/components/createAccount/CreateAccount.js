@@ -4,6 +4,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import { borderRadius } from "@mui/system";
 import axios from "axios";
+import './CreateAccount.scss';
 // import svg from './cab';
 
 function CreateAccount() {
@@ -15,7 +16,14 @@ function CreateAccount() {
     email: "",
     password: "",
     roleId: 2,
+    office:"",
+    projectId:"",
+    manager:"",
+    projectName:"",
+    department:"",
   });
+
+  const [message, setMessage] = useState("");
 
   const changeHandler = (e) => {
     e.preventDefault();
@@ -26,7 +34,8 @@ function CreateAccount() {
     // console.log(userData);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+   
     console.log(userData);
     axios
       .post("https://localhost:44371/api/v1/user", userData)
@@ -38,10 +47,23 @@ function CreateAccount() {
       });
   };
 
+
+
+  const emailValidation = (email) => {
+    const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
+    if (!emailValidator.test(email) && email !== "") {
+      setMessage("Email is Invalid");
+      window.alert(message);
+    } else {
+      setMessage("");
+    }
+  };
+
+
   const paperStyle = {
     padding: 40,
     height: "auto",
-    width: 700,
+    width: "115%",
     margin: "150px auto",
   };
   const avatarStyle = { backgroundColor: "#1696d6", borderRadius: "50%" };
@@ -51,12 +73,12 @@ function CreateAccount() {
     <>
 
 
-          <h4 style={{color: "rgb(180 36 36)", marginTop: "100px", marginBottom: "-126px",marginLeft: "10%", fontFamily: "Roboto"}}>Create New User</h4>
+          <h4 className="title" style={{color: "rgb(180 36 36)", marginTop: "100px", marginBottom: "-126px",marginLeft: "10%", fontFamily: "Roboto"}}>Create New User</h4>
 
 
     <div className="row" style={{display: "flex"}}>
 
-      <div className="col 1" style={{width: "50%", margin: "auto", float:"left"}}>
+      <div className="col one" style={{width: "50%", margin: "auto", float:"left"}}>
         <Paper elevation={1} >
 
 
@@ -64,7 +86,7 @@ function CreateAccount() {
     </Paper>
       </div>
 
-      <div className="col 2" style={{width: "50%", marginRight: "8%"}}>
+      <div className="col two" style={{width: "50%", marginRight: "8%"}}>
 
    
 
@@ -95,6 +117,7 @@ function CreateAccount() {
           name="lastName"
           label="Last Name"
           placeholder="Enter Last Name"
+          required
         />
         <TextField
           style={textStyle}
@@ -122,23 +145,37 @@ function CreateAccount() {
           label="Company Email"
           placeholder="Enter @incedoinc.com id"
           required
-        />
+        /> 
+        
         <TextField
           style={textStyle}
           size="medium"
-          label="Personal Email"
-          placeholder="Enter Email"
+          name="password"
+          onChange={changeHandler}
+          label="Password"
+          type="password"
+          placeholder="Password"
         />
         <TextField
           style={textStyle}
           size="medium"
           onChange={changeHandler}
           name="projectid"
-          type="number"
           label="Project ID"
           placeholder="Project ID"
           required
         />
+
+<TextField
+          style={textStyle}
+          size="medium"
+          onChange={changeHandler}
+          name="projectName"
+          label="Project Name"
+          placeholder="Project Name"
+          required
+        />
+
         <TextField
           style={textStyle}
           size="medium"
@@ -149,6 +186,30 @@ function CreateAccount() {
           placeholder="Manager Name"
           required
         />
+
+    <TextField
+          style={textStyle}
+          size="medium"
+          onChange={changeHandler}
+          name="department"
+          type="text"
+          label="Department"
+          placeholder="Department"
+          required
+        />
+
+<TextField
+          style={textStyle}
+          size="medium"
+          onChange={changeHandler}
+          name="office"
+          type="text"
+          label="Office"
+          placeholder="Office"
+          required
+        />
+
+
         <TextField
           sx={{ margin: "10px 20px", width: "86.5%" }}
           size="medium"
@@ -166,15 +227,16 @@ function CreateAccount() {
           onClick={onSubmitHandler}
           sx={{
             marginLeft: "60%",
-            width: "30%",
+            width: "20%",
             backgroundColor: "green",
-            marginTop: "10px",
+            marginTop: "5%",
+            marginLeft: "67.5%"
           }}
           type="submit"
           color="primary"
           variant="contained"
         >
-          <h5>Create User</h5>
+          <h5>Create</h5>
         </Button>
         </Grid>
       </Paper>

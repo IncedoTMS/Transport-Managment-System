@@ -82,20 +82,20 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Pickup Location",
-    sortable: true,
+    sortable: false,
   },
   {
     id: "dropLocation",
     numeric: true,
     disablePadding: false,
     label: "Drop Location",
-    sortable: true,
+    sortable: false,
   },
   {
     id: "month",
     numeric: true,
     disablePadding: false,
-    label: "Month",
+    label: "Date",
     sortable: true,
   },
 
@@ -111,7 +111,7 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Status",
-    sortable: true,
+    sortable: false,
   },
 ];
 
