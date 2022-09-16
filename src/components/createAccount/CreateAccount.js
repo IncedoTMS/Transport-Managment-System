@@ -4,7 +4,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import { borderRadius } from "@mui/system";
 import axios from "axios";
-import './CreateAccount.scss';
+import "./CreateAccount.scss";
 // import svg from './cab';
 
 function CreateAccount() {
@@ -16,11 +16,11 @@ function CreateAccount() {
     email: "",
     password: "",
     roleId: 2,
-    office:"",
-    projectId:"",
-    manager:"",
-    projectName:"",
-    department:"",
+    office: "",
+    projectId: "",
+    manager: "",
+    projectName: "",
+    department: "",
   });
 
   const [message, setMessage] = useState("");
@@ -35,7 +35,6 @@ function CreateAccount() {
   };
 
   const onSubmitHandler = (e) => {
-   
     console.log(userData);
     axios
       .post("https://localhost:44371/api/v1/user", userData)
@@ -47,8 +46,6 @@ function CreateAccount() {
       });
   };
 
-
-
   const emailValidation = (email) => {
     const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
     if (!emailValidator.test(email) && email !== "") {
@@ -59,40 +56,55 @@ function CreateAccount() {
     }
   };
 
-
   const paperStyle = {
-    padding: 40,
+    padding: 20,
     height: "auto",
-    width: "115%",
-    margin: "150px auto",
+    width: "90%",
+    marginTop: "40px",
+    marginBottom: "30px",
+    marginLeft: "50px",
   };
   const avatarStyle = { backgroundColor: "#1696d6", borderRadius: "50%" };
   const textStyle = { margin: "8px 20px", width: "40%" };
   return (
-
     <>
+      {/* <h4
+        className="title"
+        style={{
+          color: "rgb(180 36 36)",
+          marginTop: "100px",
+          marginBottom: "-126px",
+          marginLeft: "10%",
+          fontFamily: "Roboto",
+        }}
+      >
+        Create New User
+      </h4> */}
 
+      <div className="row" style={{ display: "flex" }}>
+        <div
+          className="col one"
+          style={{
+            width: "50%",
+            margin: "auto",
+            float: "left",
+          }}
+        >
+          <img
+            src="account.png"
+            style={{
+              width: "80%",
+              height: "80%",
+              marginLeft: "20%",
+            }}
+          />
+        </div>
 
-          <h4 className="title" style={{color: "rgb(180 36 36)", marginTop: "100px", marginBottom: "-126px",marginLeft: "10%", fontFamily: "Roboto"}}>Create New User</h4>
-
-
-    <div className="row" style={{display: "flex"}}>
-
-      <div className="col one" style={{width: "50%", margin: "auto", float:"left"}}>
-        <Paper elevation={1} >
-
-
-<img src="cab.svg" style={{width: "50%", height: 500, borderRadius:"10%", backgroundColor:"#dfdfdf"}}/>
-    </Paper>
-      </div>
-
-      <div className="col two" style={{width: "50%", marginRight: "8%"}}>
-
-   
-
-    <Grid>
-      <Paper elevation={1} style={paperStyle}>
-        {/* <Grid align="center">
+        <div className="col two" style={{ width: "50%", marginRight: "8%" }}>
+          <form>
+            <Grid>
+              <Paper elevation={3} style={paperStyle}>
+                {/* <Grid align="center">
           <Avatar style={avatarStyle} variant="square">
             <PersonAddOutlinedIcon sx={{ width: 30, height: 30 }} />
           </Avatar>
@@ -100,150 +112,144 @@ function CreateAccount() {
           <h4 style={{ color: "black" }}>Create New User</h4>
         </Grid> */}
 
-        <Grid align="center">
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="firstName"
-          label="First Name"
-          placeholder="Enter First Name"
-          required
-        />
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="lastName"
-          label="Last Name"
-          placeholder="Enter Last Name"
-          required
-        />
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="empCode"
-          label="Employee Code"
-          placeholder="Enter Employee Code"
-          required
-        />
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="phone"
-          label="Phone Number"
-          placeholder="Enter Phone Number"
-          required
-        />
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="email"
-          label="Company Email"
-          placeholder="Enter @incedoinc.com id"
-          required
-        /> 
-        
-        <TextField
-          style={textStyle}
-          size="medium"
-          name="password"
-          onChange={changeHandler}
-          label="Password"
-          type="password"
-          placeholder="Password"
-        />
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="projectid"
-          label="Project ID"
-          placeholder="Project ID"
-          required
-        />
+                <Grid align="center">
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="firstName"
+                    label="First Name"
+                    placeholder="Enter First Name"
+                    required
+                  />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="lastName"
+                    label="Last Name"
+                    placeholder="Enter Last Name"
+                    required
+                  />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="empCode"
+                    label="Employee Code"
+                    placeholder="Enter Employee Code"
+                    required
+                  />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="phone"
+                    label="Phone Number"
+                    placeholder="Enter Phone Number"
+                    required
+                  />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="email"
+                    label="Company Email"
+                    placeholder="Enter @incedoinc.com id"
+                    required
+                  />
 
-<TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="projectName"
-          label="Project Name"
-          placeholder="Project Name"
-          required
-        />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    name="password"
+                    onChange={changeHandler}
+                    label="Password"
+                    type="password"
+                    placeholder="Password"
+                  />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="projectid"
+                    label="Project ID"
+                    placeholder="Project ID"
+                    required
+                  />
 
-        <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="manager"
-          type="text"
-          label="Manager Name"
-          placeholder="Manager Name"
-          required
-        />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="projectName"
+                    label="Project Name"
+                    placeholder="Project Name"
+                    required
+                  />
 
-    <TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="department"
-          type="text"
-          label="Department"
-          placeholder="Department"
-          required
-        />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="manager"
+                    type="text"
+                    label="Manager Name"
+                    placeholder="Manager Name"
+                    required
+                  />
 
-<TextField
-          style={textStyle}
-          size="medium"
-          onChange={changeHandler}
-          name="office"
-          type="text"
-          label="Office"
-          placeholder="Office"
-          required
-        />
+                  <TextField
+                    style={textStyle}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="department"
+                    type="text"
+                    label="Department"
+                    placeholder="Department"
+                    required
+                  />
 
+                  <TextField
+                    sx={{ width: "86.8%", margin: "10px 20px" }}
+                    size="medium"
+                    onChange={changeHandler}
+                    name="office"
+                    type="text"
+                    label="Office"
+                    placeholder="Office"
+                    required
+                  />
 
-        <TextField
-          sx={{ margin: "10px 20px", width: "86.5%" }}
-          size="medium"
-          label="Address Line 1"
-          placeholder="Enter Address"
-          required
-        />
-        <TextField
-          sx={{ margin: "10px 20px", width: "86.5%" }}
-          size="medium"
-          label="Address Line 2"
-          placeholder="Enter Address"
-        />
-        <Button
-          onClick={onSubmitHandler}
-          sx={{
-            marginLeft: "60%",
-            width: "20%",
-            backgroundColor: "green",
-            marginTop: "5%",
-            marginLeft: "67.5%"
-          }}
-          type="submit"
-          color="primary"
-          variant="contained"
-        >
-          <h5>Create</h5>
-        </Button>
-        </Grid>
-      </Paper>
-    </Grid>
-    </div>
+                  <TextField
+                    sx={{ margin: "10px 20px", width: "86.8%" }}
+                    size="medium"
+                    label="Address Line"
+                    placeholder="Enter Address"
+                    required
+                  />
 
-    </div>
+                  <Button
+                    onClick={onSubmitHandler}
+                    sx={{
+                      marginLeft: "60%",
+                      width: "20%",
+                      backgroundColor: "green",
+                      marginTop: "3%",
+                      marginLeft: "67.5%",
+                    }}
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                  >
+                    <h5>Create</h5>
+                  </Button>
+                </Grid>
+              </Paper>
+            </Grid>
+          </form>
+        </div>
+      </div>
     </>
   );
 }
