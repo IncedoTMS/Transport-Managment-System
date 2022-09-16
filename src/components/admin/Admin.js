@@ -84,17 +84,77 @@ export default function Admin() {
     GetAdhocApi(setAdhocState);
   }, []);
 
+
+  const getMonthString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let monthStr = months[month] + "-" + year;
+    return monthStr;
+  };
+
+
+  const getDateString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let dateStr = day+"-"+months[month] + "-" + year;
+    return dateStr;
+  };
+
+
   // Calling tableDataMethod to set state
 
   const handleSearch = (e) => {
     setInputMonthly(e.target.value);
     let targ = e.target.value.toLowerCase();
     let temp_arr = tableDataState;
+    
+
     let f_arr = temp_arr.filter((el) => {
+
+      let month=getMonthString(el.requestDate);
+  
       return (
         el.id === targ ||
-        el.empName.toLowerCase().includes(targ) ||
-        el.month.toLowerCase().includes(targ)
+        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) ||
+        month.toLowerCase().includes(targ)
       );
     });
     setTemp(f_arr);
@@ -105,10 +165,13 @@ export default function Admin() {
     let targ = e.target.value.toLowerCase();
     let temp_arr = adhocDataState;
     let f_arr = temp_arr.filter((el) => {
+
+      let date=getDateString(el.requestDate);
+
       return (
         el.id === targ ||
-        el.empName.toLowerCase().includes(targ) ||
-        el.date.toLowerCase().includes(targ)
+        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) ||
+        date.toLowerCase().includes(targ)
       );
     });
     setAdhocTemp(f_arr);

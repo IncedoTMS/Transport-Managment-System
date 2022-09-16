@@ -10,9 +10,8 @@ var data = [];
 const GetAdhocApi = (setter) => {
   adhocTableData = [];
   axios
-    .get(
-      "http://localhost:3000/adhoc",
-
+      .get("https://localhost:44371/api/v1/cabrequirment",
+      
       {
         headers: {
           "Cache-Control": "no-cache",
@@ -20,11 +19,13 @@ const GetAdhocApi = (setter) => {
           Expires: "0",
         },
       }
-    )
+      
+      
+      )
     .then((resp) => {
       data = resp.data;
       data.forEach((e) => {
-        adhocTableData.push(e);
+        if(e.isAdhoc) adhocTableData.push(e);
         // console.log(e);
       });
       // Once API call is complete and array is not empty,

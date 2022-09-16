@@ -28,11 +28,27 @@ import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
 
 const axios = require("axios");
+const dict ={
+  0:"none",
+  1: "Approved",
+  2: "Rejected",
+  3: "Pending",
+
+  "none":0,
+  "Approved":1,
+  "Rejected":2,
+  "Pending":3,
+}
 
 function descendingComparator(a, b, orderBy) {
-  console.log("a", a);
-  console.log("b", b);
-  console.log("orderBy", orderBy);
+  // console.log(orderBy)
+  
+  if(orderBy=="month"){
+    // console.log(new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf());
+
+    return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
+  }
+  
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -71,11 +87,11 @@ const headCells = [
     sortable: true,
   },
   {
-    id: "empName",
+    id: "firstName",
     numeric: true,
     disablePadding: false,
     label: "Employee Name",
-    sortable: false,
+    sortable: true,
   },
   {
     id: "pickupLocation",
@@ -92,10 +108,10 @@ const headCells = [
     sortable: false,
   },
   {
-    id: "date",
+    id: "requestDate",
     numeric: true,
     disablePadding: false,
-    label: "Date",
+    label: "Month",
     sortable: true,
   },
 
@@ -111,7 +127,7 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Status",
-    sortable: true,
+    sortable: false,
   },
 ];
 
@@ -187,7 +203,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
-  const [Dropdown, setDropdown] = React.useState("None");
+  const [Dropdown, setDropdown] = React.useState(0);
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -198,12 +214,12 @@ function Display({ row, loader, apiDataSetter }) {
   });
 
   React.useEffect(() => {
-    console.log(1);
+    // console.log(1);
     loadUser();
   }, [Dropdown]);
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3000/adhoc/${row.id}`, {
+    const result = await axios.get(`http://localhost:3000/monthly/${row.id}`, {
       headers: {
         "Cache-Control": "no-cache",
         Pragma: "no-cache",
@@ -213,21 +229,64 @@ function Display({ row, loader, apiDataSetter }) {
     setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
-  const sendData = (e) => {
-    console.log(userData);
-    if (Dropdown != "None")
-      axios
-        .patch(`http://localhost:3000/adhoc/${row.id}`, {managerApproval:[Dropdown]})
+  const sendData = async(e) => {
+   
+   if(Dropdown!=0)  
+   {
+
+  
+   
+   await axios
+        .patch(`https://localhost:44371/api/v1/cabrequirment/${row.id}`, [{
+          operationType: "Replace",
+          path: "isApproved",
+          op: "replace",
+          from:"" ,
+          value: Dropdown,
+        }]
+      )
         .then((resp) => {
           console.log(resp);
         })
         .catch((e) => {
           console.log(e);
         });
+      }
 
+  
     apiDataSetter([]);
     loader(apiDataSetter);
   };
+
+
+
+  const getDateString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let dateStr =day+"-"+ months[month] + "-" + year;
+    return dateStr;
+  };
+
+
 
   return (
     <TableRow role="checkbox" tabIndex={-1} sx={{fontSize: "1.16rem"}} disabled={true}>
@@ -238,19 +297,19 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem" }}
         align="center"
       >
-        {row.empId}
+        {row.empCode}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.empName}
+        {row.firstName + " "+ row.lastName}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.pickupLocation}
+        {row.pickUpLocation}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
@@ -262,7 +321,7 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.date}
+        {getDateString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         <div class="btn-group">
@@ -271,12 +330,11 @@ function Display({ row, loader, apiDataSetter }) {
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            style={{overflow: "visible"}}
             
           >
             <Chip
               color="info"
-              label={Dropdown == "None" ? row.managerApproval : Dropdown}
+              label={Dropdown == 0 ? (dict[row.isApproved]) : dict[Dropdown]}
               style={{ fontSize: "1.16rem" }}
             />
           </button>
@@ -286,19 +344,8 @@ function Display({ row, loader, apiDataSetter }) {
               href="#"
                 class="dropdown-item"
                 value="Hold"
-                onClick={() => setDropdown("Hold")}
-                style={{overflow: "visible"}}
-              >
-                Hold
-              </a>
-            </li>
-            <li>
-              <a
-              href="#"
-                class="dropdown-item"
-                value="Approved"
-                onClick={() => setDropdown("Approved")}
-                style={{overflow: "visible"}}
+                onClick={() => setDropdown(1)}
+                style={{zIndex:"+2!important"}} 
               >
                 Approved
               </a>
@@ -307,11 +354,22 @@ function Display({ row, loader, apiDataSetter }) {
               <a
               href="#"
                 class="dropdown-item"
-                value="Rejected"
-                onClick={() => setDropdown("Rejected")}
-                style={{overflow: "visible"}}
+                value="Approved"
+                onClick={() => setDropdown(2)}
+                style={{zIndex:"+2!important"}} 
               >
                 Rejected
+              </a>
+            </li>
+            <li>
+              <a
+              href="#"
+                class="dropdown-item"
+                value="Rejected"
+                onClick={() => setDropdown(3)}
+                style={{zIndex:"+2!important"}} 
+              >
+                Hold
               </a>
             </li>
           </ul>
@@ -357,13 +415,15 @@ export default function CreateAdhoc({
 }) {
   var rows = [];
 
+  console.log(tableData)
+
   if (searchData.length == 0 ) {
 
     if(searchInput.length==0)
     {
 
     tableData.map((data, id) => {
-      if(data.status=="Active")
+      // console.log(data.pickupLocation)
       rows.push(data);
     });
   }
@@ -372,7 +432,7 @@ export default function CreateAdhoc({
   
   else {
     searchData.map((data, id) => {
-      if(data.status=="Active") rows.push(data);
+       rows.push(data);
     });
   }
 
@@ -442,7 +502,7 @@ export default function CreateAdhoc({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight: 200 }}
+            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight:200 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -464,12 +524,14 @@ export default function CreateAdhoc({
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <Display
+
+                    (<Display
                       row={row}
                       loader={loader}
                       apiDataSetter={apiDataSetter}
-                    />
+                    />)
 
+                    
                   );
                 })}
               {emptyRows > 0 && (
