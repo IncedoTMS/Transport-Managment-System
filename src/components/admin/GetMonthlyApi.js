@@ -8,7 +8,7 @@ var data = [];
 const GetMonthlyApi = (setter) => {
   tableData = [];
     axios
-      .get("http://localhost:3000/monthly",
+      .get("https://localhost:44371/api/v1/cabrequirment",
       
       {
         headers: {
@@ -21,10 +21,14 @@ const GetMonthlyApi = (setter) => {
       
       )
       .then((resp) => {
+
         data = resp.data;
         data.forEach((e) => {
-          tableData.push(e);
+          // console.log(e);
+        if(!e.isAdhoc) tableData.push(e);
         });
+
+       
         // Once API call is complete and array is not empty,
         // setter sets the state and sends tableData to Admin.js
         setter(tableData);

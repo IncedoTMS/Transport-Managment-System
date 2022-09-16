@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet"; //React Helmet use to Dynamically set what's in the document's head section.
 import {
   BrowserRouter as Router,
@@ -11,10 +11,13 @@ import {
 import "./Signin.scss";
 import axios from "axios";
 
+
+
 var userData = "";
 
 export default function Signin() {
   //setting token for session storage
+ 
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
@@ -59,7 +62,8 @@ export default function Signin() {
           localStorage.setItem("token", "qwertyuiop");
           localStorage.setItem("loadedData", JSON.stringify(userData));
           loggedIn = true;
-          History.push("/dashboard");
+         if(res.data.roleId==2) History.push("/dashboard");
+         else History.push("/admin")
         } else {
           alert("Wrong credentials!");
         }

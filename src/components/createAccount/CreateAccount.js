@@ -60,7 +60,7 @@ function CreateAccount() {
     padding: 20,
     height: "auto",
     width: "90%",
-    marginTop: "40px",
+    marginTop: "10%",
     marginBottom: "30px",
     marginLeft: "50px",
   };

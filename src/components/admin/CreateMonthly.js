@@ -28,11 +28,27 @@ import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
 
 const axios = require("axios");
+const dict ={
+  0:"none",
+  1: "Approved",
+  2: "Rejected",
+  3: "Pending",
+
+  "none":0,
+  "Approved":1,
+  "Rejected":2,
+  "Pending":3,
+}
 
 function descendingComparator(a, b, orderBy) {
-  console.log("a", a);
-  console.log("b", b);
-  console.log("orderBy", orderBy);
+  // console.log(orderBy)
+  
+  if(orderBy=="month"){
+    // console.log(new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf());
+
+    return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
+  }
+  
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -71,7 +87,7 @@ const headCells = [
     sortable: true,
   },
   {
-    id: "empName",
+    id: "firstName",
     numeric: true,
     disablePadding: false,
     label: "Employee Name",
@@ -92,10 +108,10 @@ const headCells = [
     sortable: false,
   },
   {
-    id: "month",
+    id: "requestDate",
     numeric: true,
     disablePadding: false,
-    label: "Date",
+    label: "Month",
     sortable: true,
   },
 
@@ -187,7 +203,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
-  const [Dropdown, setDropdown] = React.useState("None");
+  const [Dropdown, setDropdown] = React.useState(0);
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -198,7 +214,7 @@ function Display({ row, loader, apiDataSetter }) {
   });
 
   React.useEffect(() => {
-    console.log(1);
+    // console.log(1);
     loadUser();
   }, [Dropdown]);
 
@@ -213,21 +229,64 @@ function Display({ row, loader, apiDataSetter }) {
     setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
-  const sendData = (e) => {
-    console.log(userData);
-    if (Dropdown != "None")
-      axios
-        .patch(`http://localhost:3000/monthly/${row.id}`, {managerApproval: [Dropdown]})
+  const sendData = async(e) => {
+   
+   if(Dropdown!=0)  
+   {
+
+  
+   
+   await axios
+        .patch(`https://localhost:44371/api/v1/cabrequirment/${row.id}`, [{
+          operationType: "Replace",
+          path: "isApproved",
+          op: "replace",
+          from:"" ,
+          value: Dropdown,
+        }]
+      )
         .then((resp) => {
           console.log(resp);
         })
         .catch((e) => {
           console.log(e);
         });
+      }
 
+  
     apiDataSetter([]);
     loader(apiDataSetter);
   };
+
+
+
+  const getMonthString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let monthStr = months[month] + "-" + year;
+    return monthStr;
+  };
+
+
 
   return (
     <TableRow role="checkbox" tabIndex={-1} sx={{fontSize: "1.16rem"}} disabled={true}>
@@ -238,19 +297,19 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem" }}
         align="center"
       >
-        {row.empId}
+        {row.empCode}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.empName}
+        {row.firstName + " "+ row.lastName}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.pickupLocation}
+        {row.pickUpLocation}
       </TableCell>
       <TableCell
         sx={{ fontSize: "1.16rem"}}
@@ -262,7 +321,7 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem"}}
         align="center"
       >
-        {row.month}
+        {getMonthString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         <div class="btn-group">
@@ -275,7 +334,7 @@ function Display({ row, loader, apiDataSetter }) {
           >
             <Chip
               color="info"
-              label={Dropdown == "None" ? row.managerApproval : Dropdown}
+              label={Dropdown == 0 ? (dict[row.isApproved]) : dict[Dropdown]}
               style={{ fontSize: "1.16rem" }}
             />
           </button>
@@ -285,18 +344,7 @@ function Display({ row, loader, apiDataSetter }) {
               href="#"
                 class="dropdown-item"
                 value="Hold"
-                onClick={() => setDropdown("Hold")}
-                style={{zIndex:"+2!important"}} 
-              >
-                Hold
-              </a>
-            </li>
-            <li>
-              <a
-              href="#"
-                class="dropdown-item"
-                value="Approved"
-                onClick={() => setDropdown("Approved")}
+                onClick={() => setDropdown(1)}
                 style={{zIndex:"+2!important"}} 
               >
                 Approved
@@ -306,11 +354,22 @@ function Display({ row, loader, apiDataSetter }) {
               <a
               href="#"
                 class="dropdown-item"
-                value="Rejected"
-                onClick={() => setDropdown("Rejected")}
+                value="Approved"
+                onClick={() => setDropdown(2)}
                 style={{zIndex:"+2!important"}} 
               >
                 Rejected
+              </a>
+            </li>
+            <li>
+              <a
+              href="#"
+                class="dropdown-item"
+                value="Rejected"
+                onClick={() => setDropdown(3)}
+                style={{zIndex:"+2!important"}} 
+              >
+                Hold
               </a>
             </li>
           </ul>
@@ -356,13 +415,15 @@ export default function CreateMonthly({
 }) {
   var rows = [];
 
+  console.log(tableData)
+
   if (searchData.length == 0 ) {
 
     if(searchInput.length==0)
     {
 
     tableData.map((data, id) => {
-      if(data.status=="Active")
+      // console.log(data.pickupLocation)
       rows.push(data);
     });
   }
@@ -371,7 +432,7 @@ export default function CreateMonthly({
   
   else {
     searchData.map((data, id) => {
-      if(data.status=="Active") rows.push(data);
+       rows.push(data);
     });
   }
 
@@ -464,13 +525,11 @@ export default function CreateMonthly({
 
                   return (
 
-                    row.status=="Active"?
                     (<Display
                       row={row}
                       loader={loader}
                       apiDataSetter={apiDataSetter}
-                    />):
-                    (<></>)
+                    />)
 
                     
                   );

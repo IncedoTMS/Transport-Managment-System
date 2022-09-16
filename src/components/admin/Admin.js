@@ -18,6 +18,13 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,7 +60,10 @@ function a11yProps(index) {
 }
 
 export default function Admin() {
-  // Added State to wait for JSON API
+  
+  let isLoggedIn=false;
+  if(localStorage.getItem("token"))  isLoggedIn=true;
+
   const [tableDataState, setTableDataState] = useState([]);
   const [adhocDataState, setAdhocState] = useState([]);
   const [value, setValue] = useState(0);
@@ -127,6 +137,8 @@ export default function Admin() {
 
   return (
     <>
+    {!isLoggedIn?<Redirect to="/" /> :null}
+ 
       <hr />
       <hr />
       <hr />
