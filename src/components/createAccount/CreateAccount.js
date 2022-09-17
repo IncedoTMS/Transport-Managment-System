@@ -5,6 +5,8 @@ import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import { borderRadius } from "@mui/system";
 import axios from "axios";
 import "./CreateAccount.scss";
+import swal from "sweetalert";
+
 // import svg from './cab';
 
 function CreateAccount() {
@@ -21,6 +23,7 @@ function CreateAccount() {
     manager: "",
     projectName: "",
     department: "",
+    address: "",
   });
 
   const [message, setMessage] = useState("");
@@ -41,9 +44,21 @@ function CreateAccount() {
       .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
+        swal({
+          title: "Done",
+          text: "Account Created Successfully",
+          icon: "success",
+          button: "OK",
+        });
       })
       .catch((e) => {
         console.log(e);
+        swal({
+          title: "Error Occured",
+          text: "Data Entered is Invalid/Incomplete",
+          icon: "error",
+          button: "OK",
+        });
       });
   };
 
@@ -225,6 +240,7 @@ function CreateAccount() {
                   <TextField
                     sx={{ margin: "10px 20px", width: "86.8%" }}
                     size="medium"
+                    name="address"
                     label="Address Line"
                     placeholder="Enter Address"
                     required

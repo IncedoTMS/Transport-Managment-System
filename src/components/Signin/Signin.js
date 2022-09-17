@@ -34,7 +34,7 @@ export default function Signin() {
   const emailValidation = (email) => {
     const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
     if (!emailValidator.test(email) && email !== "") {
-      setMessage("Email is Invalid");
+      setMessage("");
     } else {
       setMessage("");
     }
@@ -64,15 +64,15 @@ export default function Signin() {
           localStorage.setItem("token", "qwertyuiop");
           localStorage.setItem("loadedData", JSON.stringify(userData));
           loggedIn = true;
-          if (res.data.roleId == 2) History.push("/dashboard");
-          else if (res.data.roleId == 1) History.push("/admin");
-          else if (res.data.roleId == 3) History.push("/signup");
+          if (res.data.roleId === 2) History.push("/dashboard");
+          else if (res.data.roleId === 1) History.push("/admin");
+          else if (res.data.roleId === 3) History.push("/signup");
         } else {
-          alert("Wrong credentials!");
+          alert("\n\t Invalid/Incomplete Credentials!");
         }
       })
       .catch((error) => {
-        alert(error);
+        alert("\n\t Invalid/Incomplete Credentials!");
       });
   };
 
@@ -98,17 +98,6 @@ export default function Signin() {
               <form>
                 <div className="form-content">
                   <div className="mb-3">
-                    <label className="form-label"> Role &nbsp;</label>
-                    <select name="roleId" onChange={handleOnChange}>
-                      <option disabled selected>
-                        Select a role
-                      </option>
-                      <option value="1">Admin</option>
-                      <option value="2">User</option>
-                      <option value="3">Manager</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
                     <label className="form-label">Email address</label>
                     <input
                       type="email"
@@ -129,6 +118,22 @@ export default function Signin() {
                       className="form-control"
                       placeholder="Password"
                     />
+                  </div>
+                  <br />
+                  <div className="mb-3">
+                    <label className="form-label"> Role &nbsp;</label>
+                    <select
+                      name="roleId"
+                      onChange={handleOnChange}
+                      class="required"
+                    >
+                      <option selected disabled>
+                        Select a role
+                      </option>
+                      <option value="1">Admin</option>
+                      <option value="2">User</option>
+                      <option value="3">Manager</option>
+                    </select>
                   </div>
                 </div>
               </form>
