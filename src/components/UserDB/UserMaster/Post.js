@@ -56,12 +56,12 @@ export default function Post({ user }) {
       disablePadding: false,
       label: "Manager",
     },
-    // {
-    //   id: "resAddress",
-    //   numeric: false,
-    //   disablePadding: false,
-    //   label: "Residence Address",
-    // },
+    {
+      id: "addressDetails",
+      numeric: false,
+      disablePadding: false,
+      label: "Residence Address",
+    },
     {
       id: "office",
       numeric: false,
@@ -116,39 +116,30 @@ export default function Post({ user }) {
               >
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.empCode}
-                  {/* {userData.empCode} */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.firstName + " " + user.lastName}
-                  {/* {userData.firstName + " " + userData.lastName} */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.phone}
-                  {/* {userData.phone} */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.department}
-                  {/* Delivery */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.projectId}
-                  {/* IT-607631 */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.projectName}
-                  {/* TMS */}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.manager}
-                  {/* Rishi */}
                 </TableCell>
-                {/* <TableCell align="center" sx={{ fontSize: "1.16rem" }}> */}
-                {/* {user.resAddress} */}
-                {/* Sector-18, Gurgaon */}
-                {/* </TableCell> */}
+                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
+                  {user.addressDetails}
+                </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.office}
-                  {/* Gurgaon */}
                 </TableCell>
               </TableRow>
             </TableBody>

@@ -23,7 +23,7 @@ function CreateAccount() {
     manager: "",
     projectName: "",
     department: "",
-    address: "",
+    addressDetails: "",
   });
 
   const [message, setMessage] = useState("");
@@ -240,7 +240,8 @@ function CreateAccount() {
                   <TextField
                     sx={{ margin: "10px 20px", width: "86.8%" }}
                     size="medium"
-                    name="address"
+                    name="addressDetails"
+                    onChange={changeHandler}
                     label="Address Line"
                     placeholder="Enter Address"
                     required
