@@ -11,13 +11,11 @@ import {
 import "./Signin.scss";
 import axios from "axios";
 
-
-
 var userData = "";
 
 export default function Signin() {
   //setting token for session storage
- 
+
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
@@ -30,6 +28,7 @@ export default function Signin() {
   const [loginData, setLoginData] = useState({
     userName: "",
     password: "",
+    roleId: "",
   });
 
   const emailValidation = (email) => {
@@ -55,15 +54,19 @@ export default function Signin() {
     emailValidation(e);
 
     await axios
-      .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user/login", loginData)
+      .post(
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/login",
+        loginData
+      )
       .then((res) => {
         if (res.data.firstName) {
           userData = res.data;
           localStorage.setItem("token", "qwertyuiop");
           localStorage.setItem("loadedData", JSON.stringify(userData));
           loggedIn = true;
-         if(res.data.roleId==2) History.push("/dashboard");
-         else History.push("/admin")
+          if (res.data.roleId == 2) History.push("/dashboard");
+          else if (res.data.roleId == 1) History.push("/admin");
+          else if (res.data.roleId == 3) History.push("/signup");
         } else {
           alert("Wrong credentials!");
         }
@@ -88,16 +91,23 @@ export default function Signin() {
           </div>
           <div className="column two col-sm">
             <div className="formbox">
-              <div className="welcome d-flex justify-content-between">
+              <div className="mb-3">
                 <h3 className="sign-in-h3">Sign In</h3>
-                <p className="register-link">
-                  New to Transportation Hub?{" "}
-                  <a onClick={routeToSignup}>Register</a>
-                </p>
               </div>
 
               <form>
                 <div className="form-content">
+                  <div className="mb-3">
+                    <label className="form-label"> Role &nbsp;</label>
+                    <select name="roleId" onChange={handleOnChange}>
+                      <option disabled selected>
+                        Select a role
+                      </option>
+                      <option value="1">Admin</option>
+                      <option value="2">User</option>
+                      <option value="3">Manager</option>
+                    </select>
+                  </div>
                   <div className="mb-3">
                     <label className="form-label">Email address</label>
                     <input

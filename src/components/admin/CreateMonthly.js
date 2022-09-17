@@ -28,27 +28,27 @@ import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
 
 const axios = require("axios");
-const dict ={
-  0:"none",
+const dict = {
+  0: "none",
   1: "Approved",
   2: "Rejected",
   3: "Pending",
 
-  "none":0,
-  "Approved":1,
-  "Rejected":2,
-  "Pending":3,
-}
+  none: 0,
+  Approved: 1,
+  Rejected: 2,
+  Pending: 3,
+};
 
 function descendingComparator(a, b, orderBy) {
   // console.log(orderBy)
-  
-  if(orderBy=="month"){
+
+  if (orderBy == "month") {
     // console.log(new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf());
 
     return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
   }
-  
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -84,14 +84,14 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: "Employee Id",
-    sortable: true,
+    sortable: false,
   },
   {
     id: "firstName",
     numeric: true,
     disablePadding: false,
     label: "Employee Name",
-    sortable: true,
+    sortable: false,
   },
   {
     id: "pickupLocation",
@@ -147,16 +147,16 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow
-          sx={{
-            // backgroundColor: "#78146a",
-            backgroundColor: "#1976d2",
-  
-            borderBottom: "2px solid white",
-            "& th": {
-              fontSize: "1.25rem",
-              color: "white",
-            },
-          }}
+        sx={{
+          // backgroundColor: "#78146a",
+          backgroundColor: "#1976d2",
+
+          borderBottom: "2px solid white",
+          "& th": {
+            fontSize: "1.25rem",
+            color: "white",
+          },
+        }}
       >
         {headCells.map((headCell) => (
           <TableCell
@@ -229,36 +229,32 @@ function Display({ row, loader, apiDataSetter }) {
     setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
-  const sendData = async(e) => {
-   
-   if(Dropdown!=0)  
-   {
-
-  
-   
-   await axios
-        .patch(`https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${row.id}`, [{
-          operationType: "Replace",
-          path: "isApproved",
-          op: "replace",
-          from:"" ,
-          value: Dropdown,
-        }]
-      )
+  const sendData = async (e) => {
+    if (Dropdown != 0) {
+      await axios
+        .patch(
+          `https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${row.id}`,
+          [
+            {
+              operationType: "Replace",
+              path: "isApproved",
+              op: "replace",
+              from: "",
+              value: Dropdown,
+            },
+          ]
+        )
         .then((resp) => {
           console.log(resp);
         })
         .catch((e) => {
           console.log(e);
         });
-      }
+    }
 
-  
     apiDataSetter([]);
     loader(apiDataSetter);
   };
-
-
 
   const getMonthString = (date_in_iso) => {
     const date = new Date(date_in_iso);
@@ -286,10 +282,13 @@ function Display({ row, loader, apiDataSetter }) {
     return monthStr;
   };
 
-
-
   return (
-    <TableRow role="checkbox" tabIndex={-1} sx={{fontSize: "1.16rem"}} disabled={true}>
+    <TableRow
+      role="checkbox"
+      tabIndex={-1}
+      sx={{ fontSize: "1.16rem" }}
+      disabled={true}
+    >
       <TableCell
         component="th"
         scope="row"
@@ -299,28 +298,16 @@ function Display({ row, loader, apiDataSetter }) {
       >
         {row.empCode}
       </TableCell>
-      <TableCell
-        sx={{ fontSize: "1.16rem"}}
-        align="center"
-      >
-        {row.firstName + " "+ row.lastName}
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
+        {row.firstName + " " + row.lastName}
       </TableCell>
-      <TableCell
-        sx={{ fontSize: "1.16rem"}}
-        align="center"
-      >
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         {row.pickUpLocation}
       </TableCell>
-      <TableCell
-        sx={{ fontSize: "1.16rem"}}
-        align="center"
-      >
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         {row.dropLocation}
       </TableCell>
-      <TableCell
-        sx={{ fontSize: "1.16rem"}}
-        align="center"
-      >
+      <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         {getMonthString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
@@ -330,44 +317,48 @@ function Display({ row, loader, apiDataSetter }) {
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            
           >
             <Chip
               color="info"
-              label={Dropdown == 0 ? (dict[row.isApproved]) : dict[Dropdown]}
+              label={Dropdown == 0 ? dict[row.isApproved] : dict[Dropdown]}
               style={{ fontSize: "1.16rem" }}
             />
           </button>
-          <ul class="btn-outline-dark dropdown-menu" style={{zIndex:"+2!important", overflow: "visible !important"}} role="menu" boundary="scrollParent">
+          <ul
+            class="btn-outline-dark dropdown-menu"
+            style={{ zIndex: "+2!important", overflow: "visible !important" }}
+            role="menu"
+            boundary="scrollParent"
+          >
             <li>
               <a
-              href="#"
+                href="#"
                 class="dropdown-item"
                 value="Hold"
                 onClick={() => setDropdown(1)}
-                style={{zIndex:"+2!important"}} 
+                style={{ zIndex: "+2!important" }}
               >
                 Approved
               </a>
             </li>
             <li>
               <a
-              href="#"
+                href="#"
                 class="dropdown-item"
                 value="Approved"
                 onClick={() => setDropdown(2)}
-                style={{zIndex:"+2!important"}} 
+                style={{ zIndex: "+2!important" }}
               >
                 Rejected
               </a>
             </li>
             <li>
               <a
-              href="#"
+                href="#"
                 class="dropdown-item"
                 value="Rejected"
                 onClick={() => setDropdown(3)}
-                style={{zIndex:"+2!important"}} 
+                style={{ zIndex: "+2!important" }}
               >
                 Hold
               </a>
@@ -376,31 +367,27 @@ function Display({ row, loader, apiDataSetter }) {
         </div>
       </TableCell>
 
-      <TableCell
-        sx={{ fontSize: "1.16rem", position: "relative" }}
-      >
-
-    {row.status==="Expired"?(
-
-      <Chip
-                          label={row.status}
-                          color="error"
-                          variant="outlined"
-                          size="small"
-                          sx={{ fontSize: "1.16rem" }}
-                        />
-
-
-    ):
-(<Chip
-          color="success"
-          label="Confirm"
-          sx={{ fontSize: "1.16rem" }}
-          name="status"
-          onClick={sendData}
-          disabled={(row.isApproved==1 || row.isApproved==2) && Dropdown==0}
-        />)
-        }
+      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }}>
+        {row.status === "Expired" ? (
+          <Chip
+            label={row.status}
+            color="error"
+            variant="outlined"
+            size="small"
+            sx={{ fontSize: "1.16rem" }}
+          />
+        ) : (
+          <Chip
+            color="success"
+            label="Confirm"
+            sx={{ fontSize: "1.16rem" }}
+            name="status"
+            onClick={sendData}
+            disabled={
+              (row.isApproved == 1 || row.isApproved == 2) && Dropdown == 0
+            }
+          />
+        )}
       </TableCell>
     </TableRow>
   );
@@ -411,28 +398,22 @@ export default function CreateMonthly({
   searchData,
   loader,
   apiDataSetter,
-  searchInput
+  searchInput,
 }) {
   var rows = [];
 
-  console.log(tableData)
+  console.log(tableData);
 
-  if (searchData.length == 0 ) {
-
-    if(searchInput.length==0)
-    {
-
-    tableData.map((data, id) => {
-      // console.log(data.pickupLocation)
-      rows.push(data);
-    });
-  }
-
-  }
-  
-  else {
+  if (searchData.length == 0) {
+    if (searchInput.length == 0) {
+      tableData.map((data, id) => {
+        // console.log(data.pickupLocation)
+        rows.push(data);
+      });
+    }
+  } else {
     searchData.map((data, id) => {
-       rows.push(data);
+      rows.push(data);
     });
   }
 
@@ -502,7 +483,7 @@ export default function CreateMonthly({
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight:200 }}
+            sx={{ minWidth: 750, fontSize: "1.1rem", minHeight: 200 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -521,17 +502,14 @@ export default function CreateMonthly({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
+                  const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-
-                    (<Display
+                    <Display
                       row={row}
                       loader={loader}
                       apiDataSetter={apiDataSetter}
-                    />)
-
-                    
+                    />
                   );
                 })}
               {emptyRows > 0 && (
