@@ -53,7 +53,7 @@ export default function Edit() {
   const loadCabs = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid)",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/(id,userid,roleid)",
         {
           params: {
             Id: id,
@@ -61,7 +61,7 @@ export default function Edit() {
         }
       );
       res.data.map((onecab) => {
-        setCabRecord(onecab);
+        if(!onecab.isAdhoc) setCabRecord(onecab);
       });
       // setCabRecord(res.data);
       // console.log(res.data);
@@ -80,7 +80,7 @@ export default function Edit() {
     e.preventDefault();
     cabRecord.isApproved = 3;
     await axios.put(
-      `https://localhost:44371/api/v1/cabrequirment/${id}`,
+      `https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${id}`,
       cabRecord
     );
     history.push("/dashboard");

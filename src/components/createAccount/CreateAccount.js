@@ -35,9 +35,10 @@ function CreateAccount() {
   };
 
   const onSubmitHandler = (e) => {
+    e.preventDefault();
     console.log(userData);
     axios
-      .post("https://localhost:44371/api/v1/user", userData)
+      .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
       })

@@ -36,7 +36,7 @@ export default function UserDB() {
   const loadUserDetails = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/user/(empcode,name,email)",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/(empcode,name,email)",
         {
           params: {
             EmpCode: loadedData.empCode,

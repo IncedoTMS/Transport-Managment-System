@@ -8,7 +8,7 @@ var data = [];
 const GetMonthlyApi = (setter) => {
   tableData = [];
     axios
-      .get("https://localhost:44371/api/v1/cabrequirment",
+      .get("https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
       
       {
         headers: {

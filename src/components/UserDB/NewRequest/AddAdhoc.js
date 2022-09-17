@@ -47,9 +47,15 @@ const AddAdhoc = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(
-      "https://localhost:44371/api/v1/cabrequirment",
+      "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
       cabrequirement
-    );
+    ).then((res)=>{
+      console.log(res);
+    }).catch((e)=>{
+      console.log(e);
+    })
+
+    
     history.push("/dashboard");
   };
   const timeSlots = [

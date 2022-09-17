@@ -237,7 +237,7 @@ function Display({ row, loader, apiDataSetter }) {
   
    
    await axios
-        .patch(`https://localhost:44371/api/v1/cabrequirment/${row.id}`, [{
+        .patch(`https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${row.id}`, [{
           operationType: "Replace",
           path: "isApproved",
           op: "replace",
