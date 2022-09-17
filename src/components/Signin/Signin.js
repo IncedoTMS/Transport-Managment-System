@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import "./Signin.scss";
 import axios from "axios";
+import swal from "sweetalert";
+import { gridTabIndexCellSelector } from "@mui/x-data-grid";
 
 var userData = "";
 
@@ -68,11 +70,21 @@ export default function Signin() {
           else if (res.data.roleId === 1) History.push("/admin");
           else if (res.data.roleId === 3) History.push("/signup");
         } else {
-          alert("\n\t Invalid/Incomplete Credentials!");
+          swal({
+            title: "Error",
+            text: "Invalid/Incomplete Credentials!",
+            icon: "error",
+            button: "OK",
+          });
         }
       })
       .catch((error) => {
-        alert("\n\t Invalid/Incomplete Credentials!");
+        swal({
+          title: "Error",
+          text: "Invalid/Incomplete Credentials!",
+          icon: "error",
+          button: "OK",
+        });
       });
   };
 
