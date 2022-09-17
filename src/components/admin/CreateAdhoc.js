@@ -398,7 +398,7 @@ function Display({ row, loader, apiDataSetter }) {
           sx={{ fontSize: "1.16rem" }}
           name="status"
           onClick={sendData}
-          disabled={(row.managerApproval=="Approved" || row.managerApproval=="Rejected") && Dropdown=="None"}
+          disabled={(row.isApproved==1 || row.isApproved==2) && Dropdown==0}
         />)
         }
       </TableCell>
