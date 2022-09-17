@@ -356,7 +356,8 @@ export default function EnhancedTable(props) {
                       )}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {getStatus(row.requestDate) === "Expired" ? (
+                      {getStatus(row.requestDate) === "Expired" ||
+                      row.isApproved != 3 ? (
                         <>
                           <Link
                             to={`/dashboard/monthly/edit/${row.id}`}

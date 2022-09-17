@@ -56,12 +56,12 @@ export default function Post({ user }) {
       disablePadding: false,
       label: "Manager",
     },
-    {
-      id: "resAddress",
-      numeric: false,
-      disablePadding: false,
-      label: "Residence Address",
-    },
+    // {
+    //   id: "resAddress",
+    //   numeric: false,
+    //   disablePadding: false,
+    //   label: "Residence Address",
+    // },
     {
       id: "office",
       numeric: false,
@@ -142,10 +142,10 @@ export default function Post({ user }) {
                   {user.manager}
                   {/* Rishi */}
                 </TableCell>
-                <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                  {/* {user.resAddress} */}
-                  Sector-18, Gurgaon
-                </TableCell>
+                {/* <TableCell align="center" sx={{ fontSize: "1.16rem" }}> */}
+                {/* {user.resAddress} */}
+                {/* Sector-18, Gurgaon */}
+                {/* </TableCell> */}
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.office}
                   {/* Gurgaon */}
