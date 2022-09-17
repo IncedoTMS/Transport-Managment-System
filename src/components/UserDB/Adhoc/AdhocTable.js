@@ -27,7 +27,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
 function descendingComparator(a, b, orderBy) {
-  if (orderBy === "date") {
+  if (orderBy === "requestDate") {
     return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
   }
   if (b[orderBy] < a[orderBy]) {
