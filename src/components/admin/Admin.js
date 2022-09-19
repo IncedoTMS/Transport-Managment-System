@@ -141,6 +141,7 @@ export default function Admin() {
   // Calling tableDataMethod to set state
 
   const handleSearch = (e) => {
+    e.preventDefault();
     setInputMonthly(e.target.value);
     let targ = e.target.value.toLowerCase();
     let temp_arr = tableDataState;
@@ -149,10 +150,13 @@ export default function Admin() {
     let f_arr = temp_arr.filter((el) => {
 
       let month=getMonthString(el.requestDate);
+      let fullName=(el.firstName+" "+el.lastName).toLowerCase();
+      console.log(fullName, targ);
+
   
       return (
         el.id === targ ||
-        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) ||
+        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) || fullName.includes(targ) ||
         month.toLowerCase().includes(targ)
       );
     });
@@ -160,16 +164,22 @@ export default function Admin() {
   };
 
   const handleSearch2 = (e) => {
+    e.preventDefault();
     setInputAdhoc(e.target.value);
     let targ = e.target.value.toLowerCase();
     let temp_arr = adhocDataState;
+
+    
+
     let f_arr = temp_arr.filter((el) => {
 
       let date=getDateString(el.requestDate);
+      let fullName=(el.firstName+" "+el.lastName).toLowerCase();
+      console.log(fullName);
 
       return (
         el.id === targ ||
-        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) ||
+        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) || fullName.includes(targ) ||
         date.toLowerCase().includes(targ)
       );
     });
@@ -196,6 +206,10 @@ export default function Admin() {
       setShowComponent(!showComponent);
     }, 1500);
   }, [tableDataState.length == 0, adhocDataState.length == 0]);
+
+  const checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+    };
 
   return (
     <>
@@ -260,6 +274,7 @@ export default function Admin() {
                       placeholder="Search By Name/Date"
                       inputProps={{ "aria-label": "search google maps" }}
                       onChange={handleSearch}
+                      onKeyDown={(e) => checkKeyDown(e)}
                     />
                     <IconButton
                       type="button"
@@ -321,6 +336,7 @@ export default function Admin() {
                         placeholder="Search By Name/Date"
                         inputProps={{ "aria-label": "search google maps" }}
                         onChange={handleSearch2}
+                        onKeyDown={(e) => checkKeyDown(e)}
                       />
                       <IconButton
                         type="button"
