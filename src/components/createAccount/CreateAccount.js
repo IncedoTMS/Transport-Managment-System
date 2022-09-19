@@ -6,10 +6,16 @@ import { borderRadius } from "@mui/system";
 import axios from "axios";
 import "./CreateAccount.scss";
 import swal from "sweetalert";
+import { Redirect } from "react-router-dom";
 
 // import svg from './cab';
 
 function CreateAccount() {
+
+
+  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  console.log(localData.roleId);
+
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -84,18 +90,7 @@ function CreateAccount() {
   const textStyle = { margin: "8px 20px", width: "40%" };
   return (
     <>
-      {/* <h4
-        className="title"
-        style={{
-          color: "rgb(180 36 36)",
-          marginTop: "100px",
-          marginBottom: "-126px",
-          marginLeft: "10%",
-          fontFamily: "Roboto",
-        }}
-      >
-        Create New User
-      </h4> */}
+    {localData.roleId!=3?<Redirect to="/" /> :null}
 
       <div className="row" style={{ display: "flex" }}>
         <div

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import UserDB from "./components/UserDB/UserDB";
 import Signup from "./components/Signup/Signup";
 import Signin from "./components/Signin/Signin";
@@ -21,12 +21,12 @@ const App = () => {
           <Route exact path="/" component={Signin}>
             <Signin />
           </Route>
-          <Route exact path="/signup" component={CreateAccount}>
+          <Route exact path="/createuser" component={CreateAccount}>
             <CreateAccount />
           </Route>
           <Route exact path="/dashboard" component={UserDB}></Route>
 
-          <Route path="/admin" component={Admin}></Route>
+          <Route path="/manager" component={Admin}></Route>
           <Route path="*" component={NoMatch}></Route>
         </Switch>
       </main>

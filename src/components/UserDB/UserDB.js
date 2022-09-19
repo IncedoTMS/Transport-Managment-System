@@ -22,6 +22,11 @@ export default function UserDB() {
   if (token == null) {
     loggedIn = false;
   }
+
+
+  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  console.log(localData.roleId);
+
   const [user, setUser] = useState([]);
   const [userId, setUserId] = useState();
   // const [cabs, setCabs] = useState([]);
@@ -56,7 +61,7 @@ export default function UserDB() {
 
   return (
     <>
-      {loggedIn == false ? <Redirect to="/" /> : null}
+      {localData.roleId!=2? <Redirect to="/" /> : null}
       <BrowserRouter>
         <div className="db-body">
           {/* <Post userData={userData} /> */}

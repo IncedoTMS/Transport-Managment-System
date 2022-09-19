@@ -61,8 +61,7 @@ function a11yProps(index) {
 
 export default function Admin() {
   
-  let isLoggedIn=false;
-  if(localStorage.getItem("token"))  isLoggedIn=true;
+ var localData=JSON.parse(localStorage.getItem("loadedData"));
 
   const [tableDataState, setTableDataState] = useState([]);
   const [adhocDataState, setAdhocState] = useState([]);
@@ -200,7 +199,7 @@ export default function Admin() {
 
   return (
     <>
-    {!isLoggedIn?<Redirect to="/" /> :null}
+    {localData.roleId!=1?<Redirect to="/" /> :null}
  
       <hr />
       <hr />

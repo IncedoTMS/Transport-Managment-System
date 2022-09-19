@@ -67,8 +67,8 @@ export default function Signin() {
           localStorage.setItem("loadedData", JSON.stringify(userData));
           loggedIn = true;
           if (res.data.roleId === 2) History.push("/dashboard");
-          else if (res.data.roleId === 1) History.push("/admin");
-          else if (res.data.roleId === 3) History.push("/signup");
+          else if (res.data.roleId === 1) History.push("/manager");
+          else if (res.data.roleId === 3) History.push("/createuser");
         } else {
           swal({
             title: "Error",
@@ -91,7 +91,7 @@ export default function Signin() {
   return (
     <>
       {/* Check if logged in */}
-      {loggedIn ? <Redirect to="/dashboard" /> : null}
+      {/* {loggedIn ? <Redirect to="/dashboard" /> : null} */}
       <div className="pageTwo">
         <Helmet>
           <title>Incedo-TMS-SignIn</title>

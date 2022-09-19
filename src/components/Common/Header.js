@@ -9,11 +9,13 @@ function Header() {
   // load logindata from local storage
   const loadedData = JSON.parse(localStorage.getItem("loadedData"));
   const isDashboard = useRouteMatch("/dashboard");
-  const isAdmin = useRouteMatch("/admin");
+  const isAdmin = useRouteMatch("/manager");
+  const isManager=useRouteMatch("/createuser");
+
   return (
     <React.Fragment>
       <div className="header">
-        {isDashboard || isAdmin ? (
+        {isDashboard || isAdmin || isManager ? (
           <>
             <a href="https://thehub.incedoinc.com/" target="_blank">
               <img src={thehub} alt="" />
