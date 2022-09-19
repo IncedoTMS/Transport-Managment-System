@@ -141,8 +141,89 @@
     }
   }
 
-   select {
-    border-radius: 10ch;
-    border: transparent;
-  }
+ *,
+ *::before,
+ *::after {
+  box-sizing: border-box;
+ }
+ 
+
+select {
+  // A reset of styles, including removing the default dropdown arrow
+  appearance: none;
+  // Additional resets for further consistency
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  // ...existing styles
+  outline: none;
+}
+
+:root {
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+}
+ .select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.5;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+ }
+
+ .select::after {
+  content: "";
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-bottom: 2px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+ }
+
+
+
+.select {
+  // ...existing styles
+  display: grid;
+}
+.select {
+  // ...existing styles
+  grid-template-areas: "select";
+}
+
+select,
+.select:after {
+  grid-area: select;
+}
+.select {
+  // ...existing styles
+  align-items: center;
+}
+
+.select:after {
+  // ...existing styles
+  justify-self: end;
+}
 }

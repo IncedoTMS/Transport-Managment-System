@@ -136,12 +136,16 @@ export default function Signin() {
                     />
                   </div>
                   <br />
-                  <div className="mb-3">
-                    <label className="form-label"> Role &nbsp;</label>
+
+                  <label for="standard-select" className="form-label">
+                    Role &nbsp;
+                  </label>
+                  <div className="select">
                     <select
                       name="roleId"
                       onChange={handleOnChange}
                       class="required"
+                      id="standard-select"
                     >
                       <option selected disabled>
                         Select a role
