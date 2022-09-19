@@ -40,7 +40,7 @@ export default function Signin() {
   const emailValidation = (email) => {
     const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
     if (!emailValidator.test(email) && email !== "") {
-      setMessage("invalid email");
+      setMessage("");
     } else {
       setMessage("");
     }
