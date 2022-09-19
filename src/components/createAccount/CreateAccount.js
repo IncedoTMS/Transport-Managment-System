@@ -32,21 +32,31 @@ function CreateAccount() {
     addressDetails: "",
   });
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({
+    email:"",
+    password:"",
+    empCode:"",
+    phone:"",
+    projectId: ""
+  });
+
+  const [showMessage, setShowMessage]=useState({})
 
   const changeHandler = (e) => {
     e.preventDefault();
     let key = e.target.name;
     let value = e.target.value;
-    // console.log(key,value);
     setUserData({ ...userData, [key]: value });
-    // console.log(userData);
+    emailValidation(e);
+    
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     e.preventDefault();
-    console.log(userData);
-    axios
+    
+
+    
+  await  axios
       .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
@@ -68,15 +78,65 @@ function CreateAccount() {
       });
   };
 
-  const emailValidation = (email) => {
+  const emailValidation = async(e) => {
+
+    let key=e.target.name;
+    let value=e.target.value;
+
     const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
-    if (!emailValidator.test(email) && email !== "") {
-      setMessage("Email is Invalid");
-      window.alert(message);
-    } else {
-      setMessage("");
+
+    console.log(key,value);
+
+    if(key=="email")
+    {
+      if(!emailValidator.test(value) && value!= "")
+      { 
+        setMessage({...message, [key]:"Invalid"});
+      }
+      else {
+        setMessage({...message, [key]:""})
+      }
     }
-  };
+
+    if(key=="password"){
+
+      if(value.length<8 && value.length!=0)
+      {
+        setMessage({...message, [key]:"Invalid"});
+      }
+
+      else {
+        setMessage({...message, [key]:""});
+      }
+    }
+
+    if(key=="phone"){
+
+      if(value.length!=10 && value.length!=0)
+      {
+        setMessage({...message, [key]:"Invalid"});
+      }
+      else {
+        setMessage({...message, [key]:""});
+      }
+      
+    }
+
+    if(key=="empCode"){
+
+      if(value.length!=6 && value.length!=0)
+      {
+        setMessage({...message, [key]:"Invalid"});
+      }
+
+      else {
+        setMessage({...message, [key]:""});
+      }
+      
+    }
+
+      
+    }
 
   const paperStyle = {
     padding: 20,
@@ -88,6 +148,7 @@ function CreateAccount() {
   };
   const avatarStyle = { backgroundColor: "#1696d6", borderRadius: "50%" };
   const textStyle = { margin: "8px 20px", width: "40%" };
+
   return (
     <>
     {localData.roleId!=3?<Redirect to="/" /> :null}
@@ -116,13 +177,6 @@ function CreateAccount() {
           <form>
             <Grid>
               <Paper elevation={3} style={paperStyle}>
-                {/* <Grid align="center">
-          <Avatar style={avatarStyle} variant="square">
-            <PersonAddOutlinedIcon sx={{ width: 30, height: 30 }} />
-          </Avatar>
-
-          <h4 style={{ color: "black" }}>Create New User</h4>
-        </Grid> */}
 
                 <Grid align="center">
                   <TextField
@@ -135,6 +189,7 @@ function CreateAccount() {
                     autoComplete="false"
                     required
                   />
+                
                   <TextField
                     style={textStyle}
                     size="small"
@@ -152,6 +207,7 @@ function CreateAccount() {
                     name="empCode"
                     label="Employee Code"
                     placeholder="Enter Employee Code"
+                    helperText={<div style={{color: "red"}}>{message.empCode}</div>}
                     autoComplete="false"
                     required
                   />
@@ -162,6 +218,7 @@ function CreateAccount() {
                     name="phone"
                     label="Phone Number"
                     placeholder="Enter Phone Number"
+                    helperText={<div style={{color: "red"}}>{message.phone}</div>}
                     required
                   />
                   <TextField
@@ -171,9 +228,11 @@ function CreateAccount() {
                     name="email"
                     label="Company Email"
                     placeholder="Enter @incedoinc.com id"
+                    helperText={<div style={{color:"red"}}>{message.email}</div>}
                     autoComplete="false"
                     required
                   />
+
 
                   <TextField
                     style={textStyle}
@@ -183,6 +242,7 @@ function CreateAccount() {
                     label="Password"
                     type="password"
                     placeholder="Password"
+                    helperText={<div style={{color:"red"}} >{message.password}</div>}
                     autoComplete="false"
                     required
                   />
@@ -193,6 +253,7 @@ function CreateAccount() {
                     name="projectid"
                     label="Project ID"
                     placeholder="Project ID"
+                    helperText={<div style={{color: "red"}}>{message.projectId}</div>}
                     autoComplete="false"
                     required
                   />

@@ -353,7 +353,7 @@ function Display({ row, loader, apiDataSetter }) {
               </a>
             </li>
             <li>
-              <a
+              {/* <a
                 href="#"
                 class="dropdown-item"
                 value="Rejected"
@@ -361,7 +361,7 @@ function Display({ row, loader, apiDataSetter }) {
                 style={{ zIndex: "+2!important" }}
               >
                 Hold
-              </a>
+              </a> */}
             </li>
           </ul>
         </div>
