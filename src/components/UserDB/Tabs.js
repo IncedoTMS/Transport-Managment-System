@@ -66,7 +66,7 @@ export default function BasicTabs({ userId }) {
     }
   };
   const monthlyCabs = cabs.filter((cab) => cab.isAdhoc === false);
-  const adhocCabs = cabs.filter((cab) => cab.isAdhoc === true);
+  const adhocCabs = cabs.filter((cab) => cab.isAdhoc === true).reverse();
 
   const [value, setValue] = React.useState(0);
 
@@ -100,25 +100,18 @@ export default function BasicTabs({ userId }) {
           variant="fullWidth"
         >
           <Tab
-            label="Monthly Requests"
+            label="Adhoc Requests"
             sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
             {...a11yProps(0)}
           />
           <Tab
-            label="Adhoc Requests"
+            label="Monthly Requests"
             sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
             {...a11yProps(1)}
           />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {monthlyCabs.length > 0 ? (
-          <MonthlyTable data={monthlyCabs} />
-        ) : (
-          <p>No Monthly cab data.</p>
-        )}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
         {adhocCabs.length > 0 ? (
           <AdhocTable data={adhocCabs} />
         ) : (
@@ -134,6 +127,13 @@ export default function BasicTabs({ userId }) {
             </Button>
           </Link>
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {monthlyCabs.length > 0 ? (
+          <MonthlyTable data={monthlyCabs} />
+        ) : (
+          <p>No Monthly cab data.</p>
+        )}
       </TabPanel>
     </Box>
   );
