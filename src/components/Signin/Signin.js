@@ -17,7 +17,11 @@ var userData = "";
 
 export default function Signin() {
   //setting token for session storage
-
+  const landingRoutes = ["/manager", "/dashboard", "/createuser"];
+  const getHomePage = () => {
+    let role = JSON.parse(localStorage.getItem("loadedData")).roleId;
+    return landingRoutes[role - 1];
+  };
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
@@ -91,7 +95,7 @@ export default function Signin() {
   return (
     <>
       {/* Check if logged in */}
-      {/* {loggedIn ? <Redirect to="/dashboard" /> : null} */}
+      {loggedIn ? <Redirect to={getHomePage()} /> : null}
       <div className="pageTwo">
         <Helmet>
           <title>Incedo-TMS-SignIn</title>
