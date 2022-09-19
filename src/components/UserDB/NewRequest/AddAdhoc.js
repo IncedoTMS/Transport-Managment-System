@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
-
+import emailjs, { init } from "@emailjs/browser";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -44,18 +44,39 @@ const AddAdhoc = () => {
     setCabrequirement({ ...cabrequirement, [e.target.name]: e.target.value });
   };
 
+  const form = useRef();
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(
-      "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
-      cabrequirement
-    ).then((res)=>{
-      console.log(res);
-    }).catch((e)=>{
-      console.log(e);
-    })
+    await axios
+      .post(
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
+        cabrequirement
+      )
+      .then((res) => {
+        // console.log(res);
+        emailjs
+          .sendForm(
+            "service_aw7irj8",
+            "template_l8ouh1c",
+            form.current,
+            "9xBu-OIGFCW5eVISf"
+          )
 
-    
+          .then(
+            (result) => {
+              alert("Message sent successfully");
+
+              console.log(result.text);
+            },
+            (error) => {
+              console.log(error.text);
+            }
+          );
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     history.push("/dashboard");
   };
   const timeSlots = [
@@ -86,7 +107,7 @@ const AddAdhoc = () => {
         >
           Add Adhoc Drop Request
         </Typography>
-        <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }} ref={form}>
           <TextField
             type="date"
             margin="normal"
