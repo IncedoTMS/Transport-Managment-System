@@ -80,9 +80,9 @@ function CreateAccount() {
 
   const paperStyle = {
     padding: 20,
-    height: "auto",
+    height: "90%",
     width: "90%",
-    marginTop: "10%",
+    marginTop: "5%",
     marginBottom: "30px",
     marginLeft: "50px",
   };
@@ -92,20 +92,21 @@ function CreateAccount() {
     <>
     {localData.roleId!=3?<Redirect to="/" /> :null}
 
-      <div className="row" style={{ display: "flex" }}>
+      <div className="row" style={{ display: "flex", marginTop: "3%" }}>
         <div
           className="col one"
           style={{
             width: "50%",
             margin: "auto",
+            height:"80%",
             float: "left",
           }}
         >
           <img
-            src="account.png"
+            src="cab.svg"
             style={{
               width: "80%",
-              height: "80%",
+              height: "60%",
               marginLeft: "20%",
             }}
           />
@@ -126,34 +127,37 @@ function CreateAccount() {
                 <Grid align="center">
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="firstName"
                     label="First Name"
                     placeholder="Enter First Name"
+                    autoComplete="false"
                     required
                   />
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="lastName"
                     label="Last Name"
                     placeholder="Enter Last Name"
+                    autoComplete="false"
                     required
                   />
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="empCode"
                     label="Employee Code"
                     placeholder="Enter Employee Code"
+                    autoComplete="false"
                     required
                   />
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="phone"
                     label="Phone Number"
@@ -162,82 +166,90 @@ function CreateAccount() {
                   />
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="email"
                     label="Company Email"
                     placeholder="Enter @incedoinc.com id"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     name="password"
                     onChange={changeHandler}
                     label="Password"
                     type="password"
                     placeholder="Password"
+                    autoComplete="false"
+                    required
                   />
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="projectid"
                     label="Project ID"
                     placeholder="Project ID"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="projectName"
                     label="Project Name"
                     placeholder="Project Name"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="manager"
                     type="text"
                     label="Manager Name"
                     placeholder="Manager Name"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
                     style={textStyle}
-                    size="medium"
+                    size="small"
                     onChange={changeHandler}
                     name="department"
                     type="text"
                     label="Department"
                     placeholder="Department"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
-                    sx={{ width: "86.8%", margin: "10px 20px" }}
-                    size="medium"
+                    sx={{ width: "86.8%", margin: "8px 20px" }}
+                    size="small"
                     onChange={changeHandler}
                     name="office"
                     type="text"
                     label="Office"
                     placeholder="Office"
+                    autoComplete="false"
                     required
                   />
 
                   <TextField
                     sx={{ margin: "10px 20px", width: "86.8%" }}
-                    size="medium"
+                    size="small"
                     name="addressDetails"
                     onChange={changeHandler}
-                    label="Address Line"
+                    label="Address"
                     placeholder="Enter Address"
                     required
                   />
@@ -247,15 +259,17 @@ function CreateAccount() {
                     sx={{
                       marginLeft: "60%",
                       width: "20%",
-                      backgroundColor: "green",
-                      marginTop: "3%",
+                      backgroundColor: "#FF5733",
+                      marginTop: "1%",
                       marginLeft: "67.5%",
+                      maxHeight: 30,
                     }}
                     type="submit"
                     color="primary"
                     variant="contained"
+                    size="small"
                   >
-                    <h5>Create</h5>
+                    <h5 style={{padding:"auto"}}>Create</h5>
                   </Button>
                 </Grid>
               </Paper>
