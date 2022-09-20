@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs, { init } from "@emailjs/browser";
 import { Grid, Paper, Avatar, TextField, Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
@@ -78,6 +79,7 @@ function CreateAccount() {
 
   }
 
+  const form=useRef();
   const onSubmitHandler = async(e) => {
     
     e.preventDefault();
@@ -89,6 +91,32 @@ function CreateAccount() {
       .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
+
+
+        var data = {
+          service_id: "service_qlr0527",
+          template_id: "template_fc6ueu4",
+          user_id: "sCNQRic4STP4B_tW_",
+          template_params: {
+            uemail: userData.email,
+            password: userData.password,
+            name: userData.firstName,
+            receiversEmail: userData.email,
+          },
+        };
+
+        window.$.ajax("https://api.emailjs.com/api/v1.0/email/send", {
+          type: "POST",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+        })
+          .done(function () {
+            console.log("Your mail is sent!");
+          })
+          .fail(function (error) {
+            console.log("Oops... " + JSON.stringify(error));
+          });
+
         swal({
           title: "Done",
           text: "Account Created Successfully",
@@ -350,6 +378,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                       marginLeft: "67.5%",
                       maxHeight: 30,
                     }}
+                    ref={form}
                     type="submit"
                     color="primary"
                     variant="contained"
