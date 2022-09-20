@@ -64,7 +64,7 @@ const AddAdhoc = () => {
 
           .then(
             (result) => {
-              alert("Message sent successfully");
+              // alert("Message sent successfully");
 
               console.log(result.text);
             },
@@ -91,7 +91,6 @@ const AddAdhoc = () => {
     },
   ];
 
-  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

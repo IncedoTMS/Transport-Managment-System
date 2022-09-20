@@ -354,7 +354,8 @@ export default function EnhancedTable(props) {
                         : "Pending"}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {getStatus(row.requestDate) === "Active" ? (
+                      {getStatus(row.requestDate) === "Active" &&
+                      row.isApproved !== 2 ? (
                         <Chip
                           label={"Active"}
                           color="success"
