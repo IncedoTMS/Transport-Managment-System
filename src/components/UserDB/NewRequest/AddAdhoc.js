@@ -40,12 +40,47 @@ const AddAdhoc = () => {
     isAdhoc,
   } = cabrequirement;
 
+
+  var localData=JSON.parse(localStorage.getItem("loadedData"));
+
   const onInputChange = (e) => {
     setCabrequirement({ ...cabrequirement, [e.target.name]: e.target.value });
   };
 
   const form = useRef();
+
+
+  const getDateString = (date_in_iso) => {
+    const date = new Date(date_in_iso);
+    const [month, day, year] = [
+      date.getMonth(),
+      date.getDate(),
+      date.getFullYear(),
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    let dateStr = day + "-" + months[month] + "-" + year;
+    return dateStr;
+  };
+
+
   const onSubmit = async (e) => {
+
+    console.log(localData);
+
     e.preventDefault();
     await axios
       .post(
@@ -53,25 +88,36 @@ const AddAdhoc = () => {
         cabrequirement
       )
       .then((res) => {
-        // console.log(res);
-        emailjs
-          .sendForm(
-            "service_aw7irj8",
-            "template_l8ouh1c",
-            form.current,
-            "9xBu-OIGFCW5eVISf"
-          )
+        
+        var timing = cabrequirement.timeSlotId == 1 ? "22:00" : "03:00";
+        var data = {
+          service_id: "service_qlr0527",
+          template_id: "template_1v91x1n",
+          user_id: "sCNQRic4STP4B_tW_",
+          template_params: {
+            email: localData.userName,
+            status: "Pending",
+            timing: timing,
+            Date: getDateString(cabrequirement.requestDate),
+            request_type: "Adhoc",
 
-          .then(
-            (result) => {
-              // alert("Message sent successfully");
+            receiversEmail: "himanshi.sharma1@incedoinc.com",
+          },
+        };
 
-              console.log(result.text);
-            },
-            (error) => {
-              console.log(error.text);
-            }
-          );
+        window.$.ajax("https://api.emailjs.com/api/v1.0/email/send", {
+          type: "POST",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+        })
+          .done(function () {
+            console.log("Your mail is sent!");
+          })
+          .fail(function (error) {
+            console.log("Oops... " + JSON.stringify(error));
+          });
+
+
       })
       .catch((e) => {
         console.log(e);
