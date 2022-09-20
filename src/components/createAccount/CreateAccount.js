@@ -8,6 +8,9 @@ import "./CreateAccount.scss";
 import swal from "sweetalert";
 import { Redirect } from "react-router-dom";
 
+
+var pWord="";
+
 // import svg from './cab';
 
 function CreateAccount() {
@@ -46,14 +49,40 @@ function CreateAccount() {
     e.preventDefault();
     let key = e.target.name;
     let value = e.target.value;
+    if(emailValidation(e)){
+
+      let randPass=randomPasswordGenerator();
+      pWord=randPass;
+
+
+    }
+
     setUserData({ ...userData, [key]: value });
-    emailValidation(e);
+    
     
   };
 
+
+  function randomPasswordGenerator(){
+
+    var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var passwordLength = 12;
+    var password = "";
+
+    for (var i = 0; i <= passwordLength; i++) {
+      var randomNumber = Math.floor(Math.random() * chars.length);
+      password += chars.substring(randomNumber, randomNumber +1);
+     }
+
+     return password;
+
+  }
+
   const onSubmitHandler = async(e) => {
-    e.preventDefault();
     
+    e.preventDefault();
+    setUserData({...userData, "password":pWord});
+    console.log(userData);
 
     
   await  axios
@@ -78,12 +107,15 @@ function CreateAccount() {
       });
   };
 
-  const emailValidation = async(e) => {
+  const emailValidation = (e) => {
 
     let key=e.target.name;
     let value=e.target.value;
+const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
 
-    const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
+let c1=!emailValidator.test(value) || value== "" ;
+    let c2=value.length!=10 || value.length==0;
+    let c3= value.length!=6 || value.length==0;
 
     console.log(key,value);
 
@@ -92,23 +124,14 @@ function CreateAccount() {
       if(!emailValidator.test(value) && value!= "")
       { 
         setMessage({...message, [key]:"Invalid"});
+        
       }
       else {
         setMessage({...message, [key]:""})
       }
     }
 
-    if(key=="password"){
-
-      if(value.length<8 && value.length!=0)
-      {
-        setMessage({...message, [key]:"Invalid"});
-      }
-
-      else {
-        setMessage({...message, [key]:""});
-      }
-    }
+    
 
     if(key=="phone"){
 
@@ -134,6 +157,8 @@ function CreateAccount() {
       }
       
     }
+
+    return !(c1&&c2&&c3);
 
       
     }
@@ -234,7 +259,7 @@ function CreateAccount() {
                   />
 
 
-                  <TextField
+                  {/* <TextField
                     style={textStyle}
                     size="small"
                     name="password"
@@ -245,7 +270,7 @@ function CreateAccount() {
                     helperText={<div style={{color:"red"}} >{message.password}</div>}
                     autoComplete="false"
                     required
-                  />
+                  /> */}
                   <TextField
                     style={textStyle}
                     size="small"
@@ -294,7 +319,7 @@ function CreateAccount() {
                   />
 
                   <TextField
-                    sx={{ width: "86.8%", margin: "8px 20px" }}
+                    style={textStyle}
                     size="small"
                     onChange={changeHandler}
                     name="office"
