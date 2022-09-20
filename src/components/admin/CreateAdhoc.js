@@ -26,6 +26,7 @@ import "./tables.css";
 import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
+import emailjs, { init } from "@emailjs/browser";
 
 const axios = require("axios");
 const dict = {
@@ -39,6 +40,11 @@ const dict = {
   Rejected: 2,
   Pending: 3,
 };
+
+const timeSlots = {
+  1:"22:00",
+  2: "3:00"
+}
 
 function descendingComparator(a, b, orderBy) {
   // console.log(orderBy)
@@ -204,6 +210,10 @@ function Display({ row, loader, apiDataSetter }) {
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
   const [Dropdown, setDropdown] = React.useState(0);
+  const [userEmail, setUserEmail]=React.useState(row.email);
+  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  
+  
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -229,7 +239,11 @@ function Display({ row, loader, apiDataSetter }) {
     setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
+
+  const form = React.useRef();
   const sendData = async (e) => {
+
+    console.log(userEmail);
     if (Dropdown != 0) {
       await axios
         .patch(
@@ -246,6 +260,36 @@ function Display({ row, loader, apiDataSetter }) {
         )
         .then((resp) => {
           console.log(resp);
+
+          
+         
+
+
+          var data = {
+            service_id: "service_aw7irj8",
+            template_id: "template_l8ouh1c",
+            user_id: "9xBu-OIGFCW5eVISf",
+            template_params: {
+              receiversEmail: row.email,
+              from_name: row.firstName,
+              status: dict[Dropdown],
+              timing: timeSlots[row.timeSlotId],
+              request_type: "Adhoc",
+              Date:getDateString(row.requestDate)
+            },
+          };
+
+          window.$.ajax("https://api.emailjs.com/api/v1.0/email/send", {
+            type: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+          })
+            .done(function () {
+              console.log("Your mail is sent!");
+            })
+            .fail(function (error) {
+              console.log("Oops... " + JSON.stringify(error));
+            });
         })
         .catch((e) => {
           console.log(e);
@@ -281,6 +325,8 @@ function Display({ row, loader, apiDataSetter }) {
     let dateStr = day + "-" + months[month] + "-" + year;
     return dateStr;
   };
+
+  
 
   return (
     <TableRow
@@ -383,6 +429,7 @@ function Display({ row, loader, apiDataSetter }) {
             sx={{ fontSize: "1.16rem" }}
             name="status"
             onClick={sendData}
+            ref={form}
             disabled={
               (row.isApproved == 1 || row.isApproved == 2) && Dropdown == 0
             }

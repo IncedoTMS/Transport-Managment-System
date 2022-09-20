@@ -83,6 +83,7 @@ export default function Signin() {
         }
       })
       .catch((error) => {
+        console.log(error);
         swal({
           title: "Error",
           text: "Invalid/Incomplete Credentials!",
