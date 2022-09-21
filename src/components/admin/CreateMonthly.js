@@ -26,6 +26,7 @@ import "./tables.css";
 import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
 const axios = require("axios");
@@ -211,6 +212,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
   const [Dropdown, setDropdown] = React.useState(0);
+  const [note,setNote]=React.useState("");
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -266,7 +268,8 @@ function Display({ row, loader, apiDataSetter }) {
               status: dict[Dropdown],
               timing: timeSlots[row.timeSlotId],
               request_type: "Monthly",
-              Date:getMonthString(row.requestDate)
+              Date:getMonthString(row.requestDate),
+              message: note
             },
           };
 
@@ -318,7 +321,12 @@ function Display({ row, loader, apiDataSetter }) {
     return monthStr;
   };
 
+  const sendNote=(e)=>{
 
+    if(Dropdown==2) setNote(e.target.value);
+    else setNote("");
+ 
+   }
 
 
 
@@ -351,6 +359,8 @@ function Display({ row, loader, apiDataSetter }) {
         {getMonthString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
+      
+
         <div class="btn-group">
           <button
             type="button"
@@ -407,7 +417,16 @@ function Display({ row, loader, apiDataSetter }) {
         </div>
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }}>
+      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }} align="center">
+
+      {Dropdown==2?(<TextareaAutosize
+              aria-label="minimum height"
+              minRows={2}
+              placeholder="(Optional)"
+              onChange={sendNote}
+              style={{ width: 200 }}
+          />):null}
+
         {row.status === "Expired" ? (
           <Chip
             label={row.status}

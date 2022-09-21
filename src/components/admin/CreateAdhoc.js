@@ -27,6 +27,8 @@ import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
 import emailjs, { init } from "@emailjs/browser";
+import TextareaAutosize from '@mui/base/TextareaAutosize';
+import Popover from '@mui/material/Popover';
 
 const axios = require("axios");
 const dict = {
@@ -212,6 +214,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [Dropdown, setDropdown] = React.useState(0);
   const [userEmail, setUserEmail]=React.useState(row.email);
   var localData=JSON.parse(localStorage.getItem("loadedData"));
+  const [note,setNote]=React.useState("");
   
   
 
@@ -222,6 +225,8 @@ function Display({ row, loader, apiDataSetter }) {
     reqdate: "",
     status: "",
   });
+
+  
 
   React.useEffect(() => {
     // console.log(1);
@@ -261,7 +266,7 @@ function Display({ row, loader, apiDataSetter }) {
         .then((resp) => {
           console.log(resp);
 
-          
+          console.log(note);
          
 
 
@@ -275,7 +280,8 @@ function Display({ row, loader, apiDataSetter }) {
               status: dict[Dropdown],
               timing: timeSlots[row.timeSlotId],
               request_type: "Adhoc",
-              Date:getDateString(row.requestDate)
+              Date:getDateString(row.requestDate),
+              message: note
             },
           };
 
@@ -326,7 +332,12 @@ function Display({ row, loader, apiDataSetter }) {
     return dateStr;
   };
 
-  
+  const sendNote=(e)=>{
+
+   if(Dropdown==2) setNote(e.target.value);
+   else setNote("");
+
+  }
 
   return (
     <TableRow
@@ -357,8 +368,11 @@ function Display({ row, loader, apiDataSetter }) {
         {getDateString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
+      
+
         <div class="btn-group">
           <button
+          id="confirmation"
             type="button"
             class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
@@ -413,7 +427,21 @@ function Display({ row, loader, apiDataSetter }) {
         </div>
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }}>
+      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }} align="center">
+
+     {Dropdown==2?(
+     <><TextareaAutosize
+              aria-label="minimum height"
+              minRows={2}
+              placeholder="(Optional)"
+              onChange={sendNote}
+              style={{ width: 200 }}
+          />
+          <br />
+          </>
+          
+          ): null}
+
         {row.status === "Expired" ? (
           <Chip
             label={row.status}
@@ -423,6 +451,7 @@ function Display({ row, loader, apiDataSetter }) {
             sx={{ fontSize: "1.16rem" }}
           />
         ) : (
+          
           <Chip
             color="success"
             label="Confirm"

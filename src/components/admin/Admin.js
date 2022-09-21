@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
+
 import {
   BrowserRouter,
   Routes,
@@ -25,6 +26,8 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+
+const cryptoJs= require('crypto-js');
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +64,10 @@ function a11yProps(index) {
 
 export default function Admin() {
   
+  
+
  var localData=JSON.parse(localStorage.getItem("loadedData"));
+ 
 
   const [tableDataState, setTableDataState] = useState([]);
   const [adhocDataState, setAdhocState] = useState([]);
@@ -257,6 +263,7 @@ export default function Admin() {
               <>
                 <div>
                   <Paper
+                   className='inputSearch'
                     component="form"
                     sx={{
                       p: "2px 4px",
@@ -274,6 +281,7 @@ export default function Admin() {
                       placeholder="Search By Name/Date"
                       inputProps={{ "aria-label": "search google maps" }}
                       onChange={handleSearch}
+                     
                       onKeyDown={(e) => checkKeyDown(e)}
                     />
                     <IconButton
@@ -320,6 +328,7 @@ export default function Admin() {
                 <>
                   <div>
                     <Paper
+                    className='inputSearch'
                       component="form"
                       sx={{
                         p: "2px 4px",
@@ -337,6 +346,7 @@ export default function Admin() {
                         inputProps={{ "aria-label": "search google maps" }}
                         onChange={handleSearch2}
                         onKeyDown={(e) => checkKeyDown(e)}
+                        
                       />
                       <IconButton
                         type="button"

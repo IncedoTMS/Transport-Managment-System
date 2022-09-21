@@ -14,6 +14,7 @@ import swal from "sweetalert";
 import { gridTabIndexCellSelector } from "@mui/x-data-grid";
 
 var userData = "";
+const cryptoJs=require('crypto-js');
 
 export default function Signin() {
   //setting token for session storage
@@ -68,7 +69,12 @@ export default function Signin() {
         if (res.data.firstName) {
           userData = res.data;
           localStorage.setItem("token", "qwertyuiop");
+          let secret="k4WQ,kl[l0986;'kmj bj/8";
+
+          
+
           localStorage.setItem("loadedData", JSON.stringify(userData));
+
           loggedIn = true;
           if (res.data.roleId === 2) History.push("/dashboard");
           else if (res.data.roleId === 1) History.push("/manager");

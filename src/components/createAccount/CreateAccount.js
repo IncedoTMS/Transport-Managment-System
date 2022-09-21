@@ -10,7 +10,36 @@ import swal from "sweetalert";
 import { Redirect } from "react-router-dom";
 
 
+
 var pWord="";
+
+
+
+const keys = {
+  upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  lowerCase: "abcdefghijklmnopqrstuvwxyz",
+  number: "0123456789",
+  symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
+}
+
+const getKey = [
+  function upperCase() {
+    return keys.upperCase[Math.floor(Math.random() * keys.upperCase.length)];
+  },
+  function lowerCase() {
+    return keys.lowerCase[Math.floor(Math.random() * keys.lowerCase.length)];
+  },
+  function number() {
+    return keys.number[Math.floor(Math.random() * keys.number.length)];
+  },
+  function symbol() {
+    return keys.symbol[Math.floor(Math.random() * keys.symbol.length)];
+  }
+];
+
+
+
+
 
 // import svg from './cab';
 
@@ -66,23 +95,25 @@ function CreateAccount() {
 
   function randomPasswordGenerator(){
 
-    var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var passwordLength = 12;
-    var password = "";
 
-    for (var i = 0; i <= passwordLength; i++) {
-      var randomNumber = Math.floor(Math.random() * chars.length);
-      password += chars.substring(randomNumber, randomNumber +1);
-     }
-
-     return password;
+let password="";
+    while (12 > password.length) {
+      let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
+        password += keyToAdd();
 
   }
 
+  return password;
+}
+
   const form=useRef();
   const onSubmitHandler = async(e) => {
+  
+
+    let p = randomPasswordGenerator();
+    console.log(p);
+
     
-    e.preventDefault();
     setUserData({...userData, "password":pWord});
     console.log(userData);
 

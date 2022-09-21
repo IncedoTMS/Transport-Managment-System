@@ -30,3 +30,31 @@ td,
 th {
   text-align: center;
 }
+
+
+/* .inputSearch{
+
+  position: relative;
+  left:20px;
+  width:fit-content;
+
+} */
+
+@media all and (max-width: 768px) {
+
+  .inputSearch{
+
+    position: relative;
+    right:200px;
+    width:fit-content;
+
+  }
+}
+
+@media all and (min-width: 300px){
+  .inputSearch{
+
+    width:min-content;
+
+  }
+}
