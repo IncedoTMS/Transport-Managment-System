@@ -18,16 +18,16 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
-const timeSlots={
-  1:"22:00",
-  2 :"22:30",
-  3 : "23:00",
-  4 : "23:30",
-  5 : "00:00",
-  6  : "1:00",
-  7 : "2:00",
-  8 : "3:00",
-}
+const timeSlots = {
+  1: "22:00",
+  2: "22:30",
+  3: "23:00",
+  4: "23:30",
+  5: "00:00",
+  6: "1:00",
+  7: "2:00",
+  8: "3:00",
+};
 
 export default function Edit2() {
   let history = useHistory();
@@ -64,7 +64,7 @@ export default function Edit2() {
   const loadCabs = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid,managerid)",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/(id,userid,roleid,managerid)",
         {
           params: {
             Id: id,
@@ -72,7 +72,7 @@ export default function Edit2() {
         }
       );
       res.data.map((onecab) => {
-        if(onecab.isAdhoc) setCabRecord(onecab);
+        if (onecab.isAdhoc) setCabRecord(onecab);
       });
       // setCabRecord(res.data);
       // console.log(res.data);
@@ -85,7 +85,7 @@ export default function Edit2() {
     e.preventDefault();
     cabRecord.isApproved = 3;
     await axios.put(
-      `https://localhost:44371/api/v1/cabrequirment/${id}`,
+      `https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${id}`,
       cabRecord
     );
     history.push("/dashboard");

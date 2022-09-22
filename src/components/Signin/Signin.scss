@@ -16,7 +16,7 @@
     cursor: pointer;
   }
   .row {
-    display: flex;
+    display: flex !important;
     height: inherit;
   }
   

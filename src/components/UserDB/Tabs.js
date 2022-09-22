@@ -53,7 +53,7 @@ export default function BasicTabs({ userId }) {
   const loadCabDetails = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid,managerid)",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/(id,userid,roleid,managerid)",
         {
           params: {
             UserID: userId,

@@ -23,8 +23,7 @@ export default function UserDB() {
     loggedIn = false;
   }
 
-
-  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  var localData = JSON.parse(localStorage.getItem("loadedData"));
   console.log(localData.roleId);
 
   const [user, setUser] = useState([]);
@@ -41,7 +40,7 @@ export default function UserDB() {
   const loadUserDetails = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:44371/api/v1/user/(empcode,name,email,managerid)",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/(empcode,name,email,managerid)",
         {
           params: {
             EmpCode: loadedData.empCode,
@@ -61,7 +60,7 @@ export default function UserDB() {
 
   return (
     <>
-      {localData.roleId!=2? <Redirect to="/" /> : null}
+      {localData.roleId != 2 ? <Redirect to="/" /> : null}
       <BrowserRouter>
         <div className="db-body">
           {/* <Post userData={userData} /> */}

@@ -18,21 +18,21 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { MenuItem } from "@mui/material";
 
-const timings={
-  1:"22:00",
-  2 :"22:30",
-  3 : "23:00",
-  4 : "23:30",
-  5 : "00:00",
-  6  : "1:00",
-  7 : "2:00",
-  8 : "3:00",
-}
+const timings = {
+  1: "22:00",
+  2: "22:30",
+  3: "23:00",
+  4: "23:30",
+  5: "00:00",
+  6: "1:00",
+  7: "2:00",
+  8: "3:00",
+};
 
 const AddAdhoc = () => {
   let history = useHistory();
   const { userId } = useParams();
-  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  var localData = JSON.parse(localStorage.getItem("loadedData"));
   const [cabrequirement, setCabrequirement] = useState({
     userId: localData.empCode,
     timeSlotId: "",
@@ -52,15 +52,13 @@ const AddAdhoc = () => {
     isAdhoc,
   } = cabrequirement;
 
-
-  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  var localData = JSON.parse(localStorage.getItem("loadedData"));
 
   const onInputChange = (e) => {
     setCabrequirement({ ...cabrequirement, [e.target.name]: e.target.value });
   };
 
   const form = useRef();
-
 
   const getDateString = (date_in_iso) => {
     const date = new Date(date_in_iso);
@@ -88,33 +86,31 @@ const AddAdhoc = () => {
     return dateStr;
   };
 
-
   const onSubmit = async (e) => {
-
     e.preventDefault();
     console.log(localData);
-    var receiver="";
+    var receiver = "";
 
-    await axios.get(
-      `https://localhost:44371/api/v1/user/manager/${localData.managerId}`
-      ).then((res)=>{
+    await axios
+      .get(
+        `https://tms-incedo-demo.azurewebsites.net/api/v1/user/manager/${localData.managerId}`
+      )
+      .then((res) => {
         console.log(res);
-          receiver=res.data.managerEmail;
-        
-      }).catch((err)=>{
-        console.log(err)
+        receiver = res.data.managerEmail;
       })
+      .catch((err) => {
+        console.log(err);
+      });
 
-
-console.log(receiver);
+    console.log(receiver);
     // e.preventDefault();
     await axios
       .post(
-        "https://localhost:44371/api/v1/cabrequirment",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
         cabrequirement
       )
       .then((res) => {
-  
         var data = {
           service_id: "service_qlr0527",
           template_id: "template_1v91x1n",
@@ -126,7 +122,7 @@ console.log(receiver);
             Date: getDateString(cabrequirement.requestDate),
             request_type: "Adhoc",
 
-            receiversEmail:receiver,
+            receiversEmail: receiver,
           },
         };
 
@@ -141,8 +137,6 @@ console.log(receiver);
           .fail(function (error) {
             console.log("Oops... " + JSON.stringify(error));
           });
-
-
       })
       .catch((e) => {
         console.log(e);
@@ -185,14 +179,11 @@ console.log(receiver);
       value: 8,
       label: "03:00",
     },
-   
-    
   ];
 
- var today=new Date();
- var x= today.toISOString();
- var todaysDate=x.substring(0,10);
-  
+  var today = new Date();
+  var x = today.toISOString();
+  var todaysDate = x.substring(0, 10);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -215,7 +206,7 @@ console.log(receiver);
         <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }} ref={form}>
           <TextField
             type="date"
-            inputProps={{ min: `${todaysDate}` }} 
+            inputProps={{ min: `${todaysDate}` }}
             margin="normal"
             required
             fullWidth

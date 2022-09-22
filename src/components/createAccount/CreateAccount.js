@@ -9,18 +9,14 @@ import "./CreateAccount.scss";
 import swal from "sweetalert";
 import { Redirect } from "react-router-dom";
 
-
-
-var pWord="";
-
-
+var pWord = "";
 
 const keys = {
   upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   lowerCase: "abcdefghijklmnopqrstuvwxyz",
   number: "0123456789",
-  symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
-}
+  symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
+};
 
 const getKey = [
   function upperCase() {
@@ -34,19 +30,13 @@ const getKey = [
   },
   function symbol() {
     return keys.symbol[Math.floor(Math.random() * keys.symbol.length)];
-  }
+  },
 ];
-
-
-
-
 
 // import svg from './cab';
 
 function CreateAccount() {
-
-
-  var localData=JSON.parse(localStorage.getItem("loadedData"));
+  var localData = JSON.parse(localStorage.getItem("loadedData"));
   console.log(localData.roleId);
 
   const [userData, setUserData] = useState({
@@ -63,68 +53,56 @@ function CreateAccount() {
     projectName: "",
     department: "",
     managerId: "",
-    managerName:"",
-    managerEmail:"",
+    managerName: "",
+    managerEmail: "",
     addressDetails: "",
   });
 
   const [message, setMessage] = useState({
-    email:"",
-    password:"",
-    empCode:"",
-    phone:"",
+    email: "",
+    password: "",
+    empCode: "",
+    phone: "",
     projectId: "",
-    managerId:"",
-    managerEmail:"",
-
+    managerId: "",
+    managerEmail: "",
   });
 
-  const [showMessage, setShowMessage]=useState({})
+  const [showMessage, setShowMessage] = useState({});
 
   const changeHandler = (e) => {
     e.preventDefault();
     let key = e.target.name;
     let value = e.target.value;
 
-emailValidation(e);
-    
+    emailValidation(e);
 
     setUserData({ ...userData, [key]: value });
-    
-    
   };
 
-
-  function randomPasswordGenerator(){
-
-
-let password="";
+  function randomPasswordGenerator() {
+    let password = "";
     while (12 > password.length) {
       let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
-        password += keyToAdd();
+      password += keyToAdd();
+    }
 
+    return password;
   }
 
-  return password;
-}
-
-  const form=useRef();
-  const onSubmitHandler = async(e) => {
-
+  const form = useRef();
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-  
 
     let p = await randomPasswordGenerator();
-    
-   await setUserData({...userData, password:p});
+
+    await setUserData({ ...userData, password: p });
     console.log(userData);
 
-    
-  await  axios
-      .post("https://localhost:44371/api/v1/user", userData)
+    await axios
+      .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
-
 
         var data = {
           service_id: "service_qlr0527",
@@ -169,86 +147,58 @@ let password="";
   };
 
   const emailValidation = (e) => {
+    let key = e.target.name;
+    let value = e.target.value;
+    const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
 
-    let key=e.target.name;
-    let value=e.target.value;
-const emailValidator = /^([a-z\d\.\_])+@incedoinc.com/;
+    let c1 = !emailValidator.test(value) || value == "";
+    let c2 = value.length != 10 || value.length == 0;
+    let c3 = value.length != 6 || value.length == 0;
 
-let c1=!emailValidator.test(value) || value== "" ;
-    let c2=value.length!=10 || value.length==0;
-    let c3= value.length!=6 || value.length==0;
+    console.log(key, value);
 
-    console.log(key,value);
-
-    if(key=="email")
-    {
-      if(!emailValidator.test(value) && value!= "")
-      { 
-        setMessage({...message, [key]:"Invalid"});
-        
-      }
-      else {
-        setMessage({...message, [key]:""})
+    if (key == "email") {
+      if (!emailValidator.test(value) && value != "") {
+        setMessage({ ...message, [key]: "Invalid" });
+      } else {
+        setMessage({ ...message, [key]: "" });
       }
     }
 
-    
-
-    if(key=="phone"){
-
-      if(value.length!=10 && value.length!=0)
-      {
-        setMessage({...message, [key]:"Invalid"});
+    if (key == "phone") {
+      if (value.length != 10 && value.length != 0) {
+        setMessage({ ...message, [key]: "Invalid" });
+      } else {
+        setMessage({ ...message, [key]: "" });
       }
-      else {
-        setMessage({...message, [key]:""});
-      }
-      
     }
 
-    if(key=="empCode"){
-
-      if(value.length!=6 && value.length!=0)
-      {
-        setMessage({...message, [key]:"Invalid"});
+    if (key == "empCode") {
+      if (value.length != 6 && value.length != 0) {
+        setMessage({ ...message, [key]: "Invalid" });
+      } else {
+        setMessage({ ...message, [key]: "" });
       }
-
-      else {
-        setMessage({...message, [key]:""});
-      }
-      
     }
 
-    if(key=="managerId"){
-
-      if(value.length!=6 && value.length!=0)
-      {
-        setMessage({...message, [key]:"Invalid"});
+    if (key == "managerId") {
+      if (value.length != 6 && value.length != 0) {
+        setMessage({ ...message, [key]: "Invalid" });
+      } else {
+        setMessage({ ...message, [key]: "" });
       }
-
-      else {
-        setMessage({...message, [key]:""});
-      }
-
-
     }
 
-    if(key=="managerEmail"){
-      if(!emailValidator.test(value) && value!= "")
-      { 
-        setMessage({...message, [key]:"Invalid"});
-        
+    if (key == "managerEmail") {
+      if (!emailValidator.test(value) && value != "") {
+        setMessage({ ...message, [key]: "Invalid" });
+      } else {
+        setMessage({ ...message, [key]: "" });
       }
-      else {
-        setMessage({...message, [key]:""})
-      }
-
     }
 
-    return !(c1&&c2&&c3);
-
-      
-    }
+    return !(c1 && c2 && c3);
+  };
 
   const paperStyle = {
     padding: 20,
@@ -263,7 +213,7 @@ let c1=!emailValidator.test(value) || value== "" ;
 
   return (
     <>
-    {localData.roleId!=1?<Redirect to="/" /> :null}
+      {localData.roleId != 1 ? <Redirect to="/" /> : null}
 
       <div className="row" style={{ display: "flex", marginTop: "3%" }}>
         <div
@@ -271,7 +221,7 @@ let c1=!emailValidator.test(value) || value== "" ;
           style={{
             width: "50%",
             margin: "auto",
-            height:"80%",
+            height: "80%",
             float: "left",
           }}
         >
@@ -289,7 +239,6 @@ let c1=!emailValidator.test(value) || value== "" ;
           <form>
             <Grid>
               <Paper elevation={3} style={paperStyle}>
-
                 <Grid align="center">
                   <TextField
                     style={textStyle}
@@ -301,7 +250,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                     autoComplete="false"
                     required
                   />
-                
+
                   <TextField
                     style={textStyle}
                     size="small"
@@ -319,7 +268,9 @@ let c1=!emailValidator.test(value) || value== "" ;
                     name="empCode"
                     label="Employee Code"
                     placeholder="Enter Employee Code"
-                    helperText={<div style={{color: "red"}}>{message.empCode}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.empCode}</div>
+                    }
                     autoComplete="false"
                     required
                   />
@@ -330,7 +281,9 @@ let c1=!emailValidator.test(value) || value== "" ;
                     name="phone"
                     label="Phone Number"
                     placeholder="Enter Phone Number"
-                    helperText={<div style={{color: "red"}}>{message.phone}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.phone}</div>
+                    }
                     required
                   />
                   <TextField
@@ -340,11 +293,12 @@ let c1=!emailValidator.test(value) || value== "" ;
                     name="email"
                     label="Company Email"
                     placeholder="Enter @incedoinc.com id"
-                    helperText={<div style={{color:"red"}}>{message.email}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.email}</div>
+                    }
                     autoComplete="false"
                     required
                   />
-
 
                   <TextField
                     style={textStyle}
@@ -354,12 +308,14 @@ let c1=!emailValidator.test(value) || value== "" ;
                     label="Manager Id"
                     type="text"
                     placeholder="Password"
-                    helperText={<div style={{color:"red"}}>{message.managerId}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.managerId}</div>
+                    }
                     autoComplete="false"
                     required
                   />
 
-          <TextField
+                  <TextField
                     style={textStyle}
                     size="small"
                     name="managerName"
@@ -371,7 +327,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                     required
                   />
 
-             <TextField
+                  <TextField
                     style={textStyle}
                     size="small"
                     name="managerEmail"
@@ -379,11 +335,12 @@ let c1=!emailValidator.test(value) || value== "" ;
                     label="Manager Email"
                     type="text"
                     placeholder="Manager Email"
-                    helperText={<div style={{color:"red"}}>{message.managerEmail}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.managerEmail}</div>
+                    }
                     autoComplete="false"
                     required
                   />
-
 
                   <TextField
                     style={textStyle}
@@ -392,7 +349,9 @@ let c1=!emailValidator.test(value) || value== "" ;
                     name="projectid"
                     label="Project ID"
                     placeholder="Project ID"
-                    helperText={<div style={{color: "red"}}>{message.projectId}</div>}
+                    helperText={
+                      <div style={{ color: "red" }}>{message.projectId}</div>
+                    }
                     autoComplete="false"
                     required
                   />
@@ -407,8 +366,6 @@ let c1=!emailValidator.test(value) || value== "" ;
                     autoComplete="false"
                     required
                   />
-
-                
 
                   <TextField
                     style={textStyle}
@@ -460,7 +417,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                     variant="contained"
                     size="small"
                   >
-                    <h5 style={{padding:"auto"}}>Create</h5>
+                    <h5 style={{ padding: "auto" }}>Create</h5>
                   </Button>
                 </Grid>
               </Paper>

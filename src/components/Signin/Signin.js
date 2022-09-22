@@ -14,23 +14,19 @@ import swal from "sweetalert";
 import { gridTabIndexCellSelector } from "@mui/x-data-grid";
 
 var userData = "";
-const cryptoJs=require('crypto-js');
+const cryptoJs = require("crypto-js");
 
 export default function Signin() {
-
   //setting token for session storage
-  
-  const landingRoutes = ["/createuser",, "/dashboard", "/manager"];
+
+  const landingRoutes = ["/createuser", "/dashboard", "/manager"];
   const getHomePage = () => {
-
-
-
     let role = JSON.parse(localStorage.getItem("loadedData")).roleId;
-    if(role!=null)return landingRoutes[role - 1];
+    if (role != null) return landingRoutes[role - 1];
 
     return landingRoutes[0];
   };
-  
+
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
@@ -70,7 +66,7 @@ export default function Signin() {
 
     await axios
       .post(
-        "https://localhost:44371/api/v1/user/login",
+        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/login",
         loginData
       )
       .then((res) => {
@@ -78,9 +74,6 @@ export default function Signin() {
           userData = res.data;
           console.log(userData);
           localStorage.setItem("token", "qwertyuiop");
-          
-
-          
 
           localStorage.setItem("loadedData", JSON.stringify(userData));
 
@@ -152,9 +145,8 @@ export default function Signin() {
                       placeholder="Password"
                     />
                   </div>
-                  
 
-                  <label for="standard-select" className="form-label" >
+                  <label for="standard-select" className="form-label">
                     Role &nbsp;
                   </label>
                   <div className="select">

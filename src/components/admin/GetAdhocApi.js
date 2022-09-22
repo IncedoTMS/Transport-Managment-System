@@ -5,16 +5,15 @@ var data = [];
 
 // Setter function for adhocTableDataState
 
-
-
 const GetAdhocApi = (setter) => {
-  let localData=JSON.parse(localStorage.getItem("loadedData"));
+  let localData = JSON.parse(localStorage.getItem("loadedData"));
   console.log(localData.empCode);
 
   adhocTableData = [];
   axios
-      .get("https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid,managerid)",
-      
+    .get(
+      "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/(id,userid,roleid,managerid)",
+
       {
         headers: {
           "Cache-Control": "no-cache",
@@ -22,17 +21,15 @@ const GetAdhocApi = (setter) => {
           Expires: "0",
         },
 
-        params:{
-          ManagerId:localData.empCode
-        }
+        params: {
+          ManagerId: localData.empCode,
+        },
       }
-      
-      
-      )
+    )
     .then((resp) => {
       data = resp.data;
       data.forEach((e) => {
-        if(e.isAdhoc) adhocTableData.push(e);
+        if (e.isAdhoc) adhocTableData.push(e);
         // console.log(e);
       });
       // Once API call is complete and array is not empty,
