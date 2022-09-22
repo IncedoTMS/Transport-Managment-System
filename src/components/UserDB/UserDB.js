@@ -41,7 +41,7 @@ export default function UserDB() {
   const loadUserDetails = async () => {
     try {
       const res = await axios.get(
-        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/(empcode,name,email)",
+        "https://localhost:44371/api/v1/user/(empcode,name,email,managerid)",
         {
           params: {
             EmpCode: loadedData.empCode,
@@ -51,7 +51,7 @@ export default function UserDB() {
       if (res.data) {
         res.data.map((u) => {
           setUser(u);
-          setUserId(u.id);
+          setUserId(u.empCode);
         });
       }
     } catch (error) {

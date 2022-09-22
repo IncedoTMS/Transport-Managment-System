@@ -13,6 +13,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 export default function Post({ user }) {
+
+  console.log(user);
   const headCells = [
     {
       id: "empCode",
@@ -133,7 +135,7 @@ export default function Post({ user }) {
                   {user.projectName}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
-                  {user.manager}
+                  {user.managerId}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "1.16rem" }}>
                   {user.addressDetails}

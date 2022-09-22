@@ -62,6 +62,9 @@ function CreateAccount() {
     manager: "",
     projectName: "",
     department: "",
+    managerId: "",
+    managerName:"",
+    managerEmail:"",
     addressDetails: "",
   });
 
@@ -70,7 +73,10 @@ function CreateAccount() {
     password:"",
     empCode:"",
     phone:"",
-    projectId: ""
+    projectId: "",
+    managerId:"",
+    managerEmail:"",
+
   });
 
   const [showMessage, setShowMessage]=useState({})
@@ -79,13 +85,9 @@ function CreateAccount() {
     e.preventDefault();
     let key = e.target.name;
     let value = e.target.value;
-    if(emailValidation(e)){
 
-      let randPass=randomPasswordGenerator();
-      pWord=randPass;
-
-
-    }
+emailValidation(e);
+    
 
     setUserData({ ...userData, [key]: value });
     
@@ -108,18 +110,18 @@ let password="";
 
   const form=useRef();
   const onSubmitHandler = async(e) => {
+
+    e.preventDefault();
   
 
-    let p = randomPasswordGenerator();
-    console.log(p);
-
+    let p = await randomPasswordGenerator();
     
-    setUserData({...userData, "password":pWord});
+   await setUserData({...userData, password:p});
     console.log(userData);
 
     
   await  axios
-      .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
+      .post("https://localhost:44371/api/v1/user", userData)
       .then((resp) => {
         console.log(resp);
 
@@ -217,6 +219,32 @@ let c1=!emailValidator.test(value) || value== "" ;
       
     }
 
+    if(key=="managerId"){
+
+      if(value.length!=6 && value.length!=0)
+      {
+        setMessage({...message, [key]:"Invalid"});
+      }
+
+      else {
+        setMessage({...message, [key]:""});
+      }
+
+
+    }
+
+    if(key=="managerEmail"){
+      if(!emailValidator.test(value) && value!= "")
+      { 
+        setMessage({...message, [key]:"Invalid"});
+        
+      }
+      else {
+        setMessage({...message, [key]:""})
+      }
+
+    }
+
     return !(c1&&c2&&c3);
 
       
@@ -235,7 +263,7 @@ let c1=!emailValidator.test(value) || value== "" ;
 
   return (
     <>
-    {localData.roleId!=3?<Redirect to="/" /> :null}
+    {localData.roleId!=1?<Redirect to="/" /> :null}
 
       <div className="row" style={{ display: "flex", marginTop: "3%" }}>
         <div
@@ -318,18 +346,45 @@ let c1=!emailValidator.test(value) || value== "" ;
                   />
 
 
-                  {/* <TextField
+                  <TextField
                     style={textStyle}
                     size="small"
-                    name="password"
+                    name="managerId"
                     onChange={changeHandler}
-                    label="Password"
-                    type="password"
+                    label="Manager Id"
+                    type="text"
                     placeholder="Password"
-                    helperText={<div style={{color:"red"}} >{message.password}</div>}
+                    helperText={<div style={{color:"red"}}>{message.managerId}</div>}
                     autoComplete="false"
                     required
-                  /> */}
+                  />
+
+          <TextField
+                    style={textStyle}
+                    size="small"
+                    name="managerName"
+                    onChange={changeHandler}
+                    label="Manager Name"
+                    type="text"
+                    placeholder="Manager Name"
+                    autoComplete="false"
+                    required
+                  />
+
+             <TextField
+                    style={textStyle}
+                    size="small"
+                    name="managerEmail"
+                    onChange={changeHandler}
+                    label="Manager Email"
+                    type="text"
+                    placeholder="Manager Email"
+                    helperText={<div style={{color:"red"}}>{message.managerEmail}</div>}
+                    autoComplete="false"
+                    required
+                  />
+
+
                   <TextField
                     style={textStyle}
                     size="small"
@@ -353,17 +408,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                     required
                   />
 
-                  <TextField
-                    style={textStyle}
-                    size="small"
-                    onChange={changeHandler}
-                    name="manager"
-                    type="text"
-                    label="Manager Name"
-                    placeholder="Manager Name"
-                    autoComplete="false"
-                    required
-                  />
+                
 
                   <TextField
                     style={textStyle}
@@ -383,7 +428,7 @@ let c1=!emailValidator.test(value) || value== "" ;
                     onChange={changeHandler}
                     name="office"
                     type="text"
-                    label="Office"
+                    label="Office Address"
                     placeholder="Office"
                     autoComplete="false"
                     required

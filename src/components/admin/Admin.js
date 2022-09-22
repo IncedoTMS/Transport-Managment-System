@@ -219,7 +219,7 @@ export default function Admin() {
 
   return (
     <>
-    {localData.roleId!=1?<Redirect to="/" /> :null}
+    {localData.roleId!=3?<Redirect to="/" /> :null}
  
       <hr />
       <hr />

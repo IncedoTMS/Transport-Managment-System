@@ -18,11 +18,23 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { MenuItem } from "@mui/material";
 
+const timings={
+  1:"22:00",
+  2 :"22:30",
+  3 : "23:00",
+  4 : "23:30",
+  5 : "00:00",
+  6  : "1:00",
+  7 : "2:00",
+  8 : "3:00",
+}
+
 const AddAdhoc = () => {
   let history = useHistory();
   const { userId } = useParams();
+  var localData=JSON.parse(localStorage.getItem("loadedData"));
   const [cabrequirement, setCabrequirement] = useState({
-    userId: userId,
+    userId: localData.empCode,
     timeSlotId: "",
     requestDate: "",
     isApproved: 3,
@@ -79,17 +91,30 @@ const AddAdhoc = () => {
 
   const onSubmit = async (e) => {
 
-    console.log(localData);
-
     e.preventDefault();
+    console.log(localData);
+    var receiver="";
+
+    await axios.get(
+      `https://localhost:44371/api/v1/user/manager/${localData.managerId}`
+      ).then((res)=>{
+        console.log(res);
+          receiver=res.data.managerEmail;
+        
+      }).catch((err)=>{
+        console.log(err)
+      })
+
+
+console.log(receiver);
+    // e.preventDefault();
     await axios
       .post(
-        "https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
+        "https://localhost:44371/api/v1/cabrequirment",
         cabrequirement
       )
       .then((res) => {
-        
-        var timing = cabrequirement.timeSlotId == 1 ? "22:00" : "03:00";
+  
         var data = {
           service_id: "service_qlr0527",
           template_id: "template_1v91x1n",
@@ -97,11 +122,11 @@ const AddAdhoc = () => {
           template_params: {
             email: localData.userName,
             status: "Pending",
-            timing: timing,
+            timing: timings[cabrequirement.timeSlotId],
             Date: getDateString(cabrequirement.requestDate),
             request_type: "Adhoc",
 
-            receiversEmail: "himanshi.sharma1@incedoinc.com",
+            receiversEmail:receiver,
           },
         };
 
@@ -133,9 +158,41 @@ const AddAdhoc = () => {
     },
     {
       value: 2,
+      label: "22:30",
+    },
+
+    {
+      value: 3,
+      label: "23:00",
+    },
+    {
+      value: 4,
+      label: "23:30",
+    },
+    {
+      value: 5,
+      label: "00:00",
+    },
+    {
+      value: 6,
+      label: "01:00",
+    },
+    {
+      value: 7,
+      label: "02:00",
+    },
+    {
+      value: 8,
       label: "03:00",
     },
+   
+    
   ];
+
+ var today=new Date();
+ var x= today.toISOString();
+ var todaysDate=x.substring(0,10);
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -158,6 +215,7 @@ const AddAdhoc = () => {
         <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }} ref={form}>
           <TextField
             type="date"
+            inputProps={{ min: `${todaysDate}` }} 
             margin="normal"
             required
             fullWidth
@@ -184,6 +242,18 @@ const AddAdhoc = () => {
               </MenuItem>
             ))}
           </TextField>
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Enter pick up location"
+            name="pickUpLocation"
+            autoComplete="pickup location"
+            value={pickUpLocation}
+            onChange={(e) => onInputChange(e)}
+            multiline
+          />
 
           <TextField
             margin="normal"

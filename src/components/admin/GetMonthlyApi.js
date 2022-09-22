@@ -6,9 +6,11 @@ var data = [];
 // Setter function for TableDataState
 
 const GetMonthlyApi = (setter) => {
+  let localData=JSON.parse(localStorage.getItem("loadedData"));
+  console.log(localData.empCode);
   tableData = [];
     axios
-      .get("https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment",
+      .get("https://localhost:44371/api/v1/cabrequirment/(id,userid,roleid,managerid)",
       
       {
         headers: {
@@ -16,6 +18,10 @@ const GetMonthlyApi = (setter) => {
           Pragma: "no-cache",
           Expires: "0",
         },
+
+        params:{
+          ManagerId:localData.empCode
+        }
       }
       
       

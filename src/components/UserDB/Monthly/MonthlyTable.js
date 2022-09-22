@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
+import axios from "axios";
 
 function descendingComparator(a, b, orderBy) {
   if (orderBy === "requestDate") {
@@ -181,6 +182,10 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  
+
+  
 
   const rows = props.data;
 
@@ -376,10 +381,11 @@ export default function EnhancedTable(props) {
                         </>
                       ) : (
                         <>
-                          <Link to={`/dashboard/monthly/edit/${row.id}`}>
+                          <Link to={`/dashboard/monthly/edit/${row.id}`}
+                          onClick={(event) => event.preventDefault()}>
                             <Button
                               variant="contained"
-                              startIcon={<EditIcon fontSize="15px" />}
+                              startIcon={<EditIcon fontSize="15px"/>}
                               size="small"
                             >
                               Edit

@@ -17,12 +17,20 @@ var userData = "";
 const cryptoJs=require('crypto-js');
 
 export default function Signin() {
+
   //setting token for session storage
-  const landingRoutes = ["/manager", "/dashboard", "/createuser"];
+  
+  const landingRoutes = ["/createuser",, "/dashboard", "/manager"];
   const getHomePage = () => {
+
+
+
     let role = JSON.parse(localStorage.getItem("loadedData")).roleId;
-    return landingRoutes[role - 1];
+    if(role!=null)return landingRoutes[role - 1];
+
+    return landingRoutes[0];
   };
+  
   const token = localStorage.getItem("token");
   let loggedIn = true;
   if (token == null) {
@@ -62,14 +70,15 @@ export default function Signin() {
 
     await axios
       .post(
-        "https://tms-incedo-demo.azurewebsites.net/api/v1/user/login",
+        "https://localhost:44371/api/v1/user/login",
         loginData
       )
       .then((res) => {
         if (res.data.firstName) {
           userData = res.data;
+          console.log(userData);
           localStorage.setItem("token", "qwertyuiop");
-          let secret="k4WQ,kl[l0986;'kmj bj/8";
+          
 
           
 
@@ -77,8 +86,9 @@ export default function Signin() {
 
           loggedIn = true;
           if (res.data.roleId === 2) History.push("/dashboard");
-          else if (res.data.roleId === 1) History.push("/manager");
-          else if (res.data.roleId === 3) History.push("/createuser");
+          else if (res.data.roleId === 3) History.push("/manager");
+          else if (res.data.roleId === 1) History.push("/createuser");
+          else History.push("/manager");
         } else {
           swal({
             title: "Error",
@@ -157,9 +167,9 @@ export default function Signin() {
                       <option selected disabled>
                         Select a role
                       </option>
-                      <option value="1">Manager</option>
+                      <option value="1">Admin</option>
                       <option value="2">User</option>
-                      <option value="3">Admin</option>
+                      <option value="3">Manager</option>
                     </select>
                   </div>
                 </div>

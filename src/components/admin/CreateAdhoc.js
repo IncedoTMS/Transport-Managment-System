@@ -43,9 +43,15 @@ const dict = {
   Pending: 3,
 };
 
-const timeSlots = {
+const timeSlots={
   1:"22:00",
-  2: "3:00"
+  2 :"22:30",
+  3 : "23:00",
+  4 : "23:30",
+  5 : "00:00",
+  6  : "1:00",
+  7 : "2:00",
+  8 : "3:00",
 }
 
 function descendingComparator(a, b, orderBy) {
@@ -214,7 +220,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [Dropdown, setDropdown] = React.useState(0);
   const [userEmail, setUserEmail]=React.useState(row.email);
   var localData=JSON.parse(localStorage.getItem("loadedData"));
-  const [note,setNote]=React.useState("");
+  const [note,setNote]=React.useState("Your Request has been approved");
   
   
 
@@ -252,7 +258,7 @@ function Display({ row, loader, apiDataSetter }) {
     if (Dropdown != 0) {
       await axios
         .patch(
-          `https://tms-incedo-demo.azurewebsites.net/api/v1/cabrequirment/${row.id}`,
+          `https://localhost:44371/api/v1/cabrequirment/${row.id}`,
           [
             {
               operationType: "Replace",
@@ -335,7 +341,7 @@ function Display({ row, loader, apiDataSetter }) {
   const sendNote=(e)=>{
 
    if(Dropdown==2) setNote(e.target.value);
-   else setNote("");
+   else setNote("Your request has been approved");
 
   }
 
@@ -353,7 +359,7 @@ function Display({ row, loader, apiDataSetter }) {
         sx={{ fontSize: "1.16rem" }}
         align="center"
       >
-        {row.empCode}
+        {row.userId}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
         {row.firstName + " " + row.lastName}

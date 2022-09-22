@@ -26,6 +26,17 @@ import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
+const timeSlots={
+  1:"22:00",
+  2 :"22:30",
+  3 : "23:00",
+  4 : "23:30",
+  5 : "00:00",
+  6  : "1:00",
+  7 : "2:00",
+  8 : "3:00",
+}
+
 function descendingComparator(a, b, orderBy) {
   if (orderBy === "requestDate") {
     return new Date(b[orderBy]).valueOf() - new Date(a[orderBy]).valueOf();
@@ -341,7 +352,7 @@ export default function EnhancedTable(props) {
                       {row.pickUpLocation}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
-                      {row.timeSlotId == 1 ? "22:00" : "3:00"}
+                      {timeSlots[row.timeSlotId]}
                     </TableCell>
                     <TableCell align="center" sx={{ fontSize: TCELLFONT }}>
                       {row.dropLocation}
@@ -383,8 +394,8 @@ export default function EnhancedTable(props) {
                           >
                             <Button
                               variant="contained"
-                              startIcon={<EditIcon fontSize="15px" disabled />}
-                              disabled
+                              startIcon={<EditIcon fontSize="15px" disabled={true}  />} 
+                              disabled={true}
                               size="small"
                             >
                               Edit
