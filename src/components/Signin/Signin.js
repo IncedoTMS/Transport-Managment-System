@@ -72,7 +72,7 @@ export default function Signin() {
       .then((res) => {
         if (res.data.firstName) {
           userData = res.data;
-          console.log(userData);
+          // console.log(userData);
           localStorage.setItem("token", "qwertyuiop");
 
           localStorage.setItem("loadedData", JSON.stringify(userData));

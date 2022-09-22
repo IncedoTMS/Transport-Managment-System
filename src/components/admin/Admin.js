@@ -27,7 +27,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-const cryptoJs= require('crypto-js');
+const cryptoJs = require("crypto-js");
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,11 +63,7 @@ function a11yProps(index) {
 }
 
 export default function Admin() {
-  
-  
-
- var localData=JSON.parse(localStorage.getItem("loadedData"));
- 
+  var localData = JSON.parse(localStorage.getItem("loadedData"));
 
   const [tableDataState, setTableDataState] = useState([]);
   const [adhocDataState, setAdhocState] = useState([]);
@@ -88,7 +84,6 @@ export default function Admin() {
   useEffect(() => {
     GetAdhocApi(setAdhocState);
   }, []);
-
 
   const getMonthString = (date_in_iso) => {
     const date = new Date(date_in_iso);
@@ -116,7 +111,6 @@ export default function Admin() {
     return monthStr;
   };
 
-
   const getDateString = (date_in_iso) => {
     const date = new Date(date_in_iso);
     const [month, day, year] = [
@@ -139,10 +133,9 @@ export default function Admin() {
       "Dec",
     ];
 
-    let dateStr = day+"-"+months[month] + "-" + year;
+    let dateStr = day + "-" + months[month] + "-" + year;
     return dateStr;
   };
-
 
   // Calling tableDataMethod to set state
 
@@ -151,18 +144,17 @@ export default function Admin() {
     setInputMonthly(e.target.value);
     let targ = e.target.value.toLowerCase();
     let temp_arr = tableDataState;
-    
 
     let f_arr = temp_arr.filter((el) => {
+      let month = getMonthString(el.requestDate);
+      let fullName = (el.firstName + " " + el.lastName).toLowerCase();
+      // console.log(fullName, targ);
 
-      let month=getMonthString(el.requestDate);
-      let fullName=(el.firstName+" "+el.lastName).toLowerCase();
-      console.log(fullName, targ);
-
-  
       return (
         el.id === targ ||
-        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) || fullName.includes(targ) ||
+        el.firstName.toLowerCase().includes(targ) ||
+        el.lastName.toLowerCase().includes(targ) ||
+        fullName.includes(targ) ||
         month.toLowerCase().includes(targ)
       );
     });
@@ -175,17 +167,16 @@ export default function Admin() {
     let targ = e.target.value.toLowerCase();
     let temp_arr = adhocDataState;
 
-    
-
     let f_arr = temp_arr.filter((el) => {
-
-      let date=getDateString(el.requestDate);
-      let fullName=(el.firstName+" "+el.lastName).toLowerCase();
-      console.log(fullName);
+      let date = getDateString(el.requestDate);
+      let fullName = (el.firstName + " " + el.lastName).toLowerCase();
+      // console.log(fullName);
 
       return (
         el.id === targ ||
-        el.firstName.toLowerCase().includes(targ) || el.lastName.toLowerCase().includes(targ) || fullName.includes(targ) ||
+        el.firstName.toLowerCase().includes(targ) ||
+        el.lastName.toLowerCase().includes(targ) ||
+        fullName.includes(targ) ||
         date.toLowerCase().includes(targ)
       );
     });
@@ -214,13 +205,13 @@ export default function Admin() {
   }, [tableDataState.length == 0, adhocDataState.length == 0]);
 
   const checkKeyDown = (e) => {
-    if (e.code === 'Enter') e.preventDefault();
-    };
+    if (e.code === "Enter") e.preventDefault();
+  };
 
   return (
     <>
-    {localData.roleId!=3?<Redirect to="/" /> :null}
- 
+      {localData.roleId != 3 ? <Redirect to="/" /> : null}
+
       <hr />
       <hr />
       <hr />
@@ -263,7 +254,7 @@ export default function Admin() {
               <>
                 <div>
                   <Paper
-                   className='inputSearch'
+                    className="inputSearch"
                     component="form"
                     sx={{
                       p: "2px 4px",
@@ -281,7 +272,6 @@ export default function Admin() {
                       placeholder="Search By Name/Date"
                       inputProps={{ "aria-label": "search google maps" }}
                       onChange={handleSearch}
-                     
                       onKeyDown={(e) => checkKeyDown(e)}
                     />
                     <IconButton
@@ -328,7 +318,7 @@ export default function Admin() {
                 <>
                   <div>
                     <Paper
-                    className='inputSearch'
+                      className="inputSearch"
                       component="form"
                       sx={{
                         p: "2px 4px",
@@ -346,7 +336,6 @@ export default function Admin() {
                         inputProps={{ "aria-label": "search google maps" }}
                         onChange={handleSearch2}
                         onKeyDown={(e) => checkKeyDown(e)}
-                        
                       />
                       <IconButton
                         type="button"

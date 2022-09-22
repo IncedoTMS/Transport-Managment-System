@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import "./Admin.css";
 
 export default function Table({ tableData, searchData }) {
-
-
   const Row = ({ tableData }) => {
     function handleEdit(rowID) {
       setIsEditing(!isEditing);
@@ -13,65 +11,90 @@ export default function Table({ tableData, searchData }) {
     }
     const [isEditing, setIsEditing] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [isConfirm,setIsconfirm]=useState(false);
+    const [isConfirm, setIsconfirm] = useState(false);
     const [dropDown, setDropdown] = useState("Hold");
-    const [tempState, setTempState]= useState(tableData.managerApproval);
+    const [tempState, setTempState] = useState(tableData.managerApproval);
 
     const [userData, setUserData] = useState({
-
       empid: "",
       name: "",
       role: "",
       reqdate: "",
-      status: ""
-    }
-    )
+      status: "",
+    });
 
     useEffect(() => {
       loadUser();
-    }, [dropDown])
+    }, [dropDown]);
 
     const loadUser = async () => {
-
-      const result = await axios.get(`http://localhost:3000/monthly/${tableData.id}`);
-      setUserData({ ...result.data, managerApproval: dropDown })
-
-    }
+      const result = await axios.get(
+        `http://localhost:3000/monthly/${tableData.id}`
+      );
+      setUserData({ ...result.data, managerApproval: dropDown });
+    };
 
     const sendData = (e) => {
-
-      console.log(userData);
+      // console.log(userData);
       axios.put(`http://localhost:3000/monthly/${tableData.id}`, userData);
       setIsconfirm(true);
       setIsDisabled(true);
-
-
-    }
-
-  
-
+    };
 
     return (
       <tr>
         <td class="emp-id">{tableData.empId}</td>
         <td class="emp-name">{tableData.empName}</td>
         <td class="role">{tableData.dropLocation}</td>
-        <td class="req-date">{tableData.month}
-        </td>
+        <td class="req-date">{tableData.month}</td>
         <td class="status">
-
           <div class="btn-group">
-            <button type="button"  class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button
+              type="button"
+              class="btn btn-light dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               {tempState}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" onClick={() => { setDropdown("Hold"); setTempState("Hold") }}>Hold</a></li>
-              <li><a class="dropdown-item" onClick={() => { setDropdown("Approved"); setTempState("Approved")  }}>Approved</a></li>
-              <li><a class="dropdown-item" onClick={() => { setDropdown("Rejected"); setTempState("Rejected")  }}>Rejected</a></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onClick={() => {
+                    setDropdown("Hold");
+                    setTempState("Hold");
+                  }}
+                >
+                  Hold
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onClick={() => {
+                    setDropdown("Approved");
+                    setTempState("Approved");
+                  }}
+                >
+                  Approved
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onClick={() => {
+                    setDropdown("Rejected");
+                    setTempState("Rejected");
+                  }}
+                >
+                  Rejected
+                </a>
+              </li>
             </ul>
           </div>
 
-            {/* <select name="" id="" disabled={isDisabled}>
+          {/* <select name="" id="" disabled={isDisabled}>
 
                   <option value={tableData.status} onClick={() => { setDropdown("Hold") }} >Hold</option>
 
@@ -80,15 +103,14 @@ export default function Table({ tableData, searchData }) {
                   <option value="Rejected" onClick={() => { setDropdown("Rejected") }}>Rejected</option>
 
             </select> */}
-
-
         </td>
         <td class="confirm-button">
           <button
-
             name="status"
             onClick={sendData}
-            disabled={(tableData.month.toLowerCase().includes("aug"))?true: false}
+            disabled={
+              tableData.month.toLowerCase().includes("aug") ? true : false
+            }
             // disabled={
             //   tableData.status == "Active"
             //     ? true
@@ -102,7 +124,6 @@ export default function Table({ tableData, searchData }) {
           </button>
         </td>
         {/* <td class='edit'><button onClick={() => handleEdit(tableData.id)} class='btn btn-info'>Edit</button></td> */}
-    
       </tr>
     );
   };
@@ -120,9 +141,9 @@ export default function Table({ tableData, searchData }) {
         </tr>
       </thead>
       <tbody>
-
-        {searchData.length > 0 ? searchData.map((t) => <Row tableData={t} key={t.id} />) :
-          tableData.map((t) => <Row tableData={t} key={t.id} />)}
+        {searchData.length > 0
+          ? searchData.map((t) => <Row tableData={t} key={t.id} />)
+          : tableData.map((t) => <Row tableData={t} key={t.id} />)}
       </tbody>
     </table>
   );

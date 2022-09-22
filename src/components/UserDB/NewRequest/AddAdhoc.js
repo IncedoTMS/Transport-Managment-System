@@ -88,7 +88,7 @@ const AddAdhoc = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(localData);
+    // console.log(localData);
     var receiver = "";
 
     await axios
@@ -96,14 +96,14 @@ const AddAdhoc = () => {
         `https://tms-incedo-demo.azurewebsites.net/api/v1/user/manager/${localData.managerId}`
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         receiver = res.data.managerEmail;
       })
       .catch((err) => {
         console.log(err);
       });
 
-    console.log(receiver);
+    // console.log(receiver);
     // e.preventDefault();
     await axios
       .post(

@@ -24,7 +24,7 @@ export default function UserDB() {
   }
 
   var localData = JSON.parse(localStorage.getItem("loadedData"));
-  console.log(localData.roleId);
+  // console.log(localData.roleId);
 
   const [user, setUser] = useState([]);
   const [userId, setUserId] = useState();

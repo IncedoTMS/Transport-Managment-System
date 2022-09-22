@@ -7,7 +7,7 @@ var data = [];
 
 const GetAdhocApi = (setter) => {
   let localData = JSON.parse(localStorage.getItem("loadedData"));
-  console.log(localData.empCode);
+  // console.log(localData.empCode);
 
   adhocTableData = [];
   axios

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs, { init } from "@emailjs/browser";
 import { Grid, Paper, Avatar, TextField, Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -37,7 +37,7 @@ const getKey = [
 
 function CreateAccount() {
   var localData = JSON.parse(localStorage.getItem("loadedData"));
-  console.log(localData.roleId);
+  // console.log(localData.roleId);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -68,7 +68,11 @@ function CreateAccount() {
     managerEmail: "",
   });
 
-  const [showMessage, setShowMessage] = useState({});
+  const [submitted, setSubmitted] = useState(true);
+  useEffect(() => {
+    let p = randomPasswordGenerator();
+    setUserData({ ...userData, password: p });
+  }, [submitted]);
 
   const changeHandler = (e) => {
     e.preventDefault();
@@ -93,16 +97,13 @@ function CreateAccount() {
   const form = useRef();
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
-    let p = await randomPasswordGenerator();
-
-    await setUserData({ ...userData, password: p });
-    console.log(userData);
+    setSubmitted(!submitted);
+    // console.log(userData);
 
     await axios
       .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", userData)
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
 
         var data = {
           service_id: "service_qlr0527",
@@ -155,7 +156,7 @@ function CreateAccount() {
     let c2 = value.length != 10 || value.length == 0;
     let c3 = value.length != 6 || value.length == 0;
 
-    console.log(key, value);
+    // console.log(key, value);
 
     if (key == "email") {
       if (!emailValidator.test(value) && value != "") {

@@ -7,7 +7,7 @@ var data = [];
 
 const GetMonthlyApi = (setter) => {
   let localData = JSON.parse(localStorage.getItem("loadedData"));
-  console.log(localData.empCode);
+  // console.log(localData.empCode);
   tableData = [];
   axios
     .get(

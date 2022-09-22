@@ -26,8 +26,7 @@ import "./tables.css";
 import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import zIndex from "@mui/material/styles/zIndex";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-
+import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 const axios = require("axios");
 const dict = {
@@ -42,11 +41,10 @@ const dict = {
   Pending: 3,
 };
 
-
 const timeSlots = {
-  1:"22:00",
-  2: "3:00"
-}
+  1: "22:00",
+  2: "3:00",
+};
 
 function descendingComparator(a, b, orderBy) {
   // console.log(orderBy)
@@ -212,7 +210,7 @@ function Display({ row, loader, apiDataSetter }) {
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isConfirm, setIsconfirm] = React.useState(false);
   const [Dropdown, setDropdown] = React.useState(0);
-  const [note,setNote]=React.useState("");
+  const [note, setNote] = React.useState("");
 
   const [userData, setUserData] = React.useState({
     empid: "",
@@ -238,7 +236,7 @@ function Display({ row, loader, apiDataSetter }) {
     setUserData({ ...result.data, managerApproval: [Dropdown] });
   };
 
-  const form= React.useRef();
+  const form = React.useRef();
   const sendData = async (e) => {
     if (Dropdown != 0) {
       await axios
@@ -255,8 +253,7 @@ function Display({ row, loader, apiDataSetter }) {
           ]
         )
         .then((resp) => {
-          console.log(resp);
-
+          // console.log(resp);
 
           var data = {
             service_id: "service_aw7irj8",
@@ -268,8 +265,8 @@ function Display({ row, loader, apiDataSetter }) {
               status: dict[Dropdown],
               timing: timeSlots[row.timeSlotId],
               request_type: "Monthly",
-              Date:getMonthString(row.requestDate),
-              message: note
+              Date: getMonthString(row.requestDate),
+              message: note,
             },
           };
 
@@ -277,14 +274,13 @@ function Display({ row, loader, apiDataSetter }) {
             type: "POST",
             data: JSON.stringify(data),
             contentType: "application/json",
-          }) .done(function () {
-            console.log("Your mail is sent!");
           })
-          .fail(function (error) {
-            console.log("Oops... " + JSON.stringify(error));
-          });
-
-
+            .done(function () {
+              console.log("Your mail is sent!");
+            })
+            .fail(function (error) {
+              console.log("Oops... " + JSON.stringify(error));
+            });
         })
         .catch((e) => {
           console.log(e);
@@ -321,14 +317,10 @@ function Display({ row, loader, apiDataSetter }) {
     return monthStr;
   };
 
-  const sendNote=(e)=>{
-
-    if(Dropdown==2) setNote(e.target.value);
+  const sendNote = (e) => {
+    if (Dropdown == 2) setNote(e.target.value);
     else setNote("");
- 
-   }
-
-
+  };
 
   return (
     <TableRow
@@ -359,8 +351,6 @@ function Display({ row, loader, apiDataSetter }) {
         {getMonthString(row.requestDate)}
       </TableCell>
       <TableCell sx={{ fontSize: "1.16rem" }} align="center">
-      
-
         <div class="btn-group">
           <button
             type="button"
@@ -417,15 +407,19 @@ function Display({ row, loader, apiDataSetter }) {
         </div>
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.16rem", position: "relative" }} align="center">
-
-      {Dropdown==2?(<TextareaAutosize
-              aria-label="minimum height"
-              minRows={2}
-              placeholder="(Optional)"
-              onChange={sendNote}
-              style={{ width: 200 }}
-          />):null}
+      <TableCell
+        sx={{ fontSize: "1.16rem", position: "relative" }}
+        align="center"
+      >
+        {Dropdown == 2 ? (
+          <TextareaAutosize
+            aria-label="minimum height"
+            minRows={2}
+            placeholder="(Optional)"
+            onChange={sendNote}
+            style={{ width: 200 }}
+          />
+        ) : null}
 
         {row.status === "Expired" ? (
           <Chip

@@ -248,7 +248,7 @@ function Display({ row, loader, apiDataSetter }) {
 
   const form = React.useRef();
   const sendData = async (e) => {
-    console.log(userEmail);
+    // console.log(userEmail);
     if (Dropdown != 0) {
       await axios
         .patch(
@@ -264,9 +264,9 @@ function Display({ row, loader, apiDataSetter }) {
           ]
         )
         .then((resp) => {
-          console.log(resp);
+          // console.log(resp);
 
-          console.log(note);
+          // console.log(note);
 
           var data = {
             service_id: "service_aw7irj8",
@@ -473,7 +473,7 @@ export default function CreateAdhoc({
 }) {
   var rows = [];
 
-  console.log(tableData);
+  // console.log(tableData);
 
   if (searchData.length == 0) {
     if (searchInput.length == 0) {

@@ -13,8 +13,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 export default function Post({ user }) {
-
-  console.log(user);
+  // console.log(user);
   const headCells = [
     {
       id: "empCode",

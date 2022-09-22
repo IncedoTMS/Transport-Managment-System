@@ -29,11 +29,11 @@ export default function Signup() {
 
   function submitHandler(e) {
     e.preventDefault();
-    console.log("axios", formData);
+    // console.log("axios", formData);
     axios
       .post("https://tms-incedo-demo.azurewebsites.net/api/v1/user", formData)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         History.push("/");
       });
   }

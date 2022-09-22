@@ -32,7 +32,7 @@ const timeSlots = {
 export default function Edit2() {
   let history = useHistory();
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const [cabRecord, setCabRecord] = useState({
     userId: "",
     timeSlotId: "",
